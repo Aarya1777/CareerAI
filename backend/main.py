@@ -1,7 +1,25 @@
+from fastapi import FastAPI
 from core.config import settings
 
-print("App Name:", settings.app_name)
-print("Database URL:", settings.database_url)
-print("JWT Secret:", settings.jwt_secret)
-print("JWT Algorithm:", settings.jwt_algorithm)
-print("Expire Minutes:", settings.access_token_expire_minutes)
+
+# Create the FastAPI application
+app = FastAPI(
+    title=settings.app_name,
+    version="1.0.0"
+)
+
+
+# Root endpoint
+@app.get("/")
+def root():
+    return {
+        "message": f"Welcome to {settings.app_name}"
+    }
+
+
+# Health check endpoint
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy"
+    }
