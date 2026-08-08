@@ -1,9 +1,9 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    app_name: str = "CareerAI Backend"
-    database_url: str = "postgresql://postgres:password@localhost/career_ai"
-    jwt_secret: str = "your_secret"
+    app_name: str = "CareerAI"
+    database_url: str = "postgresql://postgres:Ananya%4027@localhost:5432/CareerAI"
+    jwt_secret: str = "secret"
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 60
 
