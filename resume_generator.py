@@ -1,5 +1,7 @@
 import os
 import json
+import time
+
 from dotenv import load_dotenv
 from google import genai
 
@@ -21,52 +23,28 @@ client = genai.Client(api_key=api_key)
 
 
 # -------------------------
-# RESUME PROFILE
+# LOAD RESUME PROFILE
 # -------------------------
 
-# Temporary test profile.
-# Later, we will connect this with resume_interview.py.
+try:
 
-profile = {
-    "target_roles": [
-        "AI Intern",
-        "Machine Learning Intern",
-        "Data Analytics Intern"
-    ],
+    with open("resume_profile.json", "r", encoding="utf-8") as file:
+        profile = json.load(file)
 
-    "career_goal": "Looking for an internship opportunity in AI, Machine Learning or Data Analytics.",
+    print("✅ Resume profile loaded successfully.")
 
-    "user_type": "student",
 
-    "education": [
-        "Second-year Computer Engineering student"
-    ],
+except FileNotFoundError:
 
-    "skills": [
-        "Python",
-        "Data Analysis",
-        "Machine Learning"
-    ],
+    print("❌ resume_profile.json not found.")
+    print("Please run resume_interview.py first.")
+    exit()
 
-    "experience": [],
 
-    "projects": [
-        {
-            "name": "Global Air Quality Data Analysis",
-            "description": "Analyzed air quality data from multiple cities over 150 days."
-        }
-    ],
+except json.JSONDecodeError:
 
-    "certifications": [],
-
-    "achievements": [],
-
-    "leadership": [],
-
-    "languages": [],
-
-    "links": []
-}
+    print("❌ resume_profile.json contains invalid JSON.")
+    exit()
 
 
 # -------------------------
@@ -85,33 +63,69 @@ USER INFORMATION:
 
 {json.dumps(profile, indent=4)}
 
+
 IMPORTANT RULES:
 
 1. Use ONLY information provided in the profile.
+
 2. NEVER invent companies, internships, jobs, projects,
    technologies, achievements, dates, numbers or results.
+
 3. Do not exaggerate the user's experience.
+
 4. Do not create fake metrics or accomplishments.
+
 5. Do not add name, email or phone number because those
    will be provided separately by the website.
+
 6. Use professional and concise language.
+
 7. Optimize wording for ATS systems without keyword stuffing.
+
 8. Use standard resume section names.
+
 9. For a student/fresher, emphasize education, skills,
    projects, certifications and achievements when available.
+
 10. Do not create an experience section if there is no experience.
+
 11. Do not create empty sections.
+
 12. Do not add information that is not present.
+
 13. Keep project descriptions factual.
+
 14. Use strong action verbs only when they accurately describe
     the information provided.
+
 15. Do not claim results unless the user provided those results.
+
 16. Do not add technologies that were not explicitly provided.
+
 17. Do not add responsibilities that were not explicitly provided.
+
 18. Do not create fake dates or durations.
+
 19. Keep the resume suitable for the user's target roles.
+
 20. If information is insufficient for a section, leave that
     section empty rather than inventing information.
+
+21. Preserve the meaning of the user's original information.
+
+22. Do not turn a project description into an achievement
+    unless the user explicitly provided an achievement.
+
+23. Do not assume technologies from a project title.
+
+24. Do not assume skills from a degree or target role.
+
+25. Do not add keywords merely because they appear in the
+    target role.
+
+26. Only include information that can be supported directly
+    by the user's profile.
+
 
 Return ONLY valid JSON.
 
@@ -162,33 +176,63 @@ Do not include any explanation outside the JSON.
 
 
     # -------------------------
-    # GEMINI REQUEST
+    # GEMINI REQUEST WITH RETRY
+    # -------------------------
+
+    max_attempts = 3
+
+    for attempt in range(1, max_attempts + 1):
+
+        try:
+
+            response = client.models.generate_content(
+                model="gemini-3.6-flash",
+                contents=prompt
+            )
+
+            text = response.text.strip()
+
+            break
+
+
+        except Exception as e:
+
+            error_message = str(e)
+
+            if "503" in error_message and attempt < max_attempts:
+
+                print("\n⚠️ Gemini is temporarily busy.")
+                print(
+                    f"🔄 Retrying... "
+                    f"({attempt}/{max_attempts - 1})"
+                )
+
+                time.sleep(3)
+
+            else:
+
+                print("\n❌ Resume generation error:")
+                print(e)
+
+                return None
+
+
+    # -------------------------
+    # CLEAN JSON RESPONSE
+    # -------------------------
+
+    if text.startswith("```"):
+
+        text = text.replace("```json", "")
+        text = text.replace("```", "")
+        text = text.strip()
+
+
+    # -------------------------
+    # CONVERT TO JSON
     # -------------------------
 
     try:
-
-        response = client.models.generate_content(
-            model="gemini-3.6-flash",
-            contents=prompt
-        )
-
-        text = response.text.strip()
-
-
-        # -------------------------
-        # CLEAN JSON RESPONSE
-        # -------------------------
-
-        if text.startswith("```"):
-
-            text = text.replace("```json", "")
-            text = text.replace("```", "")
-            text = text.strip()
-
-
-        # -------------------------
-        # CONVERT TO JSON
-        # -------------------------
 
         resume = json.loads(text)
 
@@ -201,14 +245,6 @@ Do not include any explanation outside the JSON.
 
         print("\nGemini response:")
         print(text)
-
-        return None
-
-
-    except Exception as e:
-
-        print("\n❌ Resume generation error:")
-        print(e)
 
         return None
 
@@ -233,11 +269,8 @@ resume = generate_resume(profile)
 if resume:
 
     print("\n" + "=" * 60)
-
     print("📄 GENERATED RESUME")
-
     print("=" * 60)
-
 
     print(
         json.dumps(
@@ -267,7 +300,6 @@ if resume:
 
 
     print("\n✅ Resume generated successfully!")
-
     print("📁 Saved as: generated_resume.json")
 
 
