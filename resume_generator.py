@@ -1,309 +1,270 @@
-import os
+from ai_backend_connector import save_generated_resume
+
 import json
-import time
 
-from dotenv import load_dotenv
-from google import genai
-
-
-# -------------------------
-# LOAD API KEY
-# -------------------------
-
-load_dotenv()
-
-api_key = os.getenv("GEMINI_API_KEY")
-
-if not api_key:
-    print("❌ Gemini API key not found.")
-    exit()
-
-
-client = genai.Client(api_key=api_key)
-
-
-# -------------------------
-# LOAD RESUME PROFILE
-# -------------------------
-
-try:
-
-    with open("resume_profile.json", "r", encoding="utf-8") as file:
-        profile = json.load(file)
-
-    print("✅ Resume profile loaded successfully.")
-
-
-except FileNotFoundError:
-
-    print("❌ resume_profile.json not found.")
-    print("Please run resume_interview.py first.")
-    exit()
-
-
-except json.JSONDecodeError:
-
-    print("❌ resume_profile.json contains invalid JSON.")
-    exit()
-
-
-# -------------------------
-# GENERATE RESUME
-# -------------------------
-
-def generate_resume(profile):
-
-    prompt = f"""
-You are CareerAI, an expert professional resume writer.
-
-Create a professional, ATS-friendly resume from the user's
-structured information below.
-
-USER INFORMATION:
-
-{json.dumps(profile, indent=4)}
-
-
-IMPORTANT RULES:
-
-1. Use ONLY information provided in the profile.
-
-2. NEVER invent companies, internships, jobs, projects,
-   technologies, achievements, dates, numbers or results.
-
-3. Do not exaggerate the user's experience.
-
-4. Do not create fake metrics or accomplishments.
-
-5. Do not add name, email or phone number because those
-   will be provided separately by the website.
-
-6. Use professional and concise language.
-
-7. Optimize wording for ATS systems without keyword stuffing.
-
-8. Use standard resume section names.
-
-9. For a student/fresher, emphasize education, skills,
-   projects, certifications and achievements when available.
-
-10. Do not create an experience section if there is no experience.
-
-11. Do not create empty sections.
-
-12. Do not add information that is not present.
-
-13. Keep project descriptions factual.
-
-14. Use strong action verbs only when they accurately describe
-    the information provided.
-
-15. Do not claim results unless the user provided those results.
-
-16. Do not add technologies that were not explicitly provided.
-
-17. Do not add responsibilities that were not explicitly provided.
-
-18. Do not create fake dates or durations.
-
-19. Keep the resume suitable for the user's target roles.
-
-20. If information is insufficient for a section, leave that
-    section empty rather than inventing information.
-
-21. Preserve the meaning of the user's original information.
-
-22. Do not turn a project description into an achievement
-    unless the user explicitly provided an achievement.
-
-23. Do not assume technologies from a project title.
-
-24. Do not assume skills from a degree or target role.
-
-25. Do not add keywords merely because they appear in the
-    target role.
-
-26. Only include information that can be supported directly
-    by the user's profile.
-
-
-Return ONLY valid JSON.
-
-Use exactly this structure:
-
-{{
-    "professional_summary": "",
-    "skills": [],
-    "education": [],
-    "experience": [],
-    "projects": [],
-    "certifications": [],
-    "achievements": [],
-    "leadership": [],
-    "languages": [],
-    "links": []
-}}
-
-For projects, use this structure:
-
-{{
-    "name": "",
-    "description": ""
-}}
-
-For experience, use this structure:
-
-{{
-    "company": "",
-    "role": "",
-    "duration": "",
-    "responsibilities": []
-}}
-
-For education, use this structure:
-
-{{
-    "degree": "",
-    "institution": "",
-    "duration": ""
-}}
-
-For certifications, achievements, leadership, languages and links,
-use simple strings.
-
-Do not include any explanation outside the JSON.
-"""
-
-
-    # -------------------------
-    # GEMINI REQUEST WITH RETRY
-    # -------------------------
-
-    max_attempts = 3
-
-    for attempt in range(1, max_attempts + 1):
-
-        try:
-
-            response = client.models.generate_content(
-                model="gemini-3.6-flash",
-                contents=prompt
-            )
-
-            text = response.text.strip()
-
-            break
-
-
-        except Exception as e:
-
-            error_message = str(e)
-
-            if "503" in error_message and attempt < max_attempts:
-
-                print("\n⚠️ Gemini is temporarily busy.")
-                print(
-                    f"🔄 Retrying... "
-                    f"({attempt}/{max_attempts - 1})"
-                )
-
-                time.sleep(3)
-
-            else:
-
-                print("\n❌ Resume generation error:")
-                print(e)
-
-                return None
-
-
-    # -------------------------
-    # CLEAN JSON RESPONSE
-    # -------------------------
-
-    if text.startswith("```"):
-
-        text = text.replace("```json", "")
-        text = text.replace("```", "")
-        text = text.strip()
-
-
-    # -------------------------
-    # CONVERT TO JSON
-    # -------------------------
-
-    try:
-
-        resume = json.loads(text)
-
-        return resume
-
-
-    except json.JSONDecodeError:
-
-        print("\n❌ Gemini returned invalid JSON.")
-
-        print("\nGemini response:")
-        print(text)
-
-        return None
-
-
-# -------------------------
-# MAIN
-# -------------------------
-
-print("\n🚀 CareerAI Resume Generator")
-print("--------------------------------")
-
-print("🧠 Generating your resume...")
-
-
-resume = generate_resume(profile)
-
-
-# -------------------------
-# DISPLAY RESULT
-# -------------------------
-
-if resume:
-
-    print("\n" + "=" * 60)
-    print("📄 GENERATED RESUME")
-    print("=" * 60)
-
-    print(
-        json.dumps(
-            resume,
-            indent=4,
-            ensure_ascii=False
-        )
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_CENTER
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    HRFlowable
+)
+
+
+INPUT_FILE = "generated_resume.json"
+OUTPUT_FILE = "CareerAI_Resume.pdf"
+
+
+def load_resume():
+    with open(INPUT_FILE, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+def generate_pdf(resume):
+    doc = SimpleDocTemplate(
+        OUTPUT_FILE,
+        pagesize=A4,
+        rightMargin=40,
+        leftMargin=40,
+        topMargin=40,
+        bottomMargin=40
     )
 
+    styles = getSampleStyleSheet()
 
-    # -------------------------
-    # SAVE RESUME
-    # -------------------------
+    name_style = ParagraphStyle(
+        "Name",
+        parent=styles["Title"],
+        alignment=TA_CENTER,
+        fontSize=20,
+        spaceAfter=8
+    )
 
-    with open(
-        "generated_resume.json",
-        "w",
-        encoding="utf-8"
-    ) as file:
+    heading_style = ParagraphStyle(
+        "Heading",
+        parent=styles["Heading2"],
+        fontSize=12,
+        spaceBefore=12,
+        spaceAfter=6
+    )
 
-        json.dump(
-            resume,
-            file,
-            indent=4,
-            ensure_ascii=False
+    body_style = ParagraphStyle(
+        "Body",
+        parent=styles["BodyText"],
+        fontSize=10,
+        leading=14,
+        spaceAfter=4
+    )
+
+    story = []
+
+    # Name
+    name = resume.get("name", "CareerAI Resume")
+    story.append(Paragraph(name, name_style))
+
+    # Professional Summary
+    summary = resume.get("professional_summary", "")
+
+    if summary:
+        story.append(Paragraph("PROFESSIONAL SUMMARY", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+        story.append(Paragraph(summary, body_style))
+
+    # Skills
+    skills = resume.get("skills", [])
+
+    if skills:
+        story.append(Paragraph("SKILLS", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        skills_text = " • ".join(skills)
+        story.append(Paragraph(skills_text, body_style))
+
+    # Education
+    education = resume.get("education", [])
+
+    if education:
+        story.append(Paragraph("EDUCATION", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for edu in education:
+            degree = edu.get("degree", "")
+            institution = edu.get("institution", "")
+            duration = edu.get("duration", "")
+
+            text = f"<b>{degree}</b> — {institution}"
+
+            if duration:
+                text += f" ({duration})"
+
+            story.append(Paragraph(text, body_style))
+
+    # Experience
+    experience = resume.get("experience", [])
+
+    if experience:
+        story.append(Paragraph("EXPERIENCE", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for exp in experience:
+            company = exp.get("company", "")
+            role = exp.get("role", "")
+            duration = exp.get("duration", "")
+
+            story.append(
+                Paragraph(
+                    f"<b>{role}</b> — {company} ({duration})",
+                    body_style
+                )
+            )
+
+            responsibilities = exp.get("responsibilities", [])
+
+            for responsibility in responsibilities:
+                story.append(
+                    Paragraph(
+                        f"• {responsibility}",
+                        body_style
+                    )
+                )
+
+    # Projects
+    projects = resume.get("projects", [])
+
+    if projects:
+        story.append(Paragraph("PROJECTS", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for project in projects:
+            project_name = project.get("name", "")
+            description = project.get("description", "")
+
+            story.append(
+                Paragraph(
+                    f"<b>{project_name}</b>",
+                    body_style
+                )
+            )
+
+            if description:
+                story.append(
+                    Paragraph(
+                        f"• {description}",
+                        body_style
+                    )
+                )
+
+    # Certifications
+    certifications = resume.get("certifications", [])
+
+    if certifications:
+        story.append(Paragraph("CERTIFICATIONS", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for certification in certifications:
+            story.append(
+                Paragraph(
+                    f"• {certification}",
+                    body_style
+                )
+            )
+
+    # Achievements
+    achievements = resume.get("achievements", [])
+
+    if achievements:
+        story.append(Paragraph("ACHIEVEMENTS", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for achievement in achievements:
+            story.append(
+                Paragraph(
+                    f"• {achievement}",
+                    body_style
+                )
+            )
+
+    # Leadership
+    leadership = resume.get("leadership", [])
+
+    if leadership:
+        story.append(Paragraph("LEADERSHIP", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for item in leadership:
+            story.append(
+                Paragraph(
+                    f"• {item}",
+                    body_style
+                )
+            )
+
+    # Languages
+    languages = resume.get("languages", [])
+
+    if languages:
+        story.append(Paragraph("LANGUAGES", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        story.append(
+            Paragraph(
+                " • ".join(languages),
+                body_style
+            )
         )
 
+    # Links
+    links = resume.get("links", [])
 
-    print("\n✅ Resume generated successfully!")
-    print("📁 Saved as: generated_resume.json")
+    if links:
+        story.append(Paragraph("LINKS", heading_style))
+        story.append(HRFlowable(width="100%", thickness=1))
+        story.append(Spacer(1, 5))
+
+        for link in links:
+            story.append(
+                Paragraph(
+                    f"• {link}",
+                    body_style
+                )
+            )
+
+    doc.build(story)
+
+    print("\n✅ Resume PDF generated successfully!")
+    print(f"📄 File: {OUTPUT_FILE}")
 
 
-else:
+def main():
+    try:
+        resume = load_resume()
 
-    print("\n❌ Resume generation failed.")
+        # Send generated resume to backend
+        access_token = "YOUR_ACCESS_TOKEN_HERE"
+        save_generated_resume(access_token, resume)
 
+        # Generate PDF
+        generate_pdf(resume)
+
+    except FileNotFoundError:
+        print(f"❌ {INPUT_FILE} not found.")
+        print("Generate the resume first.")
+
+    except Exception as e:
+        print("❌ Resume generation failed.")
+        print("Error:", e)
+
+
+if __name__ == "__main__":
+    main()
