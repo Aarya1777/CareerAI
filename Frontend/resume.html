@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Optimizer | CareerAI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="optimizer-page">
+
+        <!-- PAGE HEADING -->
+        <h1 class="optimizer-title">
+            RESUME OPTIMIZER
+        </h1>
+
+
+        <!-- MAIN CONTENT -->
+        <div class="optimizer-layout">
+
+
+            <!-- =====================================
+                 LEFT SETTINGS PANEL
+            ====================================== -->
+
+            <aside class="optimizer-sidebar">
+
+                <h2>
+                    What would you like to<br>
+                    edit today?
+                </h2>
+
+
+                <!-- COLOR PALETTE -->
+
+                <section class="optimizer-setting">
+
+                    <h3>COLOR PALETTE</h3>
+
+
+                    <div class="setting-row">
+
+                        <label for="color-count">
+                            No. of colors
+                        </label>
+
+                        <select id="color-count">
+
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="resume-color">
+                            Choose color
+                        </label>
+
+                        <input
+                            type="color"
+                            id="resume-color"
+                            value="#8b0000"
+                        >
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- FONT -->
+
+                <section class="optimizer-setting">
+
+                    <h3>Font</h3>
+
+
+                    <div class="setting-row">
+
+                        <label for="current-font">
+                            Current font
+                        </label>
+
+                        <div
+                            id="current-font"
+                            class="current-font-demo"
+                        >
+                            CareerAI
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="font-choice">
+                            Choose font
+                        </label>
+
+                        <select id="font-choice">
+
+                            <option>Arial</option>
+                            <option>Georgia</option>
+                            <option>Times New Roman</option>
+                            <option>Verdana</option>
+                            <option>Trebuchet MS</option>
+                            <option>Courier New</option>
+                            <option>Garamond</option>
+                            <option>Tahoma</option>
+                            <option>Calibri</option>
+                            <option>Helvetica</option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- FONT SIZE -->
+
+                <section class="optimizer-setting">
+
+                    <h3>Size of font</h3>
+
+
+                    <div class="setting-row">
+
+                        <label for="font-section">
+                            Choose a section
+                        </label>
+
+                        <select id="font-section">
+
+                            <option>Heading</option>
+                            <option>Subheading</option>
+                            <option>Body</option>
+                            <option>Skills</option>
+                            <option>Experience</option>
+                            <option>Education</option>
+                            <option>Contact</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="font-size">
+                            Font size
+                        </label>
+
+                        <select id="font-size">
+
+                            <option>12px</option>
+                            <option>14px</option>
+                            <option>16px</option>
+                            <option>18px</option>
+                            <option>20px</option>
+                            <option>22px</option>
+                            <option>24px</option>
+                            <option>28px</option>
+                            <option>32px</option>
+                            <option>36px</option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- THEME -->
+
+                <section class="optimizer-setting">
+
+                    <div class="setting-row">
+
+                        <label for="current-theme">
+                            Current theme
+                        </label>
+
+                        <select id="current-theme">
+
+                            <option>Classic</option>
+                            <option>Modern</option>
+                            <option>Minimal</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="edit-theme">
+                            Edit theme
+                        </label>
+
+                        <select id="edit-theme">
+
+                            <option>Casual</option>
+                            <option>Professional</option>
+                            <option>Creative</option>
+                            <option>Minimal</option>
+                            <option>Modern</option>
+                            <option>Elegant</option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+
+
+            <!-- =====================================
+                 RIGHT CONTENT
+            ====================================== -->
+
+            <section class="optimizer-content">
+
+
+                <!-- UPLOAD FILE -->
+
+                <label
+                    for="resume-file"
+                    class="upload-resume"
+                >
+
+                    <span>
+                        Upload files
+                    </span>
+
+                    <small>
+                        PDF or Word doc
+                    </small>
+
+                </label>
+
+
+                <input
+                    type="file"
+                    id="resume-file"
+                    accept=".pdf,.doc,.docx"
+                    hidden
+                >
+
+                <!-- DOWNLOAD BUTTON -->
+
+                <button class="download-resume">
+                    Download
+                </button>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

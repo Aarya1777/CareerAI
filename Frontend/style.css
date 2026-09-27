@@ -1,0 +1,1607 @@
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background-color: #F7F0E3;
+color: #241A17;
+line-height: 1.5;
+}
+
+a {
+text-decoration: none;
+color: inherit;
+}
+
+.navbar {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 18px 7%;
+background-color: #6b1313;
+border-bottom: 1px solid #3b0505;
+}
+
+/* Container that holds the logo */
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Image styling */
+.logo-image {
+  height: 85px; /* Adjust this value if you want the logo bigger or smaller */
+  width: 150px;  /* Keeps the logo image proportions correct */
+  display: block;
+  object-fit: contain;
+}
+
+.nav-links {
+display: flex;
+gap: 35px;
+}
+
+.nav-links a {
+color: #756A63;
+font-size: 15px;
+font-weight: 600;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+color:#d8cdcd;
+}
+
+.nav-buttons {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+
+.login-btn {
+padding: 9px 17px;
+background-color: #a14747;
+color: white;
+border-radius: 7px;
+font-weight: 600;
+}
+
+.signup-btn {
+padding: 9px 17px;
+background-color: #a14747;
+color: white;
+border-radius: 7px;
+font-weight: 600;
+}
+
+.signup-btn:hover,
+.form-button:hover,
+.card-button:hover {
+background-color: #ca6666;
+}
+
+.small-heading {
+color: #313030cb;
+font-size: 14px;
+font-weight: 800;
+letter-spacing: 1.5px;
+margin-bottom: 10px;
+}
+
+.home-intro {
+text-align: center;
+padding: 90px 20px 55px;
+}
+
+.hero1{
+    color:#500b0b
+}
+
+.home-intro h1 {
+font-size: 50px;
+line-height: 1.1;
+margin-bottom: 18px;
+font-weight: 700;
+}
+
+.home-intro > p:last-child {
+max-width: 550px;
+margin: auto;
+color: #645b55;
+font-size: 16px;
+}
+
+.stats-section {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+margin: 0 8% 75px;
+background-color: #FFF9EF;
+border: 1px solid #E2D6C7;
+border-radius: 12px;
+}
+
+.stat {
+flex: 1 1 200px;
+text-align: center;
+padding: 30px 20px;
+border-right: 1px solid #E2D6C7;
+}
+
+.stat:last-child {
+border-right: none;
+}
+
+.stat h2 {
+color: #7A1F1F;
+font-size: 32px;
+margin-bottom: 5px;
+}
+
+.stat p {
+color: #756A63;
+font-size: 13px;
+}
+
+.reviews-section {
+padding: 70px 8%;
+background-color: #FFF9EF;
+}
+
+.section-heading {
+margin-bottom: 40px;
+}
+
+.section-heading h2 {
+font-size: 34px;
+}
+
+.centered {
+text-align: center;
+}
+
+.review-grid {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+}
+
+.review-card {
+flex: 1 1 280px;
+padding: 28px;
+border: 2px solid #645b55;
+border-radius: 12px;
+background-color: #FDF7ED;
+}
+
+.quote {
+font-size: 40px;
+line-height: 1;
+color: #7A1F1F;
+margin-bottom: 8px;
+}
+
+.review-card p:not(.quote) {
+color: #756A63;
+font-size: 14px;
+margin-bottom: 20px;
+}
+
+.review-card h4 {
+font-size: 13px;
+}
+
+footer {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 25px 8%;
+background-color: #681512;
+border-top: 1px solid #500b0b;
+}
+
+footer p {
+color: #756A63;
+font-size: 13px;
+}
+
+.dashboard {
+padding: 65px 8% 90px;
+min-height: calc(100vh - 130px);
+}
+
+.dashboard-heading {
+margin-bottom: 40px;
+}
+
+.dashboard-heading h1 {
+font-size: 40px;
+margin-bottom: 8px;
+}
+
+.dashboard-heading > p:last-child {
+color: #756A63;
+}
+
+.dashboard-grid {
+display: flex;
+flex-wrap: wrap;
+gap: 22px;
+}
+
+.dashboard-card {
+flex: 1 1 45%;
+min-height: 260px;
+padding: 30px;
+background-color: #FFF9EF;
+border: 1px solid #E2D6C7;
+border-radius: 14px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+.dashboard-card:hover {
+border-color: #C9AAA0;
+}
+
+.dashboard-icon {
+width: 55px;
+height: 55px;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #F1DFD5;
+border-radius: 10px;
+font-size: 25px;
+margin-bottom: 18px;
+}
+
+.dashboard-card h2 {
+font-size: 23px;
+margin-bottom: 8px;
+}
+
+.dashboard-card p {
+color: #756A63;
+font-size: 14px;
+max-width: 400px;
+margin-bottom: 20px;
+}
+
+.card-button {
+margin-top: auto;
+border: none;
+padding: 10px 17px;
+background-color: #7A1F1F;
+color: white;
+border-radius: 7px;
+font-weight: 600;
+cursor: pointer;
+}
+
+/* ================================================= */
+/* CAREERAI AUTHENTICATION PAGES */
+/* ================================================= */
+
+
+/* ---------------- PAGE BACKGROUND ---------------- */
+
+.auth-body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    background-color: #5a2e26;
+}
+
+
+/* ---------------- MAIN CARD ---------------- */
+
+.auth-container {
+    width: min(950px, 95vw);
+    min-height: 560px;
+
+    display: flex;
+
+    background-color: #FFF9EF;
+
+    border: 1px solid #8f0018;
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 25px rgba(143, 0, 24, 0.3),
+        0 15px 45px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ---------------- LEFT RED PANEL ---------------- */
+
+.auth-visual {
+    width: 45%;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 45px;
+
+    background-color: #d3b797;
+
+    color: white;
+
+    overflow: hidden;
+
+    /*
+       DIAGONAL CUT
+       The red panel becomes narrower
+       toward the bottom.
+    */
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        70% 100%,
+        0 100%
+    );
+}
+
+
+/* ---------------- LOGO ---------------- */
+
+.auth-logo {
+    position: relative;
+    z-index: 2;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: white;
+
+    text-decoration: none;
+}
+
+.auth-logo span {
+    color: #E8D8D0;
+}
+
+
+/* ---------------- WELCOME TEXT ---------------- */
+
+.auth-welcome {
+    position: relative;
+    z-index: 2;
+
+    margin-bottom: 40px;
+}
+
+.auth-welcome h1 {
+    font-size: 42px;
+
+    line-height: 1.1;
+
+    margin-bottom: 20px;
+
+    color: white;
+}
+
+.auth-welcome p {
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color: #E8D8D0;
+}
+
+
+/* ---------------- RIGHT FORM PANEL ---------------- */
+
+.auth-form {
+    width: 55%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 60px 100px;
+
+    background-color: #FFF9EF;
+}
+
+
+/* ---------------- FORM HEADING ---------------- */
+
+.auth-form h1 {
+    font-size: 32px;
+
+    color: #d3b797;
+
+    margin-bottom: 8px;
+}
+
+.form-subtitle {
+    color: #756A63;
+
+    font-size: 14px;
+
+    margin-bottom: 30px;
+}
+
+
+/* ---------------- FORM ---------------- */
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.auth-form label {
+    font-size: 13px;
+    font-weight: 700;
+
+    color: #241A17;
+
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+.auth-form input {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: none;
+    border-bottom: 1px solid #B9A9A0;
+
+    background-color: transparent;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #241A17;
+}
+
+.auth-form input:focus {
+    border-bottom: 2px solid #d3b797;
+}
+
+.auth-form input::placeholder {
+    color: #B6AAA1;
+}
+
+
+/* ---------------- DEMO HINT ---------------- */
+
+.demo-hint {
+    color: #B6AAA1;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+
+/* ---------------- BUTTON ---------------- */
+
+.form-button {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #d3b797;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.form-button:hover {
+    background-color: #d3b797;
+}
+
+
+/* ---------------- FORM MESSAGE ---------------- */
+
+.form-message {
+    text-align: center;
+
+    color: #7A1F1F;
+
+    font-size: 13px;
+
+    margin-top: 12px;
+
+    min-height: 18px;
+}
+
+
+/* ---------------- SWITCH LOGIN/SIGNUP ---------------- */
+
+.switch-form {
+    text-align: center;
+
+    color: #756A63;
+
+    font-size: 13px;
+
+    margin-top: 28px;
+}
+
+.switch-form a {
+    color: #6b1010;
+
+    font-weight: 700;
+}
+
+.switch-form a:hover {
+    text-decoration: underline;
+}
+
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 700px) {
+
+    .auth-container {
+        flex-direction: column;
+
+        width: 95vw;
+    }
+
+    .auth-visual {
+        width: 100%;
+
+        min-height: 220px;
+
+        padding: 30px;
+
+        clip-path: none;
+    }
+
+    .auth-welcome h1 {
+        font-size: 30px;
+    }
+
+    .auth-welcome p {
+        font-size: 13px;
+    }
+
+    .auth-form {
+        width: 100%;
+
+        padding: 40px 30px;
+    }
+
+}
+
+/* ---------------- LANDING PAGE ---------------- */
+
+.hero {
+    min-height: calc(100vh - 90px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 55px 20px;
+}
+
+
+/* ---------------- TEXT ABOVE VIDEO ---------------- */
+
+.hero-text {
+    font-family: "Comic Sans MS", cursive;
+
+    font-size: clamp(32px, 4vw, 58px);
+    font-weight: normal;
+
+    color: #8f0018;
+    text-align: center;
+
+    line-height: 1.2;
+}
+
+
+/* ---------------- VIDEO CARD ---------------- */
+
+.video-card {
+    width: 90%;              /* Makes the video wide */
+    max-width: 1400px;       /* Prevents it from becoming too huge */
+
+    height: 280px;           /* Height of the video area */
+
+    background-color: transparent;
+
+    border: none;             /* REMOVES RED BORDER */
+
+    border-radius: 0;
+
+    padding: 0;
+
+    margin: 25px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: none;
+}
+
+
+/* ---------------- VIDEO ---------------- */
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 0;
+
+    display: block;
+}
+
+
+/* ---------------- MOBILE ---------------- */
+
+@media (max-width: 600px) {
+
+    .hero {
+        padding: 45px 15px;
+    }
+
+    .hero-text {
+        font-size: 32px;
+    }
+
+    .video-card {
+        width: 200px;
+        height: 250px;
+    }
+
+}
+
+.video-card {
+    width: 200px !important;
+    height: 300px !important;
+    background-color: white !important;
+    border: 5px solid red !important;
+}
+
+.hero-video {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    height: 55px;
+    width: auto;
+
+    display: block;
+    object-fit: contain;
+}
+
+/* ===== VIDEO ===== */
+
+.video-card {
+    width: 100% !important;
+    max-width: 1400px !important;
+
+    height: 280px !important;
+
+    margin: 25px auto !important;
+    padding: 0 !important;
+
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    overflow: hidden !important;
+}
+
+.hero-video {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: fill !important;  /* Fills the ENTIRE rectangle */
+
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background-color: #fffde8;
+    color: #6e1111;
+
+    font-family: Arial, sans-serif;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 78px;
+
+    background-color: #8b0000;
+
+    margin: 18px 40px 0;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+}
+
+
+/* LOGO */
+
+.logo {
+    width: 150px;
+    height: 78px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    color: white;
+}
+
+.logo span {
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    letter-spacing: 2px;
+}
+
+.logo strong {
+    position: absolute;
+
+    font-family: Georgia, serif;
+
+    font-size: 60px;
+
+    font-weight: normal;
+
+    color: #fff5d6;
+
+    opacity: 0.9;
+}
+
+
+/* NAV LINKS */
+
+.nav-links {
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 100px;
+}
+
+.nav-links a {
+    color: white;
+
+    text-decoration: none;
+
+    font-family: "Comic Sans MS", cursive;
+
+    font-size: 23px;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-title {
+    margin: 20px 60px 12px;
+
+    font-family: "Trebuchet MS", sans-serif;
+
+    font-size: 52px;
+
+    font-weight: 500;
+
+    letter-spacing: 7px;
+
+    color: #870000;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.optimizer {
+    display: flex;
+
+    margin: 0 45px;
+
+    border-top: 2px solid #777;
+
+    min-height: 790px;
+}
+
+
+/* =========================
+   LEFT SETTINGS
+========================= */
+
+.settings-panel {
+    width: 32%;
+
+    padding: 18px 25px 30px 20px;
+
+    border-right: 3px solid #888;
+}
+
+.settings-panel > h2 {
+    font-family: "Comic Sans MS", cursive;
+
+    color: #777;
+
+    font-size: 22px;
+
+    font-weight: normal;
+
+    line-height: 1.15;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   SETTING SECTIONS
+========================= */
+
+.setting-section {
+    margin-bottom: 24px;
+}
+
+.setting-section h3 {
+    font-family: "Comic Sans MS", cursive;
+
+    font-size: 17px;
+
+    letter-spacing: 2px;
+
+    color: #555;
+
+    margin-bottom: 8px;
+}
+
+.setting-section label {
+    display: block;
+
+    font-family: "Comic Sans MS", cursive;
+
+    font-size: 15px;
+
+    color: #666;
+
+    margin-top: 7px;
+
+    margin-bottom: 4px;
+}
+
+
+/* =========================
+   SELECT BOXES
+========================= */
+
+select {
+    width: 100%;
+
+    height: 32px;
+
+    border: 2px solid #aaa;
+
+    border-radius: 3px;
+
+    background-color: #fffde8;
+
+    color: #555;
+
+    padding: 3px 8px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #8b0000;
+}
+
+
+/* =========================
+   COLOR PICKER
+========================= */
+
+.color-picker-wrapper {
+    width: 105px;
+    height: 105px;
+
+    border: 2px solid #888;
+
+    border-radius: 50%;
+
+    padding: 7px;
+
+    margin: 8px auto 10px;
+}
+
+.color-picker-wrapper input[type="color"] {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+
+    border-radius: 50%;
+
+    padding: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   FONT DEMO
+========================= */
+
+.font-demo {
+    width: 100%;
+
+    height: 32px;
+
+    border: 2px solid #aaa;
+
+    background-color: #fffde8;
+
+    padding: 4px 8px;
+
+    color: #555;
+
+    font-family: Georgia, serif;
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   RIGHT AREA
+========================= */
+
+.resume-area {
+    width: 68%;
+
+    position: relative;
+
+    padding: 50px 45px 40px;
+}
+
+
+/* =========================
+   UPLOAD BOX
+========================= */
+
+.upload-box {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 480px;
+
+    min-height: 115px;
+
+    margin: 0 auto;
+
+    border: 5px solid #8b0000;
+
+    border-radius: 8px;
+
+    background-color: #fffde8;
+
+    color: #8b0000;
+
+    cursor: pointer;
+
+    text-align: center;
+}
+
+.upload-box span {
+    font-family: "Comic Sans MS", cursive;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+.upload-box small {
+    font-family: "Comic Sans MS", cursive;
+
+    font-size: 19px;
+
+    margin-top: 5px;
+}
+
+.upload-box:hover {
+    background-color: #fff6cf;
+}
+
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    min-height: 100vh;
+
+    background-color: #fffde8;
+
+    color: #555;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.optimizer-page {
+    min-height: 100vh;
+
+    margin: 0 45px;
+
+    background-color: #fffde8;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.optimizer-title {
+    margin: 0;
+
+    padding: 20px 15px 14px;
+
+    border-bottom: 2px solid #888;
+
+    color: #850000;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 50px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.optimizer-layout {
+    display: flex;
+
+    min-height: calc(100vh - 105px);
+}
+
+
+/* =========================================================
+   LEFT SETTINGS PANEL
+========================================================= */
+
+.optimizer-sidebar {
+    width: 32%;
+
+    padding: 18px 25px 30px 20px;
+
+    border-right: 3px solid #888;
+}
+
+
+/* =========================================================
+   SIDEBAR INTRODUCTION
+========================================================= */
+
+.optimizer-sidebar h2 {
+    margin: 0 0 28px;
+
+    color: #666;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 21px;
+
+    font-weight: 500;
+
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   SETTINGS SECTION
+========================================================= */
+
+.optimizer-setting {
+    margin-bottom: 25px;
+}
+
+
+/* SECTION TITLE */
+
+.optimizer-setting h3 {
+    margin: 0 0 9px;
+
+    color: #555;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   SETTING ROW
+========================================================= */
+
+.setting-row {
+    margin-bottom: 10px;
+}
+
+
+/* LABEL */
+
+.setting-row label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #666;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   SELECT DROPDOWNS
+========================================================= */
+
+.setting-row select {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 5px 9px;
+
+    border: 2px solid #aaa;
+
+    border-radius: 3px;
+
+    background-color: #fffde8;
+
+    color: #555;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+/* SELECT WHEN CLICKED */
+
+.setting-row select:focus {
+    border-color: #850000;
+}
+
+
+/* =========================================================
+   COLOR PICKER
+========================================================= */
+
+.setting-row input[type="color"] {
+    display: block;
+
+    width: 92px;
+
+    height: 92px;
+
+    margin: 7px auto 4px;
+
+    padding: 0;
+
+    border: 7px solid #fffde8;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CURRENT FONT DEMO
+========================================================= */
+
+.current-font-demo {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 6px 9px;
+
+    border: 2px solid #aaa;
+
+    background-color: #fffde8;
+
+    color: #555;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.optimizer-content {
+    width: 68%;
+
+    position: relative;
+
+    padding: 48px 45px 35px;
+}
+
+
+/* =========================================================
+   UPLOAD FILE BUTTON
+========================================================= */
+
+.upload-resume {
+    width: 480px;
+
+    min-height: 120px;
+
+    margin: 0 auto;
+
+    border: 5px solid #850000;
+
+    border-radius: 7px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-color: #fffde8;
+
+    color: #850000;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease;
+}
+
+
+/* HOVER */
+
+.upload-resume:hover {
+    background-color: #fff6d1;
+}
+
+
+/* UPLOAD TITLE */
+
+.upload-resume span {
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 23px;
+
+    font-weight: 700;
+}
+
+
+/* UPLOAD SUBTEXT */
+
+.upload-resume small {
+    margin-top: 7px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 17px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   ARROW
+========================================================= */
+
+.upload-arrow {
+    position: absolute;
+
+    top: 145px;
+
+    left: 55px;
+
+    color: #777;
+
+    font-size: 55px;
+
+    transform: rotate(-20deg);
+}
+
+
+/* =========================================================
+   EMPTY RESUME WORKSPACE
+========================================================= */
+
+.resume-workspace {
+    width: 90%;
+
+    height: 455px;
+
+    margin: 40px auto 0;
+
+    border: 3px solid #999;
+
+    border-radius: 2px;
+
+    background-color: transparent;
+}
+
+
+/* =========================================================
+   DOWNLOAD BUTTON
+========================================================= */
+
+.download-resume {
+    position: absolute;
+
+    right: 45px;
+
+    bottom: 30px;
+
+    padding: 9px 18px;
+
+    border: 2px solid #888;
+
+    border-radius: 2px;
+
+    background-color: #fffde8;
+
+    color: #555;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+
+/* DOWNLOAD HOVER */
+
+.download-resume:hover {
+    border-color: #850000;
+
+    color: #850000;
+}
+
+
+/* =========================================================
+   TABLET RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .optimizer-page {
+        margin: 0 25px;
+    }
+
+
+    .optimizer-title {
+        font-size: 40px;
+
+        letter-spacing: 3px;
+    }
+
+
+    .optimizer-sidebar {
+        width: 35%;
+    }
+
+
+    .optimizer-content {
+        width: 65%;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+
+    .upload-resume {
+        width: 90%;
+    }
+
+
+    .upload-arrow {
+        left: 10px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .optimizer-page {
+        margin: 0 15px;
+    }
+
+
+    .optimizer-title {
+        padding: 18px 5px 12px;
+
+        font-size: 30px;
+
+        letter-spacing: 2px;
+    }
+
+
+    .optimizer-layout {
+        flex-direction: column;
+    }
+
+
+    .optimizer-sidebar {
+        width: 100%;
+
+        border-right: none;
+
+        border-bottom: 3px solid #888;
+    }
+
+
+    .optimizer-content {
+        width: 100%;
+
+        min-height: 650px;
+
+        padding: 35px 15px;
+    }
+
+
+    .upload-resume {
+        width: 100%;
+    }
+
+
+    .upload-arrow {
+        display: none;
+    }
+
+
+    .resume-workspace {
+        width: 100%;
+
+        height: 420px;
+    }
+
+
+    .download-resume {
+        right: 15px;
+
+        bottom: 20px;
+    }
+}
