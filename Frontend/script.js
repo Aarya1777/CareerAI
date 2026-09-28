@@ -67,3 +67,112 @@ piece.remove();
 }, duration);
 }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const counters = document.querySelectorAll(".stat h2");
+
+    counters.forEach(function (counter) {
+
+        const target = Number(counter.getAttribute("data-target"));
+        let current = 0;
+
+        const increment = target / 100;
+
+        function updateCounter() {
+
+            current += increment;
+
+            if (current < target) {
+
+                if (target === 95) {
+                    counter.textContent = Math.floor(current) + "%";
+                } else {
+                    counter.textContent =
+                        Math.floor(current).toLocaleString() + "+";
+                }
+
+                setTimeout(updateCounter, 20);
+
+            } else {
+
+                if (target === 95) {
+                    counter.textContent = "95%";
+                } else {
+                    counter.textContent =
+                        target.toLocaleString() + "+";
+                }
+            }
+        }
+
+        updateCounter();
+    });
+
+});
+
+/* =========================
+   CAREERAI INTERACTIVE ASSISTANT
+========================= */
+
+const assistant = document.querySelector(".cursor-assistant");
+
+if (assistant) {
+
+    const interactiveElements = document.querySelectorAll(
+    "a, button, .dashboard-card"
+);
+    interactiveElements.forEach(function (element) {
+
+        element.addEventListener("mouseenter", function () {
+
+            const rect = element.getBoundingClientRect();
+
+            assistant.style.left = (rect.left - 95) + "px";
+            assistant.style.top = (rect.top + rect.height / 2 + 15) + "px";
+
+            assistant.classList.add("show");
+        });
+
+        element.addEventListener("mouseleave", function () {
+
+            assistant.classList.remove("show");
+
+        });
+
+    });
+
+}
+
+ /* =========================
+    LOGIN / SIGNUP ASSISTANT
+ ========================= */
+
+const formAssistant = document.querySelector(".form-assistant");
+
+if (formAssistant) {
+
+    const formElements = document.querySelectorAll(
+        ".auth-form input, .auth-form button, .auth-form a"
+    );
+
+    formElements.forEach(function (element) {
+
+        element.addEventListener("mouseenter", function () {
+
+            const rect = element.getBoundingClientRect();
+
+            formAssistant.style.left = (rect.left - 5) + "px";
+            formAssistant.style.top = (rect.top + rect.height / 2 + 15) + "px";
+
+            formAssistant.classList.add("show");
+        });
+
+        element.addEventListener("mouseleave", function () {
+
+            formAssistant.classList.remove("show");
+
+        });
+
+    });
+
+}
