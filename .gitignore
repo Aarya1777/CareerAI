@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# Uploaded resume files
+backend/uploaded_resumes/
+
+# Accidental local file
+tall -r requirements.txt

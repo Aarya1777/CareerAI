@@ -13,7 +13,6 @@ from modules.resumes.router import router as resumes_router
 from modules.reports.router import router as reports_router
 from modules.applications.router import router as applications_router
 
-
 app = FastAPI(
     title=settings.app_name,
     version="1.0.0"
