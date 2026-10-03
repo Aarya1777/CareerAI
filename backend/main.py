@@ -12,6 +12,7 @@ from modules.users.router import router as users_router
 from modules.resumes.router import router as resumes_router
 from modules.reports.router import router as reports_router
 from modules.applications.router import router as applications_router
+from modules.jobs.router import router as jobs_router
 
 app = FastAPI(
     title=settings.app_name,
@@ -23,6 +24,7 @@ app.include_router(users_router, prefix="/users", tags=["users"])
 app.include_router(resumes_router, prefix="/resumes", tags=["resumes"])
 app.include_router(reports_router, prefix="/reports", tags=["reports"])
 app.include_router(applications_router, prefix="/applications", tags=["applications"])
+app.include_router(jobs_router, prefix="/jobs", tags=["jobs"])
 
 
 @app.get("/")
