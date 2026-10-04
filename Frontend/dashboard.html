@@ -2,91 +2,229 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CareerAI - Dashboard</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerAI - Dashboard</title>
+
+    <!-- Handwritten font -->
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="dashboard-body">
 
-<nav class="navbar">
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-    <div class="logo">
-        <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
-    </div>
+    <nav class="navbar">
 
-    <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="dashboard.html" class="active">Dashboard</a>
-    </div>
-
-    <div class="nav-buttons">
-        <a href="login.html" class="login-btn">Logout</a>
-    </div>
-
-</nav>
-
-<main class="dashboard">
-
-    <div class="dashboard-heading">
-        <p class="small-heading">DASHBOARD</p>
-        <h1>Welcome back!</h1>
-        <p>Choose a tool to continue your career journey.</p>
-    </div>
-
-    <div class="dashboard-grid">
-
-        <div class="dashboard-card">
-            <div class="dashboard-icon">🎤</div>
-            <h2>Start Interview</h2>
-            <p>AI powered personal interview - Your guide to career success</p>
-            <a href="interview.html">
-                <button class="card-button">Start</button>
-            </a>
+        <div class="logo">
+            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
         </div>
 
-        <div class="dashboard-card">
-            <div class="dashboard-icon">📄</div>
-            <h2>Optimize Resume</h2>
-            <p>Improve your resume and make it stronger for job applications.</p>
-            <a href="resume.html">
-                <button class="card-button">Optimize</button>
-            </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
         </div>
 
-        <div class="dashboard-card">
-            <div class="dashboard-icon">🔎</div>
-            <h2>Job Matcher</h2>
-            <p>Find job opportunities that match your skills and interests.</p>
-            <a href="jobs.html">
-                <button class="card-button">Jobs for you</button>
-            </a>
+        <div class="nav-buttons">
+            <a href="login.html" class="login-btn">Logout</a>
         </div>
 
-        <div class="dashboard-card">
-            <div class="dashboard-icon">📌</div>
-            <h2>Application Tracker</h2>
-            <p>Keep track of your applications and stay organized.</p>
-            <a href="tracker.html">
-                <button class="card-button">Track Status</button>
-            </a>
+    </nav>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <main class="dashboard">
+
+        <div class="dashboard-heading">
+
+            <p class="small-heading">DASHBOARD</p>
+
+            <h1>Welcome back!</h1>
+
+            <p>Choose a tool to continue your career journey.</p>
+
         </div>
 
-    </div>
 
-</main>
+        <div class="dashboard-grid">
 
-<footer>
-    <p>Take the next step in your career now!</p>
-    <p>© 2026 CareerAI</p>
-</footer>
+            <!-- =========================
+                 CARD 1 - INTERVIEW
+            ========================== -->
 
-<!-- Interactive CareerAI Assistant -->
+            <div class="dashboard-card">
+
+                <div class="card-top-row">
+
+                    <div class="card-title-row">
+                        <span class="card-number">1.</span>
+
+                        <h2>Start Interview</h2>
+                    </div>
+
+                    <img src="Micgif.gif"
+                         alt="Start Interview"
+                         class="dashboard-gif">
+
+                </div>
+
+                <p>
+                    AI powered personal interview - Your guide to career success
+                </p>
+
+                <a href="interview.html">
+                    <button class="card-button">Start</button>
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 CARD 2 - RESUME
+            ========================== -->
+
+            <div class="dashboard-card">
+
+                <div class="card-top-row">
+
+                    <div class="card-title-row">
+                        <span class="card-number">2.</span>
+
+                        <h2>Optimize Resume</h2>
+                    </div>
+
+                    <img src="Optimizegif.gif"
+                         alt="Optimize Resume"
+                         class="dashboard-gif">
+
+                </div>
+
+                <p>
+                    Improve your resume and make it stronger for job applications.
+                </p>
+
+                <a href="resume.html">
+                    <button class="card-button">Optimize</button>
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 CARD 3 - JOB MATCHER
+            ========================== -->
+
+            <div class="dashboard-card">
+
+                <div class="card-top-row">
+
+                    <div class="card-title-row">
+                        <span class="card-number">3.</span>
+
+                        <h2>Job Matcher</h2>
+                    </div>
+
+                    <img src="jobmatchergif.gif"
+                         alt="Job Matcher"
+                         class="dashboard-gif">
+
+                </div>
+
+                <p>
+                    Find job opportunities that match your skills and interests.
+                </p>
+
+                <a href="jobs.html">
+                    <button class="card-button">Jobs for you</button>
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 CARD 4 - TRACKER
+            ========================== -->
+
+            <div class="dashboard-card">
+
+                <div class="card-top-row">
+
+                    <div class="card-title-row">
+                        <span class="card-number">4.</span>
+
+                        <h2>Application Tracker</h2>
+                    </div>
+
+                    <img src="trackergif.gif"
+                         alt="Application Tracker"
+                         class="dashboard-gif">
+
+                </div>
+
+                <!-- CareerAI Interactive Assistant -->
+
 <div class="cursor-assistant">
-    <img src="cursor.png" alt="CareerAI Assistant">
+    <img src="cursor.png"
+         alt="CareerAI Assistant"
+         id="cursor-mascot">
 </div>
 
-<script src="script.js"></script>
+                <p>
+                    Keep track of your applications and stay organized.
+                </p>
+
+                <a href="tracker.html">
+                    <button class="card-button">Track Status</button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>Take the next step in your career now!</p>
+
+        <p>© 2026 CareerAI</p>
+
+    </footer>
+
+
+    <!-- =========================
+         CAREERAI INTERACTIVE ASSISTANT
+         This image changes depending
+         on which dashboard card
+         is being hovered.
+    ========================== -->
+
+    <div class="cursor-assistant">
+
+        <img src="cursor.png"
+             alt="CareerAI Assistant"
+             id="cursor-mascot">
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
 
 </body>
+
+</html>
