@@ -1,10 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Start Interview - CareerAI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerAI - Interview</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>BEGIN YOUR AI POWERED INTERVIEW NOW</h1>
+
+<body class="interview-body">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="interview-navbar">
+
+        <div class="interview-logo">
+            <a href="index.html">
+                <img src="logoo.png" alt="CareerAI Logo">
+            </a>
+        </div>
+
+        <div class="dashboard-return">
+            <a href="dashboard.html">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN INTERVIEW AREA ================= -->
+
+    <main class="interview-container">
+
+        <!-- Heading -->
+
+        <div class="interview-heading">
+
+            <h1>Your Personalised AI Powered Interview</h1>
+
+            <p>
+                Let us dive deep in your career journey and understand your skills, experiences and aspirations.
+
+            </p>
+
+        </div>
+
+
+        <!-- ================= CHAT AREA ================= -->
+
+        <section class="interview-box">
+
+            <div class="chat-area" id="chatArea">
+
+
+                <!-- ===== CARA INTRO MESSAGE ===== -->
+
+                <div class="message-row cara-row" id="introMessage">
+
+                    <div class="avatar-container cara-avatar intro-avatar">
+
+                        <img
+                            src="cursor.png"
+                            alt="Cara"
+                            class="cara-image"
+                        >
+
+                    </div>
+
+                    <div class="message-content">
+
+                        <div class="speaker-name">
+                            Cara
+                        </div>
+
+                        <div class="chat-bubble cara-bubble">
+
+                            <p>
+                                Hi! I'm CarA, your AI powered CareerAI assistant. Lets us resume generation process by starting your interview.
+                            </p>
+
+                            <p>
+                                Hit that start button as soon as you are ready to begin! Lets create a smashing resume together.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ===== START BUTTON ===== -->
+
+                <div class="start-interview-wrapper" id="startWrapper">
+
+                    <button
+                        class="start-interview-btn"
+                        id="startInterviewBtn"
+                    >
+                        Start Interview
+                    </button>
+
+                </div>
+
+
+                <!-- ===== QUESTIONS WILL BE ADDED HERE BY JS ===== -->
+
+            </div>
+
+
+            <!-- ================= RECORDING AREA ================= -->
+
+            <div
+                class="recording-panel"
+                id="recordingPanel"
+                style="display: none;"
+            >
+
+                <div class="recording-status" id="recordingStatus">
+
+                    <span class="recording-dot"></span>
+
+                    <span id="recordingText">
+                        Ready to record
+                    </span>
+
+                </div>
+
+
+                <div class="recording-controls">
+
+                    <button
+                        class="record-btn"
+                        id="recordBtn"
+                    >
+
+                        🎙️
+                        <span id="recordBtnText">
+                            Start Recording
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="stop-btn"
+                        id="stopBtn"
+                        disabled
+                    >
+
+                        ⏹ Stop
+
+                    </button>
+
+                </div>
+
+
+                <p class="recording-hint">
+                    Speak naturally. There is no typing required.
+                </p>
+
+            </div>
+
+
+            <!-- ================= NEXT / FINISH ================= -->
+
+            <div
+                class="next-section"
+                id="nextSection"
+                style="display: none;"
+            >
+
+                <button
+                    class="next-question-btn"
+                    id="nextQuestionBtn"
+                >
+                    Next Question →
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= PROGRESS ================= -->
+
+        <div class="interview-progress">
+
+            <div class="progress-text">
+
+                <span id="progressText">
+                    Question 0 of 5
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="script.js"></script>
+
 </body>
+
 </html>
