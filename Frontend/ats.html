@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerAI - ATS Score</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="ats-navbar">
+
+        <div class="logo">
+            <a href="index.html">
+                <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
+            </a>
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="ats-container">
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <p class="small-heading">
+                RESUME ANALYSIS
+            </p>
+
+            <h1>
+                ATS Score
+            </h1>
+
+            <p class="subtitle">
+                See how well your resume is optimized for Applicant Tracking Systems.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             SCORE CARD
+        ========================== -->
+
+        <section class="score-card">
+
+            <!-- LEFT SIDE -->
+
+            <div class="score-left">
+
+                <h2>
+                    Your ATS Score
+                </h2>
+
+
+                <!-- HALF WHEEL -->
+
+<div class="gauge">
+
+    <svg
+        class="gauge-svg"
+        viewBox="0 0 300 160"
+    >
+
+        <!-- Background semicircle -->
+
+        <path
+            class="gauge-bg"
+            d="M 25 145 A 125 125 0 0 1 275 145"
+        ></path>
+
+        <!-- Filled semicircle -->
+
+        <path
+            class="gauge-progress"
+            d="M 25 145 A 125 125 0 0 1 275 145"
+        ></path>
+
+    </svg>
+
+
+    <div class="score-content">
+
+        <div>
+            <span class="score-number">
+                78
+            </span>
+
+            <span class="score-total">
+                /100
+            </span>
+        </div>
+
+        <p>
+            Good
+        </p>
+
+    </div>
+
+</div>
+
+
+            <!-- =========================
+                 SCORE BREAKDOWN
+            ========================== -->
+
+            <div class="breakdown">
+
+                <h3>
+                    Score Breakdown
+                </h3>
+
+
+                <!-- KEYWORDS -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Keywords
+                        </span>
+
+                        <strong>
+                            82%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 82%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMATTING -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Formatting
+                        </span>
+
+                        <strong>
+                            90%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 90%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTENT -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Content
+                        </span>
+
+                        <strong>
+                            70%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 70%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SKILLS -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Skills
+                        </span>
+
+                        <strong>
+                            75%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 75%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ORGANIZATION -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Organization
+                        </span>
+
+                        <strong>
+                            72%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 72%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             WHY THIS SCORE
+        ========================== -->
+
+        <section class="section-card">
+
+            <div class="section-title">
+
+                <div>
+
+                    <p class="small-heading">
+                        ANALYSIS
+                    </p>
+
+                    <h2>
+                        Why you got this score
+                    </h2>
+
+                </div>
+
+                <span class="issue-count">
+                    4 areas
+                </span>
+
+            </div>
+
+
+            <div class="reason-grid">
+
+
+                <div class="reason">
+
+                    <div class="reason-icon warning">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Some keywords are missing
+                        </h3>
+
+                        <p>
+                            Your resume does not contain some important keywords
+                            commonly found in the target job description.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reason">
+
+                    <div class="reason-icon good">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Good resume structure
+                        </h3>
+
+                        <p>
+                            Your resume follows a clear structure with recognizable
+                            sections such as education, skills and experience.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reason">
+
+                    <div class="reason-icon warning">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Experience descriptions could be stronger
+                        </h3>
+
+                        <p>
+                            Some bullet points describe responsibilities instead
+                            of showing measurable results or impact.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reason">
+
+                    <div class="reason-icon warning">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Skills section needs more detail
+                        </h3>
+
+                        <p>
+                            Adding relevant technical skills from the job description
+                            could improve your keyword matching score.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             HOW TO IMPROVE
+        ========================== -->
+
+        <section class="section-card">
+
+            <div class="section-title">
+
+                <div>
+
+                    <p class="small-heading">
+                        NEXT STEPS
+                    </p>
+
+                    <h2>
+                        How to improve your ATS score
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="improvement-list">
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Add relevant job keywords
+                        </h3>
+
+                        <p>
+                            Compare your resume with the target job description
+                            and naturally include relevant skills and technologies.
+                        </p>
+
+                    </div>
+
+                    <span class="impact">
+                        High Impact
+                    </span>
+
+                </div>
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Make your bullet points stronger
+                        </h3>
+
+                        <p>
+                            Use action verbs and measurable results instead of
+                            simply listing your responsibilities.
+                        </p>
+
+                    </div>
+
+                    <span class="impact">
+                        High Impact
+                    </span>
+
+                </div>
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Improve your skills section
+                        </h3>
+
+                        <p>
+                            Add relevant technical skills that match the position
+                            you are applying for.
+                        </p>
+
+                    </div>
+
+                    <span class="impact medium">
+                        Medium
+                    </span>
+
+                </div>
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        04
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Keep formatting ATS-friendly
+                        </h3>
+
+                        <p>
+                            Avoid excessive graphics, tables and complicated layouts
+                            that may be difficult for ATS software to read.
+                        </p>
+
+                    </div>
+
+                    <span class="impact medium">
+                        Medium
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             BOTTOM CTA
+        ========================== -->
+
+        <section class="cta-card">
+
+            <div>
+
+                <h2>
+                    Want to improve your resume?
+                </h2>
+
+                <p>
+                    Go back to the optimizer and make your resume stronger.
+                </p>
+
+            </div>
+
+
+            <button
+                onclick="window.location.href='optimize.html'"
+            >
+                Optimize Resume Again →
+            </button>
+
+        </section>
+
+
+    </main>
+
+</body>
+
+</html>
