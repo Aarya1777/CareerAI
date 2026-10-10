@@ -1,49 +1,7 @@
-/* =========================
-   LOGIN
-========================= */
 
-const loginForm = document.getElementById("loginForm");
-
-if (loginForm) {
-    const username = document.getElementById("loginUsername");
-    const password = document.getElementById("loginPassword");
-    const message = document.getElementById("loginMessage");
-
-    const demoUsername = "ananya_123";
-    const demoPassword = "Career@123";
-
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        if (username.value === "" || password.value === "") {
-            message.textContent =
-                "Please enter your username and password.";
-            return;
-        }
-
-        if (
-            username.value === demoUsername &&
-            password.value === demoPassword
-        ) {
-            message.textContent = "Login successful!";
-
-            showConfetti();
-
-            setTimeout(function () {
-                window.location.href = "dashboard.html";
-            }, 1200);
-
-        } else {
-            message.textContent =
-                "Incorrect username or password.";
-        }
-    });
-}
-
-
-/* =========================
-   SIGNUP
-========================= */
+/* ========================================
+   CAREERAI - SIGNUP
+======================================== */
 
 const signupForm = document.getElementById("signupForm");
 
@@ -57,25 +15,156 @@ if (signupForm) {
     signupForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        const fullName = name.value.trim();
+        const userEmail = email.value.trim();
+        const userUsername = username.value.trim();
+        const userPassword = password.value;
+
+        // Check empty fields
         if (
-            name.value === "" ||
-            email.value === "" ||
-            username.value === "" ||
-            password.value === ""
+            !fullName ||
+            !userEmail ||
+            !userUsername ||
+            !userPassword
         ) {
+            message.textContent = "Please fill in all the fields.";
+            return;
+        }
+
+        // Get saved accounts
+        let users = [];
+
+        try {
+            users = JSON.parse(
+                localStorage.getItem("careerAIUsers") || "[]"
+            );
+        } catch (error) {
             message.textContent =
-                "Please fill in all the fields.";
+                "Unable to read saved accounts. Please try again.";
+            return;
+        }
+
+        // Check if username already exists
+        const existingUser = users.find(function (user) {
+            return user.username.toLowerCase() ===
+                userUsername.toLowerCase();
+        });
+
+        if (existingUser) {
+            message.textContent =
+                "Username already exists. Please choose another.";
+            return;
+        }
+
+        // Create and save account
+        const newUser = {
+            name: fullName,
+            email: userEmail,
+            username: userUsername,
+            password: userPassword
+        };
+
+        users.push(newUser);
+
+        try {
+            localStorage.setItem(
+                "careerAIUsers",
+                JSON.stringify(users)
+            );
+        } catch (error) {
+            message.textContent =
+                "Unable to save your account. Please try again.";
             return;
         }
 
         message.textContent =
-            "Account created successfully!";
+            "Account created successfully! Redirecting to login...";
 
-        showConfetti();
+        if (typeof showConfetti === "function") {
+            showConfetti();
+        }
 
+        // Go to login page
         setTimeout(function () {
-            window.location.href = "dashboard.html";
+            window.location.href = "login.html";
         }, 1200);
+    });
+}
+
+
+/* ========================================
+   CAREERAI - LOGIN
+======================================== */
+
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+    const username = document.getElementById("loginUsername");
+    const password = document.getElementById("loginPassword");
+    const message = document.getElementById("loginMessage");
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const enteredUsername = username.value.trim();
+        const enteredPassword = password.value;
+
+        // Check empty fields
+        if (!enteredUsername || !enteredPassword) {
+            message.textContent =
+                "Please enter your username and password.";
+            return;
+        }
+
+        // Retrieve registered accounts
+        let users = [];
+
+        try {
+            users = JSON.parse(
+                localStorage.getItem("careerAIUsers") || "[]"
+            );
+        } catch (error) {
+            message.textContent =
+                "Unable to retrieve accounts. Please try again.";
+            return;
+        }
+
+        // Verify username and password
+        const matchedUser = users.find(function (user) {
+            return (
+                user.username.toLowerCase() ===
+                    enteredUsername.toLowerCase() &&
+                user.password === enteredPassword
+            );
+        });
+
+        if (matchedUser) {
+            // Save current user's public details
+            localStorage.setItem(
+                "careerAIUser",
+                JSON.stringify({
+                    name: matchedUser.name,
+                    email: matchedUser.email,
+                    username: matchedUser.username
+                })
+            );
+
+            message.textContent =
+                "Login successful! Redirecting to dashboard...";
+
+            if (typeof showConfetti === "function") {
+                showConfetti();
+            }
+
+            // Go to dashboard
+            setTimeout(function () {
+                window.location.href = "dashboard.html";
+            }, 1200);
+
+        } else {
+            message.textContent =
+                "Invalid username or password. Please sign up first.";
+        }
     });
 }
 
@@ -1030,3 +1119,4 @@ function finishInterview() {
     }, 100);
 
 }
+
