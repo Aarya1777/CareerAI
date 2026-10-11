@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -245,9 +245,7 @@
                     class="upload-resume"
                 >
 
-                    <span>
-                        Upload files
-                    </span>
+                    <span id="uploadText">Upload files</span>
 
                     <small>
                         PDF or Word doc
@@ -275,6 +273,225 @@
 
     </main>
 
+<div id="resumeMessage" style="margin-top:15px;"></div>
+
+<div id="resumeResult" style="display:none; margin-top:20px;">
+    <h2>Resume Analysis</h2>
+    <p id="resumeScore"></p>
+    <div id="resumeSummary"></div>
+</div>
+
+<script>
+
+function careerAI_escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[char];
+    });
+}
+
+
+const API_BASE = "http://127.0.0.1:8000";
+
+const fileInput = document.getElementById("resume-file");
+const uploadText = document.getElementById("uploadText");
+const message = document.getElementById("resumeMessage");
+const resultBox = document.getElementById("resumeResult");
+const scoreText = document.getElementById("resumeScore");
+const summaryText = document.getElementById("resumeSummary");
+
+const token = localStorage.getItem("careerai_token");
+
+if (!token) {
+    window.location.href = "login.html";
+}
+
+fileInput.addEventListener("change", async function () {
+
+    const file = fileInput.files[0];
+
+    if (!file) return;
+
+    if (file.type !== "application/pdf") {
+        message.textContent = "Please upload a PDF file.";
+        return;
+    }
+
+    uploadText.textContent = file.name;
+    message.textContent = "Uploading and analyzing your resume...";
+    resultBox.style.display = "none";
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+
+        const response = await fetch(
+            API_BASE + "/resumes/upload",
+            {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                body: formData
+            }
+        );
+
+        let data = null;
+
+        try {
+            data = await response.json();
+        } catch {
+            data = null;
+        }
+
+        console.log("Resume API response:", data);
+
+        if (!response.ok) {
+            throw new Error(
+                data && data.detail
+                    ? data.detail
+                    : "Upload failed (" + response.status + ")"
+            );
+        }
+
+        message.textContent = "Resume uploaded successfully!";
+
+        /*
+         * Show whatever useful fields the backend returns.
+         * We will refine these after seeing the actual API response.
+         */
+        if (data) {
+
+            resultBox.style.display = "block";
+
+            if (data.report) {
+
+                if (data.report.ats_score !== undefined) {
+                    scoreText.textContent =
+                        "ATS Score: " + data.report.ats_score;
+                }
+
+                if (data.report.summary) {
+                    summaryText.textContent =
+                        data.report.summary;
+                }
+
+            } else if (data.ats_score !== undefined) {
+
+                scoreText.textContent =
+                    "ATS Score: " + data.ats_score;
+
+                if (data.summary) {
+                    summaryText.textContent = data.summary;
+                }
+
+            } else {
+
+                scoreText.textContent =
+                    "Resume analysis completed.";
+
+                const resume = data.content_json || data.resume || {};
+                const sections = [];
+
+                function displayValue(value) {
+                    if (value === null || value === undefined) return "";
+                    if (Array.isArray(value)) {
+                        return value.map(displayValue).filter(Boolean);
+                    }
+                    if (typeof value === "object") {
+                        return Object.entries(value)
+                            .filter(([, v]) => v !== null && v !== undefined && v !== "")
+                            .map(([k, v]) => {
+                                const label = k.replace(/_/g, " ")
+                                    .replace(/\b\w/g, c => c.toUpperCase());
+                                const text = displayValue(v);
+                                return text ? label + ": " +
+                                    (Array.isArray(text) ? text.join("; ") : text) : "";
+                            })
+                            .filter(Boolean);
+                    }
+                    return String(value).trim();
+                }
+
+                function addSection(title, body) {
+                    if (!body) return;
+                    sections.push(
+                        `<section class="resume-result-section">
+                            <h3>${careerAI_escapeHtml(title)}</h3>
+                            ${body}
+                        </section>`
+                    );
+                }
+
+                function addTextSection(title, value) {
+                    const items = displayValue(value);
+                    const list = (Array.isArray(items) ? items : [items]).filter(Boolean);
+                    if (!list.length) return;
+
+                    addSection(title, list.map(item =>
+                        `<p>${careerAI_escapeHtml(item)}</p>`
+                    ).join(""));
+                }
+
+                const knownSections = [
+                    ["Profile", ["name", "email", "phone", "location"]],
+                    ["Professional Summary", ["summary", "professional_summary", "objective"]],
+                    ["Skills", ["skills", "technical_skills", "key_skills"]],
+                    ["Experience", ["experience", "work_experience", "employment_history"]],
+                    ["Projects", ["projects", "personal_projects"]],
+                    ["Education", ["education", "qualifications"]],
+                    ["Certifications", ["certifications", "certificates"]]
+                ];
+
+                const usedKeys = new Set();
+
+                for (const [title, keys] of knownSections) {
+                    const matchingKeys = keys.filter(key =>
+                        Object.prototype.hasOwnProperty.call(resume, key)
+                    );
+                    if (!matchingKeys.length) continue;
+
+                    const values = matchingKeys
+                        .map(key => resume[key])
+                        .filter(value => value !== null && value !== undefined && value !== "");
+
+                    if (values.length) {
+                        addTextSection(title, values.length === 1 ? values[0] : values);
+                        matchingKeys.forEach(key => usedKeys.add(key));
+                    }
+                }
+
+                for (const [key, value] of Object.entries(resume)) {
+                    if (usedKeys.has(key) || value === null || value === undefined || value === "") {
+                        continue;
+                    }
+                    const title = key.replace(/_/g, " ")
+                        .replace(/\b\w/g, c => c.toUpperCase());
+                    addTextSection(title, value);
+                }
+
+                summaryText.innerHTML = sections.length
+                    ? sections.join("")
+                    : "<p>Resume uploaded, but no readable details were returned.</p>";
+            }
+        }
+
+    } catch (error) {
+
+        console.error("Resume upload error:", error);
+
+        message.textContent =
+            "❌ " + (error.message || "Unable to upload resume.");
+    }
+});
+</script>
 </body>
 
 </html>
+

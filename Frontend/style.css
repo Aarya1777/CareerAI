@@ -1605,3 +1605,29 @@ body {
         bottom: 20px;
     }
 }
+
+/* Resume analysis sections */
+.resume-result-section {
+    margin: 14px 0;
+    padding: 14px 16px;
+    border: 1px solid #dedede;
+    border-radius: 8px;
+    background: #fff;
+    overflow-wrap: anywhere;
+}
+
+.resume-result-section h3 {
+    margin: 0 0 10px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #dedede;
+    font-size: 1.05rem;
+}
+
+.resume-result-section p {
+    margin: 6px 0;
+    line-height: 1.6;
+}
+
+#resumeSummary {
+    white-space: normal;
+}

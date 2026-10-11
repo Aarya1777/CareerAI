@@ -1,6 +1,7 @@
 from ai_backend_connector import save_generated_resume
 
 import json
+import os
 
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -251,9 +252,12 @@ def main():
         resume = load_resume()
 
         # Send generated resume to backend
-        access_token = "YOUR_ACCESS_TOKEN_HERE"
-        save_generated_resume(access_token, resume)
+        access_token = os.getenv("CAREERAI_ACCESS_TOKEN")
 
+        if not access_token:
+            raise ValueError("CAREERAI_ACCESS_TOKEN is not set.")
+
+        save_generated_resume(access_token, resume)
         # Generate PDF
         generate_pdf(resume)
 

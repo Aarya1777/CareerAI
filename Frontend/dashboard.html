@@ -9,26 +9,32 @@
 </head>
 
 <body class="dashboard-body">
+
 <nav class="navbar">
-<a href="index.html" class="logo">Career<span>AI</span></a>
+<a href="landing.html" class="logo">Career<span>AI</span></a>
+
 <div class="nav-links">
-<a href="index.html">Home</a>
+<a href="landing.html">Home</a>
 <a href="dashboard.html" class="active">Dashboard</a>
 </div>
 
 <div class="nav-buttons">
-<a href="login.html" class="login-btn">Logout</a>
+<a href="#" class="login-btn" id="logoutBtn">Logout</a>
 </div>
 </nav>
 
 <main class="dashboard">
+
 <div class="dashboard-heading">
 <p class="small-heading">DASHBOARD</p>
-<h1>Welcome back!</h1>
+
+<h1>Welcome back, <span id="userName">...</span>!</h1>
+
 <p>Choose a tool to continue your career journey.</p>
 </div>
 
 <div class="dashboard-grid">
+
 <div class="dashboard-card">
 <div class="dashboard-icon">🎤</div>
 <h2>Start Interview</h2>
@@ -65,10 +71,71 @@
 </a>
 </div>
 
+</div>
+
 </main>
+
 <footer>
 <p>Take the next step in your career now!</p>
 <p>© 2026 CareerAI</p>
 </footer>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    const token = localStorage.getItem("careerai_token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/users/me", {
+            headers: {
+                "Authorization": `Bearer ${token}` 
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Unable to load user");
+        }
+
+        const user = await response.json();
+
+        const nameElement = document.getElementById("userName");
+
+        if (user.name) {
+            nameElement.textContent = user.name;
+        } else if (user.email) {
+            nameElement.textContent = user.email;
+        } else {
+            throw new Error("User name not found");
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        localStorage.removeItem("careerai_token");
+        window.location.href = "login.html";
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", (event) => {
+
+        event.preventDefault();
+
+        localStorage.removeItem("careerai_token");
+
+        window.location.href = "login.html";
+    });
+
+});
+</script>
+
 </body>
 </html>
+

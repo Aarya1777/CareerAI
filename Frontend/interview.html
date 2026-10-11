@@ -1,10 +1,884 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <title>Start Interview - CareerAI</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CareerAI AI Interview</title>
+
+
+    <style>
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background: #f7f3f1;
+
+            color: #3b2020;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 700px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+            text-align: center;
+        }
+
+
+        h1 {
+
+            margin-bottom: 30px;
+
+            color: #7A1F1F;
+        }
+
+
+        #question {
+
+            font-size: 20px;
+
+            line-height: 1.6;
+
+            margin: 30px 0;
+
+            min-height: 70px;
+        }
+
+
+        #status {
+
+            margin: 20px 0;
+
+            font-weight: bold;
+
+            color: #7A1F1F;
+        }
+
+
+        button {
+
+            border: none;
+
+            padding: 14px 24px;
+
+            margin: 8px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            background: #7A1F1F;
+
+            color: white;
+        }
+
+
+        button:hover {
+
+            opacity: 0.9;
+        }
+
+
+        button:disabled {
+
+            opacity: 0.5;
+
+            cursor: not-allowed;
+        }
+
+
+        #answer {
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            background: #f4eeee;
+
+            border-radius: 10px;
+
+            min-height: 25px;
+
+            line-height: 1.5;
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-    <h1>BEGIN YOUR AI POWERED INTERVIEW NOW</h1>
+
+
+<div class="container">
+
+    <h1>CareerAI AI Interview</h1>
+
+
+    <div id="question">
+
+        Click "Start Interview" to begin.
+
+    </div>
+
+
+    <div>
+
+        <button id="startBtn">
+            Start Interview
+        </button>
+
+
+        <button id="speakBtn" disabled>
+            🎤 Speak
+        </button>
+
+
+        <button id="stopBtn" disabled>
+            ⏹ Stop
+        </button>
+
+    </div>
+
+
+    <div id="status">
+
+        Ready
+
+    </div>
+
+
+    <div id="answer"></div>
+
+</div>
+
+
+<script>
+
+
+// ---------------------------------------------------------
+// API
+// ---------------------------------------------------------
+
+const API_URL = "http://127.0.0.1:8000";
+
+
+// ---------------------------------------------------------
+// HTML elements
+// ---------------------------------------------------------
+
+const questionBox =
+    document.getElementById("question");
+
+const statusBox =
+    document.getElementById("status");
+
+const answerBox =
+    document.getElementById("answer");
+
+const startBtn =
+    document.getElementById("startBtn");
+
+const speakBtn =
+    document.getElementById("speakBtn");
+
+const stopBtn =
+    document.getElementById("stopBtn");
+
+
+// ---------------------------------------------------------
+// Recording variables
+// ---------------------------------------------------------
+
+let audioContext = null;
+
+let mediaStream = null;
+
+let sourceNode = null;
+
+let processorNode = null;
+
+let audioChunks = [];
+
+let isRecording = false;
+
+let interviewStarted = false;
+
+
+// ---------------------------------------------------------
+// Start Interview
+// ---------------------------------------------------------
+
+startBtn.addEventListener("click", async function () {
+
+    statusBox.textContent =
+        "Starting interview...";
+
+    startBtn.disabled = true;
+
+
+    try {
+
+        const response = await fetch(
+            API_URL + "/interview/start",
+            {
+                method: "POST"
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!data.success) {
+
+            statusBox.textContent =
+                "Could not start interview.";
+
+            startBtn.disabled = false;
+
+            return;
+        }
+
+
+        interviewStarted = true;
+
+
+        questionBox.textContent =
+            data.question;
+
+
+        speakBtn.disabled = false;
+
+
+        statusBox.textContent =
+            "Question ready. Click Speak to answer.";
+
+
+        speakQuestion(data.question);
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        statusBox.textContent =
+            "Could not connect to CareerAI AI API.";
+
+
+        startBtn.disabled = false;
+
+    }
+
+});
+
+
+// ---------------------------------------------------------
+// Speak AI question
+// ---------------------------------------------------------
+
+function speakQuestion(text) {
+
+    if ("speechSynthesis" in window) {
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+
+        speech.lang = "en-US";
+
+        speech.rate = 0.9;
+
+
+        window.speechSynthesis.speak(speech);
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// SPEAK BUTTON
+// ---------------------------------------------------------
+
+speakBtn.addEventListener(
+    "click",
+    startRecording
+);
+
+
+// ---------------------------------------------------------
+// START RECORDING
+// ---------------------------------------------------------
+
+async function startRecording() {
+
+    if (!interviewStarted) {
+
+        statusBox.textContent =
+            "Please start the interview first.";
+
+        return;
+    }
+
+
+    if (isRecording) {
+
+        return;
+    }
+
+
+    try {
+
+        // Stop AI voice if it is still speaking
+        if ("speechSynthesis" in window) {
+
+            window.speechSynthesis.cancel();
+
+        }
+
+
+        // Ask browser for microphone permission
+        mediaStream =
+            await navigator.mediaDevices.getUserMedia({
+                audio: true
+            });
+
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+
+        sourceNode =
+            audioContext.createMediaStreamSource(
+                mediaStream
+            );
+
+
+        processorNode =
+            audioContext.createScriptProcessor(
+                4096,
+                1,
+                1
+            );
+
+
+        audioChunks = [];
+
+
+        processorNode.onaudioprocess =
+            function (event) {
+
+                if (!isRecording) {
+
+                    return;
+                }
+
+
+                const inputData =
+                    event.inputBuffer.getChannelData(0);
+
+
+                const copy =
+                    new Float32Array(inputData.length);
+
+
+                copy.set(inputData);
+
+
+                audioChunks.push(copy);
+
+            };
+
+
+        sourceNode.connect(processorNode);
+
+
+        processorNode.connect(
+            audioContext.destination
+        );
+
+
+        isRecording = true;
+
+
+        speakBtn.disabled = true;
+
+        stopBtn.disabled = false;
+
+
+        statusBox.textContent =
+            "🎤 Listening... Speak your answer, then click Stop.";
+
+
+        answerBox.textContent = "";
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        statusBox.textContent =
+            "Microphone permission was not available.";
+
+        speakBtn.disabled = false;
+
+        stopBtn.disabled = true;
+
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// STOP BUTTON
+// ---------------------------------------------------------
+
+stopBtn.addEventListener(
+    "click",
+    stopRecording
+);
+
+
+// ---------------------------------------------------------
+// STOP RECORDING
+// ---------------------------------------------------------
+
+async function stopRecording() {
+
+    if (!isRecording) {
+
+        return;
+    }
+
+
+    isRecording = false;
+
+
+    speakBtn.disabled = true;
+
+    stopBtn.disabled = true;
+
+
+    statusBox.textContent =
+        "⏳ Processing your answer...";
+
+
+    // Disconnect microphone
+    if (processorNode) {
+
+        processorNode.disconnect();
+
+    }
+
+
+    if (sourceNode) {
+
+        sourceNode.disconnect();
+
+    }
+
+
+    // Stop microphone stream
+    if (mediaStream) {
+
+        mediaStream.getTracks().forEach(
+            track => track.stop()
+        );
+
+    }
+
+
+    // Convert recorded audio to WAV
+    const wavBlob =
+        createWavFile(
+            audioChunks,
+            audioContext.sampleRate
+        );
+
+
+    // Close audio context
+    if (audioContext) {
+
+        await audioContext.close();
+
+    }
+
+
+    // Send WAV to Python
+    await sendAudioToPython(wavBlob);
+
+}
+
+
+// ---------------------------------------------------------
+// CREATE WAV FILE
+// ---------------------------------------------------------
+
+function createWavFile(chunks, sampleRate) {
+
+    let totalLength = 0;
+
+
+    for (const chunk of chunks) {
+
+        totalLength += chunk.length;
+
+    }
+
+
+    const samples =
+        new Float32Array(totalLength);
+
+
+    let offset = 0;
+
+
+    for (const chunk of chunks) {
+
+        samples.set(chunk, offset);
+
+        offset += chunk.length;
+
+    }
+
+
+    const buffer =
+        new ArrayBuffer(
+            44 + samples.length * 2
+        );
+
+
+    const view =
+        new DataView(buffer);
+
+
+    writeString(view, 0, "RIFF");
+
+    view.setUint32(
+        4,
+        36 + samples.length * 2,
+        true
+    );
+
+    writeString(view, 8, "WAVE");
+
+    writeString(view, 12, "fmt ");
+
+    view.setUint32(16, 16, true);
+
+    view.setUint16(20, 1, true);
+
+    view.setUint16(22, 1, true);
+
+    view.setUint32(24, sampleRate, true);
+
+    view.setUint32(
+        28,
+        sampleRate * 2,
+        true
+    );
+
+    view.setUint16(32, 2, true);
+
+    view.setUint16(34, 16, true);
+
+    writeString(view, 36, "data");
+
+    view.setUint32(
+        40,
+        samples.length * 2,
+        true
+    );
+
+
+    floatTo16BitPCM(
+        view,
+        44,
+        samples
+    );
+
+
+    return new Blob(
+        [view],
+        {
+            type: "audio/wav"
+        }
+    );
+
+}
+
+
+// ---------------------------------------------------------
+// WAV helper
+// ---------------------------------------------------------
+
+function writeString(view, offset, string) {
+
+    for (let i = 0; i < string.length; i++) {
+
+        view.setUint8(
+            offset + i,
+            string.charCodeAt(i)
+        );
+
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// Convert audio samples
+// ---------------------------------------------------------
+
+function floatTo16BitPCM(
+    output,
+    offset,
+    input
+) {
+
+    for (let i = 0; i < input.length; i++) {
+
+        let sample =
+            Math.max(
+                -1,
+                Math.min(1, input[i])
+            );
+
+
+        sample =
+            sample < 0
+                ? sample * 0x8000
+                : sample * 0x7FFF;
+
+
+        output.setInt16(
+            offset + i * 2,
+            sample,
+            true
+        );
+
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// SEND AUDIO TO PYTHON
+// ---------------------------------------------------------
+
+async function sendAudioToPython(wavBlob) {
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL + "/speech/transcribe",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "audio/wav"
+                    },
+
+                    body: wavBlob
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            statusBox.textContent =
+                data.message ||
+                "Could not understand your answer.";
+
+            speakBtn.disabled = false;
+
+            return;
+        }
+
+
+        const answer =
+            data.text;
+
+
+        answerBox.textContent =
+            "You: " + answer;
+
+
+        statusBox.textContent =
+            "Processing your answer...";
+
+
+        // Send recognized text to interview AI
+        await sendAnswerToAI(answer);
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        statusBox.textContent =
+            "Could not connect to the speech service.";
+
+        speakBtn.disabled = false;
+
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// SEND TEXT ANSWER TO AI
+// ---------------------------------------------------------
+
+async function sendAnswerToAI(answer) {
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL + "/interview/answer",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        answer: answer
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            statusBox.textContent =
+                data.message ||
+                "Could not process your answer.";
+
+            speakBtn.disabled = false;
+
+            return;
+        }
+
+
+        // Interview completed
+        if (data.completed) {
+
+            questionBox.textContent =
+                "🎉 Interview completed!";
+
+
+            statusBox.textContent =
+                "Your resume profile has been saved.";
+
+
+            speakQuestion(
+                "Your interview is complete. Your resume profile has been saved."
+            );
+
+
+            speakBtn.disabled = true;
+
+
+            return;
+        }
+
+
+        // Show next AI question
+        questionBox.textContent =
+            data.next_question;
+
+
+        statusBox.textContent =
+            "Next question ready. Click Speak to answer.";
+
+
+        speakQuestion(
+            data.next_question
+        );
+
+
+        speakBtn.disabled = false;
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+
+        statusBox.textContent =
+            "Could not connect to the AI interview service.";
+
+
+        speakBtn.disabled = false;
+
+    }
+
+}
+
+
+</script>
+
+
 </body>
+
 </html>

@@ -22,3 +22,19 @@ class ApplicationOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class JobMatchRequest(BaseModel):
+    job_title: str | None = None
+    company_name: str | None = None
+    job_description: str
+
+
+class JobMatchOut(BaseModel):
+    match_score: float
+    matched_skills: list
+    missing_skills: list
+    strengths: list
+    concerns: list
+    recommendation: str
+    summary: str
+    model_used: str
