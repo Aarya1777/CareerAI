@@ -5557,4 +5557,79 @@ body {
 .nav-links a:first-child {
     color: white;
 }
+
+/* RESUME OPTIMIZER NAVBAR */
+
+.interview-navbar {
+    width: 100%;
+    height: 82px;
+    padding: 0 45px;
+    background-color: #681313;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 1000;
+}
+
+.interview-logo {
+    display: flex;
+    align-items: center;
+}
+
+.interview-logo a {
+    display: flex;
+    align-items: center;
+}
+
+.interview-logo img {
+    width: 155px;
+    height: auto;
+    display: block;
+}
+
+.back-dashboard {
+    padding: 10px 18px;
+    background-color: #a14747;
+    color: white;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.back-dashboard:hover {
+    background-color: #ca6666;
+    transform: translateX(-2px);
+}
+
+/* Remove the side margins so the navbar spans the page */
+.optimizer-page {
+    margin: 0 45px;
+}
+
+@media (max-width: 650px) {
+    .interview-navbar {
+        height: auto;
+        min-height: 75px;
+        padding: 12px 15px;
+        gap: 12px;
+    }
+
+    .interview-logo img {
+        width: 115px;
+    }
+
+    .back-dashboard {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+
+    .optimizer-page {
+        margin: 0 15px;
+    }
+}
   
