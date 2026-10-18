@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
 
 *   GLOBAL RESET*
 
@@ -2530,12 +2530,11 @@ footer p {
 
     width: 90px;
 
-    opacity: 1;
-
-    visibility: visible;
+    opacity: 0;
+    
+    visibility: hidden;
 
     pointer-events: none;
-
     z-index: 9999;
 
 }
@@ -5557,79 +5556,143 @@ body {
 .nav-links a:first-child {
     color: white;
 }
-
-/* RESUME OPTIMIZER NAVBAR */
-
-.interview-navbar {
-    width: 100%;
-    height: 82px;
-    padding: 0 45px;
-    background-color: #681313;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-    position: relative;
-    z-index: 1000;
-}
-
-.interview-logo {
-    display: flex;
-    align-items: center;
-}
-
-.interview-logo a {
-    display: flex;
-    align-items: center;
-}
-
-.interview-logo img {
-    width: 155px;
-    height: auto;
-    display: block;
-}
-
-.back-dashboard {
-    padding: 10px 18px;
-    background-color: #a14747;
-    color: white;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.2s ease;
-}
-
-.back-dashboard:hover {
-    background-color: #ca6666;
-    transform: translateX(-2px);
-}
-
-/* Remove the side margins so the navbar spans the page */
-.optimizer-page {
-    margin: 0 45px;
-}
-
-@media (max-width: 650px) {
-    .interview-navbar {
-        height: auto;
-        min-height: 75px;
-        padding: 12px 15px;
-        gap: 12px;
-    }
-
-    .interview-logo img {
-        width: 115px;
-    }
-
-    .back-dashboard {
-        padding: 9px 11px;
-        font-size: 12px;
-    }
-
-    .optimizer-page {
-        margin: 0 15px;
-    }
-}
   
+
+/* CareerAI mascot visibility fix */
+.cursor-assistant.show { opacity: 1 !important; visibility: visible !important; }
+
+
+/* ===== CareerAI Job Matching Page ===== */
+
+body {
+margin: 0;
+padding: 40px 24px;
+font-family: "Segoe UI", Arial, sans-serif;
+background: linear-gradient(135deg, #f0f4ff, #f8fafc);
+color: #1e293b;
+}
+
+h1 {
+max-width: 1000px;
+margin: 0 auto 36px;
+text-align: center;
+font-size: clamp(26px, 4vw, 38px);
+line-height: 1.3;
+font-weight: 800;
+color: #172554;
+}
+
+#jobsMessage {
+max-width: 1000px;
+margin: 20px auto;
+text-align: center;
+color: #64748b;
+}
+
+#jobsContainer {
+max-width: 1000px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 24px;
+}
+
+/* Each job card */
+#jobsContainer > div {
+box-sizing: border-box;
+padding: 26px;
+background: #ffffff;
+border: 1px solid #e2e8f0;
+border-radius: 18px;
+box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#jobsContainer > div:hover {
+transform: translateY(-5px);
+box-shadow: 0 16px 34px rgba(15, 23, 42, 0.12);
+}
+
+#jobsContainer h2 {
+margin: 0 0 14px;
+font-size: 23px;
+color: #1d4ed8;
+}
+
+#jobsContainer p {
+margin: 12px 0;
+font-size: 15px;
+line-height: 1.7;
+color: #475569;
+}
+
+#jobsContainer strong {
+color: #1e293b;
+}
+
+/* Buttons */
+#jobsContainer button {
+margin: 12px 8px 4px 0;
+padding: 11px 18px;
+border: none;
+border-radius: 9px;
+background: #2563eb;
+color: white;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#jobsContainer button:hover {
+background: #1d4ed8;
+transform: translateY(-1px);
+}
+
+#jobsContainer button:disabled {
+opacity: 0.6;
+cursor: not-allowed;
+transform: none;
+}
+
+/* Style the second button (Apply) */
+#jobsContainer button:nth-of-type(2) {
+background: #059669;
+}
+
+#jobsContainer button:nth-of-type(2):hover {
+background: #047857;
+}
+
+/* Match result area */
+.match-result {
+margin-top: 18px;
+padding: 14px;
+background: #f1f5f9;
+border-radius: 10px;
+overflow-wrap: anywhere;
+}
+
+.match-result:empty {
+display: none;
+}
+
+#jobsContainer hr {
+margin-top: 22px;
+border: 0;
+border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 600px) {
+body {
+padding: 28px 16px;
+}
+
+
+#jobsContainer {
+    grid-template-columns: 1fr;
+}
+
+
+}
+

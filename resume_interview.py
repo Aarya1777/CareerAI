@@ -349,6 +349,9 @@ Use exactly this structure:
             profile = updated_profile
 
             print("\nProfile updated successfully.")
+            print("Current user type:", profile.get("user_type"))
+            print("Current projects:", profile.get("projects"))
+            print("Current missing fields:", check_profile())
 
     except json.JSONDecodeError:
 
@@ -484,73 +487,67 @@ def save_profile():
 # ============================================================
 
 def ask_next_question():
+    """Generate interview questions without using a Gemini API call."""
 
     missing = check_profile()
+    user_type = str(profile.get("user_type", "")).lower()
 
-    # --------------------------------------------------------
-    # Known missing field
-    # --------------------------------------------------------
+    if not missing:
+        return ""
 
-    if missing:
+    # Ask for the most important missing information first.
+    if "target role" in missing:
+        return "What job role or roles are you targeting, and what kind of work would you like to do?"
 
-        missing_text = ", ".join(missing)
+    if "student or working professional" in missing:
+        return "Are you a student, a recent graduate, or a working professional?"
 
-        prompt = f"""
-You are CareerAI conducting a resume interview.
+    if "education" in missing:
+        return "Tell me about your education, including your degree, institution, specialization, and graduation year."
 
-The candidate's current profile is:
+    if "at least 3 skills" in missing:
+        return "What are your main technical and professional skills? Please mention at least three."
 
-{json.dumps(profile, indent=4)}
+    if (
+        "student" in user_type
+        or "fresher" in user_type
+        or "college" in user_type
+    ):
+        if "at least one project" in missing:
+            return "Tell me about a project you worked on, including its name, purpose, technologies, and your contribution."
 
-Information still missing:
+        if "project title" in missing:
+            return "What is the name of your project?"
 
-{missing_text}
+        if "project description" in missing:
+            return "What does your project do, and what problem does it solve?"
 
-Ask ONE short natural interview question
-that helps collect the most important missing information.
+        if "project technologies" in missing:
+            return "Which programming languages, tools, and technologies did you use in your project?"
 
-Rules:
+    else:
+        if "work experience" in missing:
+            return "Tell me about your work experience, including your company, role, dates, responsibilities, and achievements. If you have no work experience, please say so."
 
-- Ask only one question.
-- Keep it conversational.
-- Do not ask for name, email, or phone.
-- Do not ask for information already present.
-- If asking about a project, collect useful details.
-- If asking about experience, collect useful details.
-- Do not explain why you are asking.
-- Return ONLY the question.
-"""
+        if "company" in missing:
+            return "Which company did you work for in that role?"
 
-        question = call_gemini(prompt)
+        if "job role" in missing:
+            return "What was your job title, and what were your main responsibilities?"
 
-        if question:
-            return question
+        if "experience duration" in missing:
+            return "When did you work in that role, including your start and end dates?"
 
-    # --------------------------------------------------------
-    # Fallback
-    # --------------------------------------------------------
+        if "responsibilities" in missing:
+            return "What were your main responsibilities and accomplishments in that role?"
 
-    fallback_questions = [
+    # Ask for any other missing information in a combined question.
+    return (
+        "Is there anything else you would like to include about your "
+        "projects, certifications, achievements, leadership experience, "
+        "languages, or professional links?"
+    )
 
-        "What is your target role?",
-
-        "What is your current education or highest qualification?",
-
-        "What technical skills do you have?",
-
-        "Tell me about one of your projects, including what you built and which technologies you used.",
-
-        "What was your contribution to that project?",
-
-        "What was the result or outcome of that project?"
-
-    ]
-
-    for question in fallback_questions:
-
-        return question
-
-    return "Is there anything else important about your background that you would like to include?"
 
 
 # ============================================================
@@ -568,7 +565,7 @@ def main():
         "I will ask you a few questions to build your resume."
     )
 
-    max_questions = 25
+    max_questions = 15
 
     for question_number in range(1, max_questions + 1):
 
@@ -704,3 +701,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

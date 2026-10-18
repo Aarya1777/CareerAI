@@ -1,4 +1,6 @@
-from pydantic_settings import BaseSettings
+﻿from pathlib import Path
+from pydantic_settings import BaseSettings, SettingsConfigDict
+BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 class Settings(BaseSettings):
     app_name: str = "CareerAI"
@@ -6,15 +8,12 @@ class Settings(BaseSettings):
     jwt_secret: str = "secret"
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 60
-    adzuna_app_id: str
-    adzuna_app_key: str
-    
-    class Config:
-        env_file = ".env"
+    gemini_api_key: str = ""
+
+    model_config = SettingsConfigDict(
+        env_file=BACKEND_DIR / ".env",
+        extra="ignore"
+    )
 
 settings = Settings()
-
-
-
-from pydantic_settings import BaseSettings
 
