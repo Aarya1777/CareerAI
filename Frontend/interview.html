@@ -2,193 +2,270 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>CareerAI - Interview</title>
 
-    <title>CareerAI AI Interview</title>
-
-
-    <style>
-
-        body {
-
-            margin: 0;
-
-            font-family: Arial, sans-serif;
-
-            background: #f7f3f1;
-
-            color: #3b2020;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            min-height: 100vh;
-        }
-
-
-        .container {
-
-            width: 90%;
-
-            max-width: 700px;
-
-            background: white;
-
-            padding: 40px;
-
-            border-radius: 20px;
-
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-
-            text-align: center;
-        }
-
-
-        h1 {
-
-            margin-bottom: 30px;
-
-            color: #7A1F1F;
-        }
-
-
-        #question {
-
-            font-size: 20px;
-
-            line-height: 1.6;
-
-            margin: 30px 0;
-
-            min-height: 70px;
-        }
-
-
-        #status {
-
-            margin: 20px 0;
-
-            font-weight: bold;
-
-            color: #7A1F1F;
-        }
-
-
-        button {
-
-            border: none;
-
-            padding: 14px 24px;
-
-            margin: 8px;
-
-            border-radius: 10px;
-
-            font-size: 16px;
-
-            cursor: pointer;
-
-            background: #7A1F1F;
-
-            color: white;
-        }
-
-
-        button:hover {
-
-            opacity: 0.9;
-        }
-
-
-        button:disabled {
-
-            opacity: 0.5;
-
-            cursor: not-allowed;
-        }
-
-
-        #answer {
-
-            margin-top: 25px;
-
-            padding: 15px;
-
-            background: #f4eeee;
-
-            border-radius: 10px;
-
-            min-height: 25px;
-
-            line-height: 1.5;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
+<body class="interview-body">
 
-<body>
+    <!-- ================= NAVBAR ================= -->
 
+    <nav class="interview-navbar">
 
-<div class="container">
+        <div class="interview-logo">
+            <a href="index.html">
+                <img src="logoo.png" alt="CareerAI Logo">
+            </a>
+        </div>
 
-    <h1>CareerAI AI Interview</h1>
+        <div class="dashboard-return">
+            <a href="dashboard.html">
+                ← Back to Dashboard
+            </a>
+        </div>
 
-
-    <div id="question">
-
-        Click "Start Interview" to begin.
-
-    </div>
-
-
-    <div>
-
-        <button id="startBtn">
-            Start Interview
-        </button>
+    </nav>
 
 
-        <button id="speakBtn" disabled>
-            🎤 Speak
-        </button>
+    <!-- ================= MAIN INTERVIEW AREA ================= -->
+
+    <main class="interview-container">
+
+        <!-- Heading -->
+
+        <div class="interview-heading">
+
+            <h1>Your Personalised AI Powered Interview</h1>
+
+            <p>
+                Let us dive deep in your career journey and understand your skills, experiences and aspirations.
+
+            </p>
+
+        </div>
 
 
-        <button id="stopBtn" disabled>
-            ⏹ Stop
-        </button>
+        <!-- ================= CHAT AREA ================= -->
 
-    </div>
+        <section class="interview-box">
 
-
-    <div id="status">
-
-        Ready
-
-    </div>
+            <div class="chat-area" id="chatArea">
 
 
-    <div id="answer"></div>
+                <!-- ===== CARA INTRO MESSAGE ===== -->
 
-</div>
+                <div class="message-row cara-row" id="introMessage">
+
+                    <div class="avatar-container cara-avatar intro-avatar">
+
+                        <img
+                            src="cursor.png"
+                            alt="Cara"
+                            class="cara-image"
+                        >
+
+                    </div>
+
+                    <div class="message-content">
+
+                        <div class="speaker-name">
+                            Cara
+                        </div>
+
+                        <div class="chat-bubble cara-bubble">
+
+                            <p>
+                                Hi! I'm CarA, your AI powered CareerAI assistant. Lets us resume generation process by starting your interview.
+                            </p>
+
+                            <p>
+                                Hit that start button as soon as you are ready to begin! Lets create a smashing resume together.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
 
-<script>
+                <!-- ===== START BUTTON ===== -->
+
+                <div class="start-interview-wrapper" id="startWrapper">
+
+                    <button
+                        class="start-interview-btn"
+                        id="startInterviewBtn"
+                    >
+                        Start Interview
+                    </button>
+
+                </div>
 
 
+                <!-- ===== QUESTIONS WILL BE ADDED HERE BY JS ===== -->
+
+            </div>
+
+
+            <!-- ================= RECORDING AREA ================= -->
+
+            <div
+                class="recording-panel"
+                id="recordingPanel"
+                style="display: none;"
+            >
+
+                
+                <div id="question" aria-live="polite" style="margin:16px 0;padding:22px;border-radius:14px;background:#fff;color:#263247;line-height:1.7;font-size:1.2rem;font-weight:600;border:2px solid #dbe5f3;box-shadow:0 6px 18px rgba(38,50,71,.08);">
+                    Start the interview to receive your first question.
+                </div>
+                <div id="answer" style="margin:12px 0;color:#526078;line-height:1.5;"></div>
+                <p id="demoNotice" style="margin:10px 0;padding:10px 12px;border-radius:10px;background:#eef6ff;color:#24508a;font-size:.92rem;">
+                    Demo mode: 10 prepared questions. Answers are not saved and Gemini interview calls are disabled.
+                </p>
+
+                <div class="recording-status" id="recordingStatus">
+
+                    <span class="recording-dot"></span>
+
+                    <span id="recordingText">
+                        Ready to record
+                    </span>
+
+                </div>
+
+
+                <div class="recording-controls">
+
+                    <button
+                        class="record-btn"
+                        id="recordBtn"
+                    >
+
+                        🎙️
+                        <span id="recordBtnText">
+                            Start Recording
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="stop-btn"
+                        id="stopBtn"
+                        disabled
+                    >
+
+                        ⏹ Stop
+
+                    </button>
+
+                </div>
+
+
+                <p class="recording-hint">
+                    Speak naturally. There is no typing required.
+                </p>
+
+            </div>
+
+
+            <!-- ================= NEXT / FINISH ================= -->
+
+            <div
+                class="next-section"
+                id="nextSection"
+                style="display: none;"
+            >
+
+                <button
+                    class="next-question-btn"
+                    id="nextQuestionBtn"
+                >
+                    Next Question →
+                </button>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= PROGRESS ================= -->
+
+        <div class="interview-progress">
+
+            <div class="progress-text">
+
+                <span id="progressText">
+                    Question 0 of 10
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
 // ---------------------------------------------------------
 // API
 // ---------------------------------------------------------
 
 const API_URL = "http://127.0.0.1:8000";
+
+// Demo mode uses prepared questions and never calls Gemini interview endpoints.
+const DEMO_MODE = true;
+const demoQuestions = [
+    "Tell me about yourself and your career goals.",
+    "Which role or job are you preparing for?",
+    "What are your strongest technical skills?",
+    "Tell me about a project you are proud of.",
+    "What was your specific contribution to that project?",
+    "Describe a challenge you faced and how you handled it.",
+    "How do you work with a team?",
+    "What is one achievement you are proud of?",
+    "Which skill would you like to improve next?",
+    "Why would you be a good fit for your target role?"
+];
+let demoQuestionIndex = 0;
+let demoAnswerCount = 0;
+
+function updateProgress() {
+    const total = DEMO_MODE ? demoQuestions.length : 5;
+    const current = DEMO_MODE ? Math.min(demoQuestionIndex + 1, total) : 0;
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    if (progressText) progressText.textContent = `Question ${current} of ${total}`;
+    if (progressFill) progressFill.style.width = `${(current / total) * 100}%`;
+}
+
+function showDemoQuestion() {
+    const question = demoQuestions[demoQuestionIndex];
+    questionBox.textContent = question;
+    answerBox.textContent = "";
+    statusBox.textContent = `Demo question ${demoQuestionIndex + 1} of ${demoQuestions.length}. Click Start Recording to answer.`;
+    speakBtn.disabled = false;
+    updateProgress();
+    speakQuestion(question);
+}
 
 
 // ---------------------------------------------------------
@@ -199,16 +276,16 @@ const questionBox =
     document.getElementById("question");
 
 const statusBox =
-    document.getElementById("status");
+    document.getElementById("recordingText");
 
 const answerBox =
     document.getElementById("answer");
 
 const startBtn =
-    document.getElementById("startBtn");
+    document.getElementById("startInterviewBtn");
 
 const speakBtn =
-    document.getElementById("speakBtn");
+    document.getElementById("recordBtn");
 
 const stopBtn =
     document.getElementById("stopBtn");
@@ -244,6 +321,14 @@ startBtn.addEventListener("click", async function () {
 
     startBtn.disabled = true;
 
+    if (DEMO_MODE) {
+        interviewStarted = true;
+        demoQuestionIndex = 0;
+        document.getElementById("startWrapper").style.display = "none";
+        document.getElementById("recordingPanel").style.display = "block";
+        showDemoQuestion();
+        return;
+    }
 
     try {
 
@@ -270,6 +355,9 @@ startBtn.addEventListener("click", async function () {
 
 
         interviewStarted = true;
+
+document.getElementById("startWrapper").style.display = "none";
+document.getElementById("recordingPanel").style.display = "block";
 
 
         questionBox.textContent =
@@ -780,6 +868,26 @@ async function sendAudioToPython(wavBlob) {
 
 async function sendAnswerToAI(answer) {
 
+    if (DEMO_MODE) {
+        demoAnswerCount += 1;
+        answerBox.textContent = answer
+            ? "Your answer: " + answer
+            : "No speech detected. You can continue to the next question.";
+        demoQuestionIndex += 1;
+
+        if (demoQuestionIndex >= demoQuestions.length) {
+            questionBox.textContent = "🎉 Demo interview completed!";
+            statusBox.textContent = "Demo complete. No resume profile was saved.";
+            speakQuestion("The demo interview is complete. No resume profile was saved.");
+            speakBtn.disabled = true;
+            updateProgress();
+            return;
+        }
+
+        showDemoQuestion();
+        return;
+    }
+
     try {
 
         const response =
@@ -874,10 +982,7 @@ async function sendAnswerToAI(answer) {
     }
 
 }
-
-
 </script>
-
 
 </body>
 

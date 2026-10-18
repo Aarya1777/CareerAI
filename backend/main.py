@@ -21,10 +21,15 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
+    
     allow_origins=[
         "http://127.0.0.1:5500",
-        "http://localhost:5500"
+        "http://localhost:5500",
+        "http://127.0.0.1:5501",
+        "http://localhost:5501",
     ],
+
+
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,10 +46,35 @@ app.include_router(speech_router, tags=["speech"])
 
 @app.get("/jobs")
 def get_jobs():
-    jobs_file = Path(__file__).resolve().parent.parent / "smart_hiring" / "jobs.json"
+    from sqlalchemy import text
+    from core.database import engine
 
-    with open(jobs_file, "r", encoding="utf-8") as file:
-        return json.load(file)
+    query = text("""
+        SELECT id, title, company, location, required_skills,
+               description, job_url, source, fetched_at
+FROM jobs
+WHERE title NOT ILIKE ANY (ARRAY[
+'%senior%', '%AVP%', '%vice president%', '%director%',
+'%principal%', '%staff engineer%', '%team lead%',
+'%technical lead%', '%architect%', '%engineering manager%'
+])
+ORDER BY fetched_at DESC NULLS LAST, id DESC
+LIMIT 20
+    """)
+
+    with engine.connect() as conn:
+        rows = conn.execute(query).mappings().all()
+
+    jobs = []
+    for row in rows:
+        job = dict(row)
+        job["job_title"] = job.pop("title")
+        job["job_description"] = job.pop("description")
+        job["required skills"] = job.pop("required_skills") or []
+        job["salary"] = "Not specified"
+        jobs.append(job)
+
+    return {"jobs": jobs}
 
 
 @app.get("/")
@@ -55,3 +85,5 @@ def root():
 @app.get("/health")
 def health():
     return {"status": "healthy"}
+
+

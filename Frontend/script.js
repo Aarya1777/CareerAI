@@ -236,4 +236,80 @@ function showConfetti() {
         }, duration);
     }
 }
+// ========================================
+// CAREERAI INTERACTIVE MASCOT
+// ========================================
+document.addEventListener("DOMContentLoaded", function () {
+const assistant = document.querySelector(".cursor-assistant");
+const cursorMascot = document.getElementById("cursor-mascot");
 
+if (!assistant || !cursorMascot) return;
+
+const isDashboard = document.body.classList.contains("dashboard-body");
+
+function showMascot(element, image = "cursor.png") {
+    const rect = element.getBoundingClientRect();
+
+    assistant.style.left = Math.max(8, rect.left - 95) + "px";
+    assistant.style.top = Math.max(8, rect.top + rect.height / 2 - 35) + "px";
+
+    cursorMascot.src = image;
+    assistant.classList.add("show");
+}
+
+function hideMascot() {
+    assistant.classList.remove("show");
+    cursorMascot.src = "cursor.png";
+}
+
+if (isDashboard) {
+    document.querySelectorAll(".dashboard-card").forEach(function (card, index) {
+        card.addEventListener("mouseenter", function () {
+            // Use the matching illustration when available.
+            const cardImage = (index + 1) + ".jpeg";
+            showMascot(card, cardImage);
+        });
+
+        card.addEventListener("mouseleave", hideMascot);
+    });
+}
+
+const interactiveElements = document.querySelectorAll(
+    ".navbar a, .navbar button, footer a, footer button, a[href*='dashboard.html'], a[href*='landing.html']"
+);
+
+interactiveElements.forEach(function (element) {
+    element.addEventListener("mouseenter", function () {
+        showMascot(element);
+    });
+
+    element.addEventListener("mouseleave", hideMascot);
+});
+
+});
+
+
+
+/* CareerAI mascot fallback */
+window.addEventListener("load", function () {
+    const assistant = document.querySelector(".cursor-assistant");
+    const mascot = document.getElementById("cursor-mascot");
+    const cards = document.querySelectorAll(".dashboard-card");
+
+    if (!assistant || !mascot) return;
+
+    cards.forEach(function (card, index) {
+        card.addEventListener("mouseenter", function () {
+            const rect = card.getBoundingClientRect();
+            assistant.style.left = Math.max(8, rect.left - 95) + "px";
+            assistant.style.top = Math.max(8, rect.top + rect.height / 2 - 35) + "px";
+            mascot.src = (index + 1) + ".jpeg";
+            assistant.classList.add("show");
+        });
+
+        card.addEventListener("mouseleave", function () {
+            assistant.classList.remove("show");
+            mascot.src = "cursor.png";
+        });
+    });
+});

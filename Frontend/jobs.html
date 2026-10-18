@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Job Matcher- CareerAI</title>
     <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="jobs-style.css">
 </head>
 
 <body>
@@ -145,26 +146,19 @@
                 }
 
                 resultBox.innerHTML = `
-                    <p>
-                        <strong>Match Score:</strong>
-                        ${data.match_score}%
-                    </p>
-
-                    <p>
-                        <strong>Matched Skills:</strong>
-                        ${(data.matched_skills || []).join(", ")}
-                    </p>
-
-                    <p>
-                        <strong>Missing Skills:</strong>
-                        ${(data.missing_skills || []).join(", ")}
-                    </p>
-
-                    <p>
-                        <strong>Recommendation:</strong>
-                        ${data.recommendation || ""}
-                    </p>
-                `;
+    <h3>Match Results</h3>
+    <p><strong>Match Score:</strong> ${escapeHtml(data.match_score)}%</p>
+    <p><strong>Recommendation:</strong> ${escapeHtml(data.recommendation || "Not available").replaceAll("_", " ")}</p>
+    <p><strong>Summary:</strong> ${escapeHtml(data.summary || "No summary provided.")}</p>
+    <p><strong>Matched Skills:</strong></p>
+    ${renderList(data.matched_skills)}
+    <p><strong>Missing Skills:</strong></p>
+    ${renderList(data.missing_skills)}
+    <p><strong>Strengths:</strong></p>
+    ${renderList(data.strengths)}
+    <p><strong>Concerns:</strong></p>
+    ${renderList(data.concerns)}
+`;
 
             } catch (error) {
                 resultBox.textContent = error.message;
@@ -175,62 +169,29 @@
             }
         }
 
-        async function applyJob(job, button) {
-            const token =
-                localStorage.getItem("careerai_token");
+        function applyJob(job, button) {
+            const url = job.job_url;
 
-            if (!token) {
-                alert("Please log in first.");
-                window.location.href = "login.html";
+            if (!url || !/^https?:\/\//i.test(url)) {
+                alert("The original job website URL is unavailable.");
                 return;
             }
 
-            button.disabled = true;
-            button.textContent = "Applying...";
-
-            try {
-                const response = await fetch(
-                    API_BASE + "/applications/apply",
-                    {
-                        method: "POST",
-
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": "Bearer " + token
-                        },
-
-                        body: JSON.stringify({
-                            job_title: job.job_title,
-                            company_name:
-                                "CareerAI Opportunity",
-                            job_url: "#",
-                            external_job_id:
-                                job.job_id || null
-                        })
-                    }
-                );
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(
-                        data.detail || "Application failed."
-                    );
-                }
-
-                button.textContent = "Applied ✓";
-
-                alert(
-                    "Application added to your tracker!"
-                );
-
-            } catch (error) {
-                alert(error.message);
-
-                button.disabled = false;
-                button.textContent = "Apply";
-            }
+            window.open(url, "_blank", "noopener,noreferrer");
         }
+function renderList(items) {
+    if (!Array.isArray(items) || items.length === 0) {
+        return "<p>None reported.</p>";
+    }
+
+    return "<ul>" + items.map(item =>
+        "<li>" + escapeHtml(
+            typeof item === "object" && item !== null
+                ? JSON.stringify(item)
+                : item
+        ) + "</li>"
+    ).join("") + "</ul>";
+}
 
         function escapeHtml(value) {
             return String(value ?? "")
@@ -246,3 +207,5 @@
 
 </body>
 </html>
+
+

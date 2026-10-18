@@ -1,141 +1,227 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CareerAI - Dashboard</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareerAI - Dashboard</title>
+
+    <!-- Handwritten font -->
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="dashboard-body">
 
-<nav class="navbar">
-<a href="landing.html" class="logo">Career<span>AI</span></a>
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
-<div class="nav-links">
-<a href="landing.html">Home</a>
-<a href="dashboard.html" class="active">Dashboard</a>
-</div>
+    <nav class="navbar">
 
-<div class="nav-buttons">
-<a href="#" class="login-btn" id="logoutBtn">Logout</a>
-</div>
-</nav>
+        <div class="logo">
+            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
+        </div>
 
-<main class="dashboard">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html" class="active">Dashboard</a>
+        </div>
 
-<div class="dashboard-heading">
-<p class="small-heading">DASHBOARD</p>
+        <div class="nav-buttons">
+            <a href="login.html" class="login-btn">Logout</a>
+        </div>
 
-<h1>Welcome back, <span id="userName">...</span>!</h1>
+    </nav>
 
-<p>Choose a tool to continue your career journey.</p>
-</div>
 
-<div class="dashboard-grid">
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
 
-<div class="dashboard-card">
-<div class="dashboard-icon">🎤</div>
-<h2>Start Interview</h2>
-<p>AI powered personal interview-Your guide to career success</p>
-<a href="interview.html">
-<button class="card-button">Start</button>
-</a>
-</div>
+    <main class="dashboard">
 
-<div class="dashboard-card">
-<div class="dashboard-icon">📄</div>
-<h2>Optimize Resume</h2>
-<p>Improve your resume and make it stronger for job applications.</p>
-<a href="resume.html">
-<button class="card-button">Optimize</button>
-</a>
-</div>
+        <div class="dashboard-heading">
 
-<div class="dashboard-card">
-<div class="dashboard-icon">🔎</div>
-<h2>Job Matcher</h2>
-<p>Find job opportunities that match your skills and interests.</p>
-<a href="jobs.html">
-<button class="card-button">Jobs for you</button>
-</a>
-</div>
+            <p class="small-heading">DASHBOARD</p>
 
-<div class="dashboard-card">
-<div class="dashboard-icon">📌</div>
-<h2>Application Tracker</h2>
-<p>Keep track of your applications and stay organized.</p>
-<a href="tracker.html">
-<button class="card-button">Track Status</button>
-</a>
-</div>
+            <h1>Welcome back!</h1>
 
-</div>
+            <p>Choose a tool to continue your career journey.</p>
 
-</main>
+        </div>
 
-<footer>
-<p>Take the next step in your career now!</p>
-<p>© 2026 CareerAI</p>
-</footer>
 
-<script src="script.js"></script>
+        <div class="dashboard-grid">
 
-<script>
-document.addEventListener("DOMContentLoaded", async () => {
+            <!-- =========================
+                 CARD 1 - INTERVIEW
+            ========================== -->
 
-    const token = localStorage.getItem("careerai_token");
+            <div class="dashboard-card">
 
-    if (!token) {
-        window.location.href = "login.html";
-        return;
-    }
+                <div class="card-top-row">
 
-    try {
+                    <div class="card-title-row">
+                        <span class="card-number">1.</span>
 
-        const response = await fetch("http://127.0.0.1:8000/users/me", {
-            headers: {
-                "Authorization": `Bearer ${token}` 
-            }
-        });
+                        <h2>Start Interview</h2>
+                    </div>
 
-        if (!response.ok) {
-            throw new Error("Unable to load user");
-        }
+                    <img src="Micgif.gif"
+                         alt="Start Interview"
+                         class="dashboard-gif">
 
-        const user = await response.json();
+                </div>
 
-        const nameElement = document.getElementById("userName");
+                <p>
+                    AI powered personal interview - Your guide to career success
+                </p>
 
-        if (user.name) {
-            nameElement.textContent = user.name;
-        } else if (user.email) {
-            nameElement.textContent = user.email;
-        } else {
-            throw new Error("User name not found");
-        }
+                <a href="interview.html">
+                    <button class="card-button">Start</button>
+                </a>
 
-    } catch (error) {
+            </div>
 
-        console.error(error);
 
-        localStorage.removeItem("careerai_token");
-        window.location.href = "login.html";
-    }
+            <!-- =========================
+                 CARD 2 - RESUME
+            ========================== -->
 
-    document.getElementById("logoutBtn").addEventListener("click", (event) => {
+            <div class="dashboard-card">
 
-        event.preventDefault();
+                <div class="card-top-row">
 
-        localStorage.removeItem("careerai_token");
+                    <div class="card-title-row">
+                        <span class="card-number">2.</span>
 
-        window.location.href = "login.html";
-    });
+                        <h2>Optimize Resume</h2>
+                    </div>
 
-});
-</script>
+                    <img src="Optimizegif.gif"
+                         alt="Optimize Resume"
+                         class="dashboard-gif">
+
+                </div>
+
+                <p>
+                    Improve your resume and make it stronger for job applications.
+                </p>
+
+                <a href="resume.html">
+                    <button class="card-button">Optimize</button>
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 CARD 3 - JOB MATCHER
+            ========================== -->
+
+            <div class="dashboard-card">
+
+                <div class="card-top-row">
+
+                    <div class="card-title-row">
+                        <span class="card-number">3.</span>
+
+                        <h2>Job Matcher</h2>
+                    </div>
+
+                    <img src="jobmatchergif.gif"
+                         alt="Job Matcher"
+                         class="dashboard-gif">
+
+                </div>
+
+                <p>
+                    Find job opportunities that match your skills and interests.
+                </p>
+
+                <a href="jobs.html">
+                    <button class="card-button">Jobs for you</button>
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 CARD 4 - TRACKER
+            ========================== -->
+
+            <div class="dashboard-card">
+
+                <div class="card-top-row">
+
+                    <div class="card-title-row">
+                        <span class="card-number">4.</span>
+
+                        <h2>Application Tracker</h2>
+                    </div>
+
+                    <img src="trackergif.gif"
+                         alt="Application Tracker"
+                         class="dashboard-gif">
+
+                </div>
+
+                <!-- CareerAI Interactive Assistant -->
+
+
+
+                <p>
+                    Keep track of your applications and stay organized.
+                </p>
+
+                <a href="tracker.html">
+                    <button class="card-button">Track Status</button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+    
+    <!-- CareerAI Interactive Assistant -->
+    <div class="cursor-assistant">
+        <img src="cursor.png"
+            alt="CareerAI Assistant"
+            id="cursor-mascot">
+    </div>
+
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>Take the next step in your career now!</p>
+
+        <p>© 2026 CareerAI</p>
+
+    </footer>
+
+
+    <!-- =========================
+         CAREERAI INTERACTIVE ASSISTANT
+         This image changes depending
+         on which dashboard card
+         is being hovered.
+    ========================== -->
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
 
 </body>
-</html>
 
+</html>
