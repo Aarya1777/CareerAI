@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import pool
 
 from alembic import context
+from modules.jobs.models import Job
 
 # ---- FIX BLOCK ----
 sys.path.append(os.getcwd())
