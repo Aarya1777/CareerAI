@@ -1,0 +1,43 @@
+﻿{
+    "jobs":  [
+                 {
+                     "required skills":  [
+                                             "Python",
+                                             "FastAPI",
+                                             "SQL",
+                                             "Git",
+                                             "REST APIs"
+                                         ],
+                     "job_title":  "Python Developer",
+                     "salary":  "₹4–8 LPA",
+                     "job_id":  "JOB001",
+                     "job_description":  "Develop Python applications, REST APIs, and backend services. Work with FastAPI, SQL, Git, and debugging."
+                 },
+                 {
+                     "required skills":  [
+                                             "HTML",
+                                             "CSS",
+                                             "JavaScript",
+                                             "REST APIs",
+                                             "Responsive Design"
+                                         ],
+                     "job_title":  "Frontend Developer",
+                     "salary":  "₹3–7 LPA",
+                     "job_id":  "JOB002",
+                     "job_description":  "Build responsive web applications using HTML, CSS, JavaScript, API integration, and modern frontend practices."
+                 },
+                 {
+                     "required skills":  [
+                                             "Python",
+                                             "SQL",
+                                             "Excel",
+                                             "Data Analysis",
+                                             "Visualization"
+                                         ],
+                     "job_title":  "Data Analyst",
+                     "salary":  "₹4–9 LPA",
+                     "job_id":  "JOB003",
+                     "job_description":  "Analyze datasets, prepare reports, create visualizations, and use SQL and Python to extract business insights."
+                 }
+             ]
+}
