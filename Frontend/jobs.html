@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Matcher- CareerAI</title>
+    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="jobs-style.css">
+</head>
+
+<body>
+
+    <h1>GET MATCHED WITH THE PERFECT OPPORTUNITIES FOR YOU</h1>
+
+    <div id="jobsMessage">Loading jobs...</div>
+
+    <div id="jobsContainer"></div>
+
+    <script>
+        const API_BASE = "http://127.0.0.1:8000";
+
+        const jobsMessage = document.getElementById("jobsMessage");
+        const jobsContainer = document.getElementById("jobsContainer");
+
+        async function loadJobs() {
+            try {
+                /*
+                 * jobs.json is outside the Frontend folder,
+                 * so for now we load it through the project-root
+                 * server setup.
+                 */
+                const response = await fetch(API_BASE + "/jobs");
+
+                if (!response.ok) {
+                    throw new Error("Could not load jobs.");
+                }
+
+                const data = await response.json();
+
+                jobsMessage.textContent = "";
+
+                data.jobs.forEach(job => {
+                    const jobDiv = document.createElement("div");
+
+                    jobDiv.innerHTML = `
+                        <h2>${escapeHtml(job.job_title)}</h2>
+
+                        <p>
+                            ${escapeHtml(job.job_description)}
+                        </p>
+
+                        <p>
+                            <strong>Required Skills:</strong>
+                            ${escapeHtml(
+                                (job["required skills"] || []).join(", ")
+                            )}
+                        </p>
+
+                        <p>
+                            <strong>Salary:</strong>
+                            ${escapeHtml(job.salary || "Not specified")}
+                        </p>
+
+                        <button type="button">
+                            Match Me
+                        </button>
+
+                        <button type="button">
+                            Apply
+                        </button>
+
+                        <div class="match-result"></div>
+
+                        <hr>
+                    `;
+
+                    const buttons = jobDiv.querySelectorAll("button");
+                    const matchButton = buttons[0];
+                    const applyButton = buttons[1];
+                    const resultBox = jobDiv.querySelector(".match-result");
+
+                    matchButton.addEventListener("click", () => {
+                        matchJob(
+                            job,
+                            matchButton,
+                            resultBox
+                        );
+                    });
+
+                    applyButton.addEventListener("click", () => {
+                        applyJob(
+                            job,
+                            applyButton
+                        );
+                    });
+
+                    jobsContainer.appendChild(jobDiv);
+                });
+
+            } catch (error) {
+                console.error(error);
+
+                jobsMessage.textContent =
+                    "Could not load jobs.";
+            }
+        }
+
+        async function matchJob(job, button, resultBox) {
+            const token =
+                localStorage.getItem("careerai_token");
+
+            if (!token) {
+                alert("Please log in first.");
+                window.location.href = "login.html";
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = "Matching...";
+
+            try {
+                const response = await fetch(
+                    API_BASE + "/applications/match",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer " + token
+                        },
+
+                        body: JSON.stringify({
+                            job_title: job.job_title,
+                            company_name: "CareerAI Opportunity",
+                            job_description:
+                                job.job_description || ""
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.detail || "Matching failed."
+                    );
+                }
+
+                resultBox.innerHTML = `
+    <h3>Match Results</h3>
+    <p><strong>Match Score:</strong> ${escapeHtml(data.match_score)}%</p>
+    <p><strong>Recommendation:</strong> ${escapeHtml(data.recommendation || "Not available").replaceAll("_", " ")}</p>
+    <p><strong>Summary:</strong> ${escapeHtml(data.summary || "No summary provided.")}</p>
+    <p><strong>Matched Skills:</strong></p>
+    ${renderList(data.matched_skills)}
+    <p><strong>Missing Skills:</strong></p>
+    ${renderList(data.missing_skills)}
+    <p><strong>Strengths:</strong></p>
+    ${renderList(data.strengths)}
+    <p><strong>Concerns:</strong></p>
+    ${renderList(data.concerns)}
+`;
+
+            } catch (error) {
+                resultBox.textContent = error.message;
+
+            } finally {
+                button.disabled = false;
+                button.textContent = "Match Me";
+            }
+        }
+
+        function applyJob(job, button) {
+            const url = job.job_url;
+
+            if (!url || !/^https?:\/\//i.test(url)) {
+                alert("The original job website URL is unavailable.");
+                return;
+            }
+
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+function renderList(items) {
+    if (!Array.isArray(items) || items.length === 0) {
+        return "<p>None reported.</p>";
+    }
+
+    return "<ul>" + items.map(item =>
+        "<li>" + escapeHtml(
+            typeof item === "object" && item !== null
+                ? JSON.stringify(item)
+                : item
+        ) + "</li>"
+    ).join("") + "</ul>";
+}
+
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        loadJobs();
+    </script>
+
+</body>
+</html>
+
+

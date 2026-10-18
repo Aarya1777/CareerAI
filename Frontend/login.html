@@ -1,11 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>CareerAI - Login</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -13,10 +11,9 @@
 
     <div class="auth-container">
 
-        <!-- LEFT RED PANEL -->
         <div class="auth-visual">
 
-            <a href="index.html" class="auth-logo">
+            <a href="landing.html" class="auth-logo">
                 Career<span>AI</span>
             </a>
 
@@ -31,8 +28,6 @@
 
         </div>
 
-
-        <!-- RIGHT LOGIN FORM -->
         <div class="auth-form">
 
             <h1>Welcome back</h1>
@@ -43,19 +38,15 @@
 
             <form id="loginForm">
 
-                <label for="loginUsername">Username</label>
+                <label for="loginEmail">Email</label>
 
                 <input
-                    type="text"
-                    id="loginUsername"
-                    placeholder="Enter your username"
-                    autocomplete="username"
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
                 >
-
-                <p class="demo-hint">
-                    Demo username: ananya_123
-                </p>
-
 
                 <label for="loginPassword">Password</label>
 
@@ -64,12 +55,8 @@
                     id="loginPassword"
                     placeholder="Enter your password"
                     autocomplete="current-password"
+                    required
                 >
-
-                <p class="demo-hint">
-                    Demo password: Career@123
-                </p>
-
 
                 <button type="submit" class="form-button">
                     Login

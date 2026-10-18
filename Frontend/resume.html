@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Resume Optimizer | CareerAI</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -25,104 +23,44 @@
 </header>
 
     <main class="optimizer-page">
+        <h1 class="optimizer-title">RESUME OPTIMIZER</h1>
 
-        <!-- PAGE HEADING -->
-        <h1 class="optimizer-title">
-            RESUME OPTIMIZER
-        </h1>
-
-
-        <!-- MAIN CONTENT -->
         <div class="optimizer-layout">
 
-
-            <!-- =====================================
-                 LEFT SETTINGS PANEL
-            ====================================== -->
-
             <aside class="optimizer-sidebar">
-
-                <h2>
-                    What would you like to<br>
-                    edit today?
-                </h2>
-
-
-                <!-- COLOR PALETTE -->
+                <h2>What would you like to<br>edit today?</h2>
 
                 <section class="optimizer-setting">
-
                     <h3>COLOR PALETTE</h3>
 
-
                     <div class="setting-row">
-
-                        <label for="color-count">
-                            No. of colors
-                        </label>
-
+                        <label for="color-count">No. of colors</label>
                         <select id="color-count">
-
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-
                         </select>
-
                     </div>
-
 
                     <div class="setting-row">
-
-                        <label for="resume-color">
-                            Choose color
-                        </label>
-
-                        <input
-                            type="color"
-                            id="resume-color"
-                            value="#8b0000"
-                        >
-
+                        <label for="resume-color">Choose color</label>
+                        <input type="color" id="resume-color" value="#8b0000">
                     </div>
-
                 </section>
 
-
-
-                <!-- FONT -->
-
                 <section class="optimizer-setting">
-
                     <h3>Font</h3>
 
-
                     <div class="setting-row">
-
-                        <label for="current-font">
-                            Current font
-                        </label>
-
-                        <div
-                            id="current-font"
-                            class="current-font-demo"
-                        >
-                            CareerAI
-                        </div>
-
+                        <label for="current-font">Current font</label>
+                        <div id="current-font" class="current-font-demo">CareerAI</div>
                     </div>
 
-
                     <div class="setting-row">
-
-                        <label for="font-choice">
-                            Choose font
-                        </label>
-
+                        <label for="font-choice">Choose font</label>
                         <select id="font-choice">
-
                             <option>Arial</option>
                             <option>Georgia</option>
                             <option>Times New Roman</option>
@@ -133,30 +71,16 @@
                             <option>Tahoma</option>
                             <option>Calibri</option>
                             <option>Helvetica</option>
-
                         </select>
-
                     </div>
-
                 </section>
 
-
-
-                <!-- FONT SIZE -->
-
                 <section class="optimizer-setting">
-
                     <h3>Size of font</h3>
 
-
                     <div class="setting-row">
-
-                        <label for="font-section">
-                            Choose a section
-                        </label>
-
+                        <label for="font-section">Choose a section</label>
                         <select id="font-section">
-
                             <option>Heading</option>
                             <option>Subheading</option>
                             <option>Body</option>
@@ -164,20 +88,12 @@
                             <option>Experience</option>
                             <option>Education</option>
                             <option>Contact</option>
-
                         </select>
-
                     </div>
 
-
                     <div class="setting-row">
-
-                        <label for="font-size">
-                            Font size
-                        </label>
-
+                        <label for="font-size">Font size</label>
                         <select id="font-size">
-
                             <option>12px</option>
                             <option>14px</option>
                             <option>16px</option>
@@ -188,105 +104,270 @@
                             <option>28px</option>
                             <option>32px</option>
                             <option>36px</option>
-
                         </select>
-
                     </div>
-
                 </section>
 
-
-
-                <!-- THEME -->
-
                 <section class="optimizer-setting">
-
                     <div class="setting-row">
-
-                        <label for="current-theme">
-                            Current theme
-                        </label>
-
+                        <label for="current-theme">Current theme</label>
                         <select id="current-theme">
-
                             <option>Classic</option>
                             <option>Modern</option>
                             <option>Minimal</option>
-
                         </select>
-
                     </div>
 
-
                     <div class="setting-row">
-
-                        <label for="edit-theme">
-                            Edit theme
-                        </label>
-
+                        <label for="edit-theme">Edit theme</label>
                         <select id="edit-theme">
-
                             <option>Casual</option>
                             <option>Professional</option>
                             <option>Creative</option>
                             <option>Minimal</option>
                             <option>Modern</option>
                             <option>Elegant</option>
-
                         </select>
-
                     </div>
-
                 </section>
-
             </aside>
 
-
-
-            <!-- =====================================
-                 RIGHT CONTENT
-            ====================================== -->
-
             <section class="optimizer-content">
-
-
-                <!-- UPLOAD FILE -->
-
-                <label
-                    for="resume-file"
-                    class="upload-resume"
-                >
-
-                    <span>
-                        Upload files
-                    </span>
-
-                    <small>
-                        PDF or Word doc
-                    </small>
-
+                <label for="resume-file" class="upload-resume">
+                    <span id="uploadText">Upload files</span>
+                    <small>PDF or Word doc</small>
                 </label>
 
+                <input type="file" id="resume-file" accept=".pdf" hidden>
 
-                <input
-                    type="file"
-                    id="resume-file"
-                    accept=".pdf,.doc,.docx"
-                    hidden
-                >
-
-                <!-- DOWNLOAD BUTTON -->
-
-                <button class="download-resume">
-                    Download
-                </button>
-
+                <button class="download-resume" type="button">Download</button>
             </section>
 
         </div>
-
     </main>
 
-</body>
+    <div id="resumeMessage" style="margin-top:15px;"></div>
 
+    <div id="resumeResult" style="display:none; margin-top:20px;">
+        <h2>Resume Analysis</h2>
+        <p id="resumeScore"></p>
+        <div id="atsReport"></div>
+        <div id="resumeSummary"></div>
+    </div>
+
+    <script>
+        "use strict";
+
+        function escapeHtml(value) {
+            return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[char];
+            });
+        }
+
+        const API_BASE = "http://127.0.0.1:8000";
+
+        const fileInput = document.getElementById("resume-file");
+        const uploadText = document.getElementById("uploadText");
+        const message = document.getElementById("resumeMessage");
+        const resultBox = document.getElementById("resumeResult");
+        const scoreText = document.getElementById("resumeScore");
+        const summaryText = document.getElementById("resumeSummary");
+        const atsReportBox = document.getElementById("atsReport");
+
+        const token = localStorage.getItem("careerai_token");
+
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+        function renderList(value) {
+            if (!Array.isArray(value) || value.length === 0) {
+                return "<p>None reported.</p>";
+            }
+
+            return "<ul>" + value.map(function (item) {
+                if (item && typeof item === "object") {
+                    return "<li>" + Object.entries(item).map(function ([key, val]) {
+                        const displayValue = Array.isArray(val)
+                            ? val.join(", ")
+                            : String(val == null ? "" : val);
+
+                        return "<strong>" +
+                            escapeHtml(key.replace(/_/g, " ")) +
+                            ":</strong> " +
+                            escapeHtml(displayValue);
+                    }).join("<br>") + "</li>";
+                }
+
+                return "<li>" + escapeHtml(item) + "</li>";
+            }).join("") + "</ul>";
+        }
+
+        function renderReport(report) {
+            atsReportBox.innerHTML = `
+                <section class="resume-result-section">
+                    <h3>ATS Analysis</h3>
+
+                    <p><strong>Overall Score:</strong>
+                        ${escapeHtml(report.overall_score ?? "Not available")} / 100
+                    </p>
+
+                    <p><strong>Keyword Match:</strong>
+                        ${report.keyword_match_score == null
+                            ? "Not available"
+                            : escapeHtml(report.keyword_match_score) + " / 100"}
+                    </p>
+
+                    <p><strong>Formatting Score:</strong>
+                        ${report.formatting_score == null
+                            ? "Not available"
+                            : escapeHtml(report.formatting_score) + " / 100"}
+                    </p>
+
+                    <h4>Summary</h4>
+                    <p>${escapeHtml(report.summary_text || "No summary provided.")}</p>
+
+                    <h4>Missing Keywords</h4>
+                    ${renderList(report.missing_keywords)}
+
+                    <h4>Strengths</h4>
+                    ${renderList(report.strengths)}
+
+                    <h4>Suggested Corrections</h4>
+                    ${renderList(report.corrections)}
+                </section>
+            `;
+        }
+
+        fileInput.addEventListener("change", async function () {
+            const file = fileInput.files[0];
+
+            if (!file) return;
+
+            if (file.type !== "application/pdf" &&
+                !file.name.toLowerCase().endsWith(".pdf")) {
+                message.textContent = "Please upload a PDF file.";
+                fileInput.value = "";
+                return;
+            }
+
+            if (!token) return;
+
+            uploadText.textContent = file.name;
+            message.textContent = "Uploading and analyzing your resume...";
+            resultBox.style.display = "none";
+            atsReportBox.innerHTML = "";
+            summaryText.innerHTML = "";
+            scoreText.textContent = "";
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
+                const response = await fetch(API_BASE + "/resumes/upload", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    },
+                    body: formData
+                });
+
+                let data;
+
+                try {
+                    data = await response.json();
+                } catch {
+                    data = null;
+                }
+
+                console.log("Resume API response:", data);
+
+                if (!response.ok) {
+                    throw new Error(
+                        data && data.detail
+                            ? data.detail
+                            : "Resume upload failed (" + response.status + ")."
+                    );
+                }
+
+                if (!data || data.id == null) {
+                    throw new Error("Upload succeeded, but the server did not return a resume ID.");
+                }
+
+                const resumeId = String(data.id);
+
+                localStorage.setItem("careerai_resume_id", resumeId);
+                localStorage.setItem("careerai_last_resume_id", resumeId);
+
+                message.textContent = "Resume uploaded. Retrieving your ATS report...";
+
+                const reportResponse = await fetch(
+                    API_BASE + "/reports/resume/" + encodeURIComponent(resumeId),
+                    {
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        }
+                    }
+                );
+
+                if (!reportResponse.ok) {
+                    let detail = "";
+
+                    try {
+                        const errorData = await reportResponse.json();
+                        detail = errorData.detail || "";
+                    } catch {
+                        // The response may not contain JSON.
+                    }
+
+                    throw new Error(
+                        detail ||
+                        "The resume uploaded, but its ATS report is not available yet (HTTP " +
+                        reportResponse.status + ")."
+                    );
+                }
+
+                const payload = await reportResponse.json();
+                const report = Array.isArray(payload) ? payload[0] : payload;
+
+                if (!report || typeof report !== "object") {
+                    throw new Error("The server did not return an ATS report for this resume.");
+                }
+
+                console.log("ATS report response:", report);
+
+                renderReport(report);
+
+                resultBox.style.display = "block";
+                scoreText.textContent = "ATS analysis completed successfully.";
+
+                message.textContent = "Analysis complete! Opening your ATS dashboard...";
+
+                // Keep the saved resume ID so ats.html can load the same report.
+                localStorage.setItem("careerai_resume_id", resumeId);
+                localStorage.setItem("careerai_last_resume_id", resumeId);
+
+                // Redirect only after the report has been retrieved successfully.
+                window.location.href = "ats.html";
+
+            } catch (error) {
+                console.error("Resume upload/report error:", error);
+
+                message.textContent = "❌ " + (
+                    error.message || "Unable to complete resume analysis."
+                );
+
+                resultBox.style.display = "block";
+            }
+        });
+    </script>
+
+</body>
 </html>
