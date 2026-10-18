@@ -28,7 +28,7 @@ def get_matches(
 ):
     resume = get_user_resume(db, current_user.id)
     if not resume:
-        raise HTTPException(404, "No resume found — create one first")
+        raise HTTPException(404, "No resume found — create first")
 
     jobs = get_recent_jobs(db)
     if not jobs:

@@ -15,7 +15,7 @@ def fetch_and_store_jobs(db: Session, search_query: str = "developer") -> list[J
         "results_per_page": 20,
     }
     response = requests.get(EXTERNAL_JOB_API_URL, params=params, timeout=15)
-    response.raise_for_status()
+    response.raise_for_status() #http error if any
     results = response.json().get("results", [])
 
     stored_jobs = []

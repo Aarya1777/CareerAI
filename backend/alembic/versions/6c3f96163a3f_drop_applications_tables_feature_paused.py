@@ -23,4 +23,4 @@ def upgrade() -> None:
     op.drop_table('applications')
 
 def downgrade() -> None:
-    pass  # recreate tables here later if the feature comes back
+    pass  
