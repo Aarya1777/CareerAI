@@ -1,87 +1,113 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareerAI - Login</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>CareerAI — Login</title>
+
+    <link rel="stylesheet" href="style.css?v=20261025v">
+    <link rel="icon" type="image/png" href="logoo.png">
 </head>
 
 <body class="auth-body">
 
-    <div class="auth-container">
+    <div class="auth-page-wrapper">
 
-        <div class="auth-visual">
-
-            <a href="landing.html" class="auth-logo">
-                Career<span>AI</span>
+        <!-- ================= TOP NAV ================= -->
+        <header class="auth-top-nav">
+            <a href="index.html" class="logo">
+                <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
             </a>
 
-            <div class="auth-welcome">
-                <h1>WELCOME<br>BACK!</h1>
+            <a href="index.html" class="auth-back-link">
+                ← Back to Home
+            </a>
+        </header>
 
-                <p>
-                    Take a step forward<br>
-                    in your career.
-                </p>
+
+        <!-- ================= AUTH CONTAINER (MASCOT + FORM) ================= -->
+        <main class="auth-main-container">
+
+            <!-- LEFT SIDE: CURSOR MASCOT (Matching ref login.png) -->
+            <div class="auth-mascot-panel" id="caraMascotPanel" role="button" tabindex="0" title="Meet CarA - CareerAI's personalised assistant (Hover to flip!)" aria-label="Meet CarA - CareerAI's personalised assistant (Hover to flip 180 degrees)">
+
+                <div class="mascot-orbit-ring">
+                    <img
+                        src="cursor.png"
+                        alt="Cara - AI Career Assistant (Tap to rotate)"
+                        class="auth-mascot-img"
+                        id="caraMascotImg"
+                    >
+                </div>
+
+                <div class="auth-mascot-badge">
+                    <span aria-hidden="true">&#10022;</span>
+                    <span>Meet CarA</span>
+                </div>
+                <p class="auth-mascot-subtitle">CareerAI's personalised assistant</p>
+
             </div>
 
-        </div>
 
-        <div class="auth-form">
+            <!-- RIGHT SIDE: LOGIN FORM CARD -->
+            <div class="auth-form-card">
 
-            <h1>Welcome back</h1>
+                <h1>Welcome back</h1>
 
-            <p class="form-subtitle">
-                Login to continue your career journey.
-            </p>
+                <p class="form-subtitle">
+                    Login to access your AI interview, resume optimizer, and tools.
+                </p>
 
-            <form id="loginForm">
+                <form id="loginForm">
 
-                <label for="loginEmail">Email</label>
+                    <label for="loginUsername">Username</label>
+                    <input
+                        type="text"
+                        id="loginUsername"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
 
-                <input
-                    type="email"
-                    id="loginEmail"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                    required
-                >
+                    <label for="loginPassword">Password</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
 
-                <label for="loginPassword">Password</label>
+                    <button type="submit" class="form-button">
+                        Login
+                    </button>
 
-                <input
-                    type="password"
-                    id="loginPassword"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
-                    required
-                >
+                    <p class="form-message" id="loginMessage"></p>
 
-                <button type="submit" class="form-button">
-                    Login
-                </button>
+                </form>
 
-                <p class="form-message" id="loginMessage"></p>
+                <p class="switch-form">
+                    Don't have an account?
+                    <a href="signup.html">Sign up</a>
+                </p>
 
-            </form>
+            </div>
 
-            <p class="switch-form">
-                Don't have an account?
-                <a href="signup.html">Sign up</a>
-            </p>
-
-        </div>
+        </main>
 
     </div>
 
-        <!-- your login form/content above -->
+    <!-- GSAP for Smooth Controlled Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        if (typeof gsap === 'undefined') {
+            document.write('<script src="node_modules/gsap/dist/gsap.min.js"><\/script>');
+        }
+    </script>
+    <script src="script.js?v=20261025v"></script>
 
-    <!-- Login Assistant -->
-    <div class="form-assistant">
-        <img src="cursor2.png" alt="CareerAI Assistant">
-    </div>
-
-    <script src="script.js"></script>
 </body>
+
 </html>

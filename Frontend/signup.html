@@ -1,117 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CareerAI - Sign Up</title>
+    <title>CareerAI — Sign Up</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261025v">
+    <link rel="icon" type="image/png" href="logoo.png">
 </head>
 
 <body class="auth-body">
 
-    <div class="auth-container">
+    <div class="auth-page-wrapper">
 
-        <!-- LEFT RED PANEL -->
-        <div class="auth-visual">
-
-            <a href="index.html" class="auth-logo">
-                Career<span>AI</span>
+        <!-- ================= TOP NAV ================= -->
+        <header class="auth-top-nav">
+            <a href="index.html" class="logo">
+                <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
             </a>
 
-            <div class="auth-welcome">
-                <h1>START<br>YOUR<br>JOURNEY.</h1>
+            <a href="index.html" class="auth-back-link">
+                ← Back to Home
+            </a>
+        </header>
 
-                <p>
-                    Build your future<br>
-                    with CareerAI.
-                </p>
+
+        <!-- ================= AUTH CONTAINER (MASCOT + FORM) ================= -->
+        <main class="auth-main-container">
+
+            <!-- LEFT SIDE: CURSOR MASCOT (Matching ref login.png) -->
+            <div class="auth-mascot-panel" id="caraMascotPanel" role="button" tabindex="0" title="Meet CarA - CareerAI's personalised assistant (Hover to flip!)" aria-label="Meet CarA - CareerAI's personalised assistant (Hover to flip 180 degrees)">
+
+                <div class="mascot-orbit-ring">
+                    <img
+                        src="cursor.png"
+                        alt="Cara - AI Career Assistant (Tap to rotate)"
+                        class="auth-mascot-img"
+                        id="caraMascotImg"
+                    >
+                </div>
+
+                <div class="auth-mascot-badge">
+                    <span aria-hidden="true">&#10022;</span>
+                    <span>Meet CarA</span>
+                </div>
+                <p class="auth-mascot-subtitle">CareerAI's personalised assistant</p>
+
             </div>
 
-        </div>
 
+            <!-- RIGHT SIDE: SIGNUP FORM CARD -->
+            <div class="auth-form-card">
 
-        <!-- RIGHT SIGNUP FORM -->
-        <div class="auth-form">
+                <h1>Create your account</h1>
 
-            <h1>Create your account</h1>
-
-            <p class="form-subtitle">
-                Get started with CareerAI.
-            </p>
-
-            <form id="signupForm">
-
-                <label for="signupName">Full Name</label>
-
-                <input
-                    type="text"
-                    id="signupName"
-                    placeholder="Enter your name"
-                >
-
-
-                <label for="signupEmail">Email</label>
-
-                <input
-                    type="email"
-                    id="signupEmail"
-                    placeholder="Enter your email"
-                >
-
-                <p class="demo-hint">
-                    Example: ananya@gmail.com
+                <p class="form-subtitle">
+                    Get started with CareerAI's student placement tools.
                 </p>
 
+                <form id="signupForm">
 
-                <label for="signupUsername">Username</label>
+                    <label for="signupName">Full Name</label>
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Enter your name"
+                        autocomplete="name"
+                        required
+                    >
 
-                <input
-                    type="text"
-                    id="signupUsername"
-                    placeholder="Choose a username"
-                >
+                    <label for="signupEmail">Email</label>
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
 
-                <p class="demo-hint">
-                    Example: ananya_123
+                    <label for="signupUsername">Username</label>
+                    <input
+                        type="text"
+                        id="signupUsername"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+
+                    <label for="signupPassword">Password</label>
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button type="submit" class="form-button">
+                        Create Account
+                    </button>
+
+                    <p class="form-message" id="signupMessage"></p>
+
+                </form>
+
+                <p class="switch-form">
+                    Already have an account?
+                    <a href="login.html">Login</a>
                 </p>
 
+            </div>
 
-                <label for="signupPassword">Password</label>
-
-                <input
-                    type="password"
-                    id="signupPassword"
-                    placeholder="Create a password"
-                >
-
-                <p class="demo-hint">
-                    Example: Career@123
-                </p>
-
-
-                <button type="submit" class="form-button">
-                    Create Account
-                </button>
-
-                <p class="form-message" id="signupMessage"></p>
-
-            </form>
-
-            <p class="switch-form">
-                Already have an account?
-                <a href="login.html">Login</a>
-            </p>
-
-        </div>
+        </main>
 
     </div>
 
-<!-- Signup Assistant -->
-<div class="form-assistant">
-    <img src="cursor2.png" alt="CareerAI Assistant">
-</div>
+    <!-- GSAP for Smooth Controlled Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        if (typeof gsap === 'undefined') {
+            document.write('<script src="node_modules/gsap/dist/gsap.min.js"><\/script>');
+        }
+    </script>
+    <script src="script.js?v=20261025v"></script>
 
-<script src="script.js"></script>
 </body>
+
+</html>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,299 +6,471 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Profile | CareerAI</title>
+    <link rel="icon" type="image/png" href="logoo.png">
 
-    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=20261025v">
 </head>
 
-<body>
+<body class="profile-page-body">
 
-    <!-- ================= TOP BAR ================= -->
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
 
-    <header class="top-bar">
-
-        <!-- CareerAI Logo -->
-        <a href="index.html" class="logo">
-            CAREER<span>AI</span>
+        <a href="home.html" class="logo">
+            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
         </a>
 
-        <!-- Back to Dashboard -->
-        <a href="dashboard.html" class="back-btn">
-            ← Back to Dashboard
-        </a>
-
-    </header>
-
-
-    <!-- ================= PROFILE PAGE ================= -->
-
-    <main class="profile-container">
-
-        <h1>My Profile</h1>
-
-        <p class="subtitle">
-            Manage your profile, resumes and account settings.
-        </p>
-
-
-        
-<!-- ================= PROFILE INFO ================= -->
-
-<section class="profile-section">
-
-    <!-- Profile Image -->
-    <div class="profile-image-container">
-
-        <div class="profile-image">
-            <span>Upload<br>Image</span>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html" class="active">Profile</a>
         </div>
 
-        <button class="image-btn">
-            Change Photo
-        </button>
+        <div class="nav-buttons" style="display: flex; align-items: center; gap: 12px;">
+            <a href="dashboard.html" class="back-btn profile-back-btn">&larr; Back to Dashboard</a>
+            <div class="nav-user-avatar" id="navAvatarBadge" style="width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.85); background: #FFFDF5; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;" title="My Profile">
+                <span id="navInitialsBadge" style="font-size: 13px; font-weight: 800; color: #681313;">AW</span>
+                <img src="" alt="Avatar" id="navAvatarImg" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+            </div>
+        </div>
 
+    </nav>
+
+
+    <!-- ================= MAIN PROFILE CONTENT (2-Column Reference UI) ================= -->
+    <main class="profile-page-main">
+        <div class="profile-layout-grid">
+
+            <!-- ================= LEFT COLUMN ================= -->
+            <aside class="profile-left-col">
+
+                <!-- 1. USER PROFILE CARD -->
+                <div class="profile-user-card" id="studentProfileSection">
+                    
+                    <!-- Top Maroon Banner with Edit Pencil Button -->
+                    <div class="profile-card-banner">
+                        <button type="button" class="profile-banner-edit-btn" id="editProfileToggleBtn" title="Edit Profile Details" aria-label="Edit Profile Details">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Overlapping Circular Avatar -->
+                    <div class="profile-avatar-wrapper">
+                        <div class="profile-avatar-circle" id="profileAvatarCircle" title="Click to upload custom photo" tabindex="0" role="button" aria-label="Upload profile photo">
+                            <span class="profile-avatar-initials" id="profileInitialsDisplay">AW</span>
+                            <img src="" alt="Profile Photo" id="profileImagePreview" class="profile-avatar-img" style="display: none;">
+                            <div class="avatar-hover-overlay">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                        <input type="file" id="profilePhotoInput" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                    </div>
+
+                    <!-- Profile Info View Mode -->
+                    <div class="profile-card-content" id="profileViewContainer">
+                        <h2 class="profile-user-name" id="profileDisplayName">Ananya Walunjkar</h2>
+                        <p class="profile-user-role" id="profileRoleDisplay">Computer Science Student</p>
+
+                        <!-- Clean Relevant Meta Rows (No dummy roll numbers) -->
+                        <div class="profile-meta-list">
+                            <div class="profile-meta-row">
+                                <span class="profile-meta-label">Email:</span>
+                                <span class="profile-meta-value" id="profileEmailDisplay">ananya.walunjkar@example.com</span>
+                            </div>
+                            <div class="profile-meta-row">
+                                <span class="profile-meta-label">College:</span>
+                                <span class="profile-meta-value" id="profileCollegeDisplay">Engineering &amp; Tech</span>
+                            </div>
+                            <div class="profile-meta-row">
+                                <span class="profile-meta-label">Target Role:</span>
+                                <span class="profile-meta-value" id="profileTargetRoleDisplay">Software Engineer</span>
+                            </div>
+                            <div class="profile-meta-row">
+                                <span class="profile-meta-label">Location:</span>
+                                <span class="profile-meta-value" id="profileLocationDisplay">Mumbai, India</span>
+                            </div>
+                        </div>
+
+                        <!-- Edit Profile Details Action Button -->
+                        <button type="button" class="profile-edit-action-btn" id="editDetailsBtn">
+                            Edit Profile Details
+                        </button>
+                    </div>
+
+                    <!-- Inline Profile Edit Form (Toggled when editing) -->
+                    <div class="profile-edit-form" id="profileEditForm" style="display: none;">
+                        <h3 class="profile-edit-heading">Edit Profile Details</h3>
+                        <div class="profile-input-group">
+                            <label for="editNameInput">Full Name</label>
+                            <input type="text" id="editNameInput" class="ref-input" value="Ananya Walunjkar">
+                        </div>
+                        <div class="profile-input-group">
+                            <label for="editRoleInput">Headline / Major</label>
+                            <input type="text" id="editRoleInput" class="ref-input" value="Computer Science Student">
+                        </div>
+                        <div class="profile-input-group">
+                            <label for="editEmailInput">Email Address</label>
+                            <input type="email" id="editEmailInput" class="ref-input" value="ananya.walunjkar@example.com">
+                        </div>
+                        <div class="profile-input-group">
+                            <label for="editCollegeInput">College / Institution</label>
+                            <input type="text" id="editCollegeInput" class="ref-input" value="Engineering & Tech">
+                        </div>
+                        <div class="profile-input-group">
+                            <label for="editTargetRoleInput">Target Role</label>
+                            <input type="text" id="editTargetRoleInput" class="ref-input" value="Software Engineer">
+                        </div>
+                        <div class="profile-input-group">
+                            <label for="editLocationInput">Location</label>
+                            <input type="text" id="editLocationInput" class="ref-input" value="Mumbai, India">
+                        </div>
+                        <div class="profile-edit-btn-row">
+                            <button type="button" class="ref-pill-btn" id="saveProfileBtn">Save Changes</button>
+                            <button type="button" class="ref-pill-btn secondary" id="cancelProfileBtn">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- 2. QUICK STATS CARD (Warm Tinted Box Matches Reference UI) -->
+                <div class="profile-stats-card">
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-val" id="statResumesMade" data-target="5">5</span>
+                        <span class="profile-stat-lbl">Resumes Made</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-val" id="statResumesOptimized" data-target="4">4</span>
+                        <span class="profile-stat-lbl">Resumes Optimized</span>
+                    </div>
+                    <div class="profile-stat-item">
+                        <span class="profile-stat-val" id="statSavedJobs" data-target="12">12</span>
+                        <span class="profile-stat-lbl">Saved Job Roles</span>
+                    </div>
+                </div>
+
+            </aside>
+
+
+            <!-- ================= RIGHT COLUMN ================= -->
+            <section class="profile-right-col">
+
+                <!-- 3. RESUME REPOSITORY CARD (Matches Reference UI) -->
+                <div class="profile-panel-box resume-repo-card">
+                    <div class="repo-box-header">
+                        <h2 class="repo-box-title">Resume Repository</h2>
+                    </div>
+
+                    <!-- Upload Action Button -->
+                    <div class="repo-upload-bar">
+                        <button type="button" class="repo-upload-btn" id="uploadResumeBtn">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Upload New Resume
+                        </button>
+                        <input type="file" id="repoFileInput" accept=".pdf,.docx,.doc,.txt" style="display: none;">
+                    </div>
+
+                                        <!-- Resume List Items (Matching Reference Image) -->
+                    <div class="repo-list" id="repoListContainer">
+                        <!-- Item 1: CareerAI Optimized (ATS 92%) -->
+                        <div class="repo-item">
+                            <div class="repo-item-meta">
+                                <h3 class="repo-file-name">Resume_Ananya_2026.pdf</h3>
+                                <div class="repo-sub-row">
+                                    <span class="repo-date">Date, 03/28, 2026</span>
+                                    <span class="repo-badge badge-optimized">CareerAI Optimized</span>
+                                </div>
+                            </div>
+                            <div class="repo-item-actions">
+                                <span class="repo-ats-pill pill-ats-high">ATS 92%</span>
+                                <a href="resume.html?doc=Resume_Ananya_2026.pdf&ats=92%" class="repo-view-btn" data-doc="Resume_Ananya_2026.pdf" data-ats="92%" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">View</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Standard Template (ATS 78%) -->
+                        <div class="repo-item">
+                            <div class="repo-item-meta">
+                                <h3 class="repo-file-name">Resume_Internship.pdf</h3>
+                                <div class="repo-sub-row">
+                                    <span class="repo-date">Date, 03/28, 2020</span>
+                                    <span class="repo-badge badge-standard">Standard Template</span>
+                                </div>
+                            </div>
+                            <div class="repo-item-actions">
+                                <span class="repo-ats-pill pill-ats-mid">ATS 78%</span>
+                                <a href="resume.html?doc=Resume_Internship.pdf&ats=78%" class="repo-view-btn" data-doc="Resume_Internship.pdf" data-ats="78%" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">View</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Software Engineer Google Target (ATS 95%) -->
+                        <div class="repo-item">
+                            <div class="repo-item-meta">
+                                <h3 class="repo-file-name">Software_Engineer_Google_v3.pdf</h3>
+                                <div class="repo-sub-row">
+                                    <span class="repo-date">Date, 04/12, 2026</span>
+                                    <span class="repo-badge badge-optimized">CareerAI Optimized</span>
+                                </div>
+                            </div>
+                            <div class="repo-item-actions">
+                                <span class="repo-ats-pill pill-ats-high">ATS 95%</span>
+                                <a href="resume.html?doc=Software_Engineer_Google_v3.pdf&ats=95%" class="repo-view-btn" data-doc="Software_Engineer_Google_v3.pdf" data-ats="95%" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">View</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Full-Stack Developer (ATS 88%) -->
+                        <div class="repo-item">
+                            <div class="repo-item-meta">
+                                <h3 class="repo-file-name">FullStack_Developer_Stanford.docx</h3>
+                                <div class="repo-sub-row">
+                                    <span class="repo-date">Date, 04/18, 2026</span>
+                                    <span class="repo-badge badge-executive">Executive Template</span>
+                                </div>
+                            </div>
+                            <div class="repo-item-actions">
+                                <span class="repo-ats-pill pill-ats-high">ATS 88%</span>
+                                <a href="resume.html?doc=FullStack_Developer_Stanford.docx&ats=88%" class="repo-view-btn" data-doc="FullStack_Developer_Stanford.docx" data-ats="88%" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">View</a>
+                            </div>
+                        </div>
+
+                        <!-- Item 5: Data & AI Specialist (ATS 86%) -->
+                        <div class="repo-item">
+                            <div class="repo-item-meta">
+                                <h3 class="repo-file-name">Data_AI_Specialist_Resume.pdf</h3>
+                                <div class="repo-sub-row">
+                                    <span class="repo-date">Date, 04/24, 2026</span>
+                                    <span class="repo-badge badge-creative">Creative Template</span>
+                                </div>
+                            </div>
+                            <div class="repo-item-actions">
+                                <span class="repo-ats-pill pill-ats-high">ATS 86%</span>
+                                <a href="resume.html?doc=Data_AI_Specialist_Resume.pdf&ats=86%" class="repo-view-btn" data-doc="Data_AI_Specialist_Resume.pdf" data-ats="86%" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. SECURITY & PREFERENCES CARD (Matches Reference UI) -->
+                <div class="profile-panel-box security-pref-card" id="settings">
+                    <h2 class="repo-box-title">Security &amp; Preferences</h2>
+
+                    <div class="settings-rows-list">
+                        <!-- Row 1: Account Password -->
+                        <div class="setting-row">
+                            <span class="setting-row-label">Account Password</span>
+                            <button type="button" class="setting-action-btn" id="settingsChangePassBtn">Update</button>
+                        </div>
+                        <!-- Expandable Change Password Panel -->
+                        <div id="changePasswordPanel" class="ref-setting-expandable" style="display: none;">
+                            <div class="edit-field" style="margin-bottom: 12px;">
+                                <label for="currentPasswordInput" style="display: block; font-size: 12px; font-weight: 700; color: #554440; margin-bottom: 4px;">Current Password</label>
+                                <input type="password" id="currentPasswordInput" class="ref-input" placeholder="Enter current password">
+                            </div>
+                            <div class="edit-field" style="margin-bottom: 12px;">
+                                <label for="newPasswordInput" style="display: block; font-size: 12px; font-weight: 700; color: #554440; margin-bottom: 4px;">New Password</label>
+                                <input type="password" id="newPasswordInput" class="ref-input" placeholder="At least 6 characters">
+                            </div>
+                            <div class="edit-field" style="margin-bottom: 12px;">
+                                <label for="confirmPasswordInput" style="display: block; font-size: 12px; font-weight: 700; color: #554440; margin-bottom: 4px;">Confirm New Password</label>
+                                <input type="password" id="confirmPasswordInput" class="ref-input" placeholder="Re-type new password">
+                            </div>
+                            <div class="profile-edit-btn-row" style="margin-top: 14px;">
+                                <button type="button" class="ref-pill-btn" id="savePasswordBtn">Update Password</button>
+                                <button type="button" class="ref-pill-btn secondary" id="cancelPasswordBtn">Cancel</button>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: Voice Permission Settings -->
+                        <div class="setting-row">
+                            <div>
+                                <span class="setting-row-label">Voice Permission Settings</span>
+                                <div id="voicePermissionStatusSub" style="font-size: 12px; color: #8A726E; font-weight: 600; margin-top: 3px; display: flex; align-items: center; gap: 5px;">
+                                    <span id="voiceDotIndicator" style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2E7D32;"></span>
+                                    <span id="voiceModeText">When app in use</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label class="pref-toggle-switch" for="prefVoiceToggle" title="Toggle Voice Permission On or Off">
+                                    <input type="checkbox" id="prefVoiceToggle" checked>
+                                    <span class="pref-toggle-slider"></span>
+                                </label>
+                                <button type="button" class="setting-action-btn" id="settingsPreferencesBtn">Configure</button>
+                            </div>
+                        </div>
+                        <!-- Expandable Voice Permission Settings Panel -->
+                        <div id="accountPreferencesPanel" class="ref-setting-expandable" style="display: none;">
+                            <div class="edit-field" style="margin-bottom: 12px;">
+                                <label for="prefVoiceState" style="display: block; font-size: 12px; font-weight: 700; color: #554440; margin-bottom: 4px;">Voice Permission Status</label>
+                                <select id="prefVoiceState" class="ref-input">
+                                    <option value="on">On (Enabled)</option>
+                                    <option value="off">Off (Disabled)</option>
+                                </select>
+                            </div>
+                            <div class="edit-field" style="margin-bottom: 12px;" id="voicePermissionModeGroup">
+                                <label for="prefVoicePermissionMode" style="display: block; font-size: 12px; font-weight: 700; color: #554440; margin-bottom: 4px;">Microphone &amp; Voice Access</label>
+                                <select id="prefVoicePermissionMode" class="ref-input">
+                                    <option value="always">Always</option>
+                                    <option value="in_use" selected>When app in use</option>
+                                    <option value="ask_always">Always ask for permission</option>
+                                </select>
+                                <p style="font-size: 11px; color: #8A726E; margin: 4px 0 0; line-height: 1.35;">Controls microphone &amp; speech access for AI Mock Interviews, CarA voice assistant, and voice prompts.</p>
+                            </div>
+                            <div class="profile-edit-btn-row" style="margin-top: 14px;">
+                                <button type="button" class="ref-pill-btn" id="savePreferencesBtn">Save Settings</button>
+                                <button type="button" class="ref-pill-btn secondary" id="cancelPreferencesBtn">Cancel</button>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Notifications (iOS Toggle Switch) -->
+                        <div class="setting-row">
+                            <span class="setting-row-label">Notifications</span>
+                            <label class="pref-toggle-switch" for="prefEmailAlerts">
+                                <input type="checkbox" id="prefEmailAlerts" checked>
+                                <span class="pref-toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+
+    <!-- ================= RESUME PREVIEW MODAL ================= -->
+    <div id="resumeViewModal" class="ref-modal-overlay" style="display: none;">
+        <div class="ref-modal" style="max-width: 500px;">
+            <button type="button" class="ref-modal-close" id="closeResumeModalBtn" aria-label="Close modal">&times;</button>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+                <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(104,19,19,0.08); display: flex; align-items: center; justify-content: center; color: #681313;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </div>
+                <div>
+                    <h3 id="modalResumeName" style="font-size: 18px; font-weight: 800; color: #241A17; margin: 0;">Resume_Ananya_2026.pdf</h3>
+                    <p id="modalResumeMeta" style="font-size: 12.5px; color: #645550; margin: 2px 0 0;">Date, 03/28, 2026</p>
+                </div>
+            </div>
+
+            <div style="background: #FFF9EF; border: 1px solid rgba(104,19,19,0.12); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="font-size: 13.5px; font-weight: 700; color: #382420;">ATS Compatibility Score</span>
+                    <span id="modalResumeAts" style="font-size: 15px; font-weight: 900; color: #681313;">92%</span>
+                </div>
+                <div style="width: 100%; height: 7px; background: rgba(104,19,19,0.1); border-radius: 10px; overflow: hidden;">
+                    <div id="modalResumeAtsBar" style="height: 100%; width: 92%; background: linear-gradient(90deg, #8A1515 0%, #B82222 100%);"></div>
+                </div>
+                <p id="modalResumeStatus" style="font-size: 12.5px; color: #157347; font-weight: 700; margin: 10px 0 0;">Status: CareerAI Optimized</p>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <a href="resume.html" class="ref-pill-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">Open in Optimizer</a>
+                <button type="button" class="ref-pill-btn secondary" id="closeResumeModalBtn2">Close</button>
+            </div>
+        </div>
     </div>
 
 
-            <!-- User Information -->
-            <div class="profile-info">
+    <!-- ================= HELP CENTER MODAL ================= -->
+    <div id="helpCenterModal" class="ref-modal-overlay">
+        <div class="ref-modal" role="dialog" aria-labelledby="helpModalTitle">
+            <button type="button" class="ref-modal-close" id="closeHelpModalBtn" aria-label="Close help modal">&times;</button>
+            <h3 id="helpModalTitle" style="font-family: 'Playfair Display', Georgia, serif; color: #681313; font-size: 24px; margin-top: 0; margin-bottom: 15px;">Student Placement Help Center</h3>
+            <p style="color: #4a3535; font-size: 14.5px; line-height: 1.6; margin-bottom: 20px;">
+                Welcome to the CareerAI student support desk. Here are quick answers to common profile and placement questions:
+            </p>
+            <ul style="color: #3b2424; font-size: 13.5px; line-height: 1.6; padding-left: 20px; margin-bottom: 25px;">
+                <li style="margin-bottom: 8px;"><strong>Updating Details:</strong> Edit your name, role, college, and target role directly in the left profile card.</li>
+                <li style="margin-bottom: 8px;"><strong>Resume Repository:</strong> Upload and track all your ATS-ready resume versions in one place.</li>
+                <li style="margin-bottom: 8px;"><strong>Security:</strong> Update your account password and interview preferences anytime in the Security &amp; Preferences card.</li>
+            </ul>
+            <div style="text-align: right;">
+                <button type="button" class="ref-pill-btn" id="closeHelpModalBtn2">Close</button>
+            </div>
+        </div>
+    </div>
 
-                <h2>Ananya Walunjkar</h2>
 
-                <p class="role">
-                    Computer Science Student
-                </p>
+    <!-- ================= PROFILE TOAST ================= -->
+    <div id="profileToast" class="profile-toast" role="alert">
+        <span id="profileToastMessage">Profile updated successfully! &#10024;</span>
+    </div>
 
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="home.html">
+                    <img src="logoo.png" alt="CareerAI Logo" class="footer-logo-img">
+                </a>
                 <p>
-                    SY Computer Engineering
+                    Your dedicated AI-powered career companion. Helping students, professionals build resumes, optimize them, make them ATS friendly, and finding the right opportunities for them.
                 </p>
-
-                <p class="description">
-                    Building skills in Development, AI & Cybersecurity.
-                </p>
-
             </div>
 
-        </section>
-
-
-        <!-- ================= RESUME HISTORY ================= -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <div>
-                    <h2>Resume History</h2>
-
-                    <p>
-                        All your previously uploaded resumes.
-                    </p>
-                </div>
-
-                <button class="upload-btn">
-                    + Upload Resume
-                </button>
-
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
             </div>
 
-
-            <!-- Resume 1 -->
-
-            <div class="resume-item">
-
-                <div class="resume-icon">
-                    📄
-                </div>
-
-                <div class="resume-details">
-
-                    <h3>
-                        Resume_Ananya_2026.pdf
-                    </h3>
-
-                    <p>
-                        Uploaded on September 30, 2026
-                    </p>
-
-                </div>
-
-                <a href="#" class="view-btn">
-                    View
-                </a>
-
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="interview.html">AI Interview</a></li>
+                    <li><a href="resume.html">Resume Optimizer</a></li>
+                    <li><a href="ats.html">ATS Score Checker</a></li>
+                    <li><a href="dashboard.html">Job Matcher</a></li>
+                </ul>
             </div>
 
-
-            <!-- Resume 2 -->
-
-            <div class="resume-item">
-
-                <div class="resume-icon">
-                    📄
-                </div>
-
-                <div class="resume-details">
-
-                    <h3>
-                        Resume_Internship.pdf
-                    </h3>
-
-                    <p>
-                        Uploaded on September 18, 2026
-                    </p>
-
-                </div>
-
-                <a href="#" class="view-btn">
-                    View
-                </a>
-
+            <div class="footer-col">
+                <h4>Contact &amp; Help</h4>
+                <ul>
+                    <li><a href="mailto:support@careerai.com">support@careerai.com</a></li>
+                    <li><a href="profile.html#settings">Account Settings</a></li>
+                    <li><a href="profile.html#contact" id="helpCenterLink">Help Center</a></li>
+                </ul>
             </div>
 
+        </div>
 
-            <!-- Resume 3 -->
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 CareerAI.</p>
+            <p class="footer-tagline">Build your career with confidence.</p>
+            <p class="footer-subtext">Designed with precision for students and professionals.</p>
+        </div>
 
-            <div class="resume-item">
-
-                <div class="resume-icon">
-                    📄
-                </div>
-
-                <div class="resume-details">
-
-                    <h3>
-                        Resume_V1.pdf
-                    </h3>
-
-                    <p>
-                        Uploaded on August 25, 2026
-                    </p>
-
-                </div>
-
-                <a href="#" class="view-btn">
-                    View
-                </a>
-
-            </div>
-
-        </section>
+    </footer>
 
 
-        <!-- ================= SETTINGS ================= -->
-
-        <section class="section" id="settings">
-
-            <h2>Settings</h2>
-
-            <p class="section-description">
-                Manage your CareerAI account.
-            </p>
-
-
-            <div class="setting-row">
-
-                <div>
-                    <h3>Edit Profile</h3>
-
-                    <p>
-                        Update your name, role and profile information.
-                    </p>
-                </div>
-
-                <button class="setting-btn">
-                    Edit
-                </button>
-
-            </div>
-
-
-            <div class="setting-row">
-
-                <div>
-                    <h3>Change Password</h3>
-
-                    <p>
-                        Update your account password.
-                    </p>
-                </div>
-
-                <button class="setting-btn">
-                    Change
-                </button>
-
-            </div>
-
-
-            <div class="setting-row">
-
-                <div>
-                    <h3>Account Preferences</h3>
-
-                    <p>
-                        Manage your CareerAI preferences.
-                    </p>
-                </div>
-
-                <button class="setting-btn">
-                    Manage
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= CONTACT US ================= -->
-
-        <section class="section" id="contact">
-
-            <h2>Contact Us</h2>
-
-            <p class="section-description">
-                Have a question or need help? Reach out to us.
-            </p>
-
-
-            <div class="contact-box">
-
-                <div class="contact-item">
-                    📧 support@careerai.com
-                </div>
-
-                <div class="contact-item">
-                    💬 Help Center
-                </div>
-
-            </div>
-
-            <div class="dashboard-card">
-    <span class="card-number">01</span>
-    <h3>Start Interview</h3>
-    <p>Practice interviews with CareerAI.</p>
-</div>
-
-<div class="dashboard-card">
-    <span class="card-number">02</span>
-    <h3>Optimize Resume</h3>
-    <p>Improve your resume with AI.</p>
-</div>
-
-<div class="dashboard-card">
-    <span class="card-number">03</span>
-    <h3>Job Tracker</h3>
-    <p>Track your job applications.</p>
-</div>
-
-<div class="dashboard-card">
-    <span class="card-number">04</span>
-    <h3>Application Matcher</h3>
-    <p>Find jobs that match your profile.</p>
-</div>
-
-        </section>
-
-    </main>
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="script.js?v=20261025_only_upload"></script>
 
 </body>
 

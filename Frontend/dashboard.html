@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CareerAI - Dashboard</title>
+    <link rel="icon" type="image/png" href="logoo.png">
 
-    <!-- Handwritten font -->
+    <!-- Handwritten font for playful accents -->
     <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261025_progressbar">
 </head>
 
 <body class="dashboard-body">
@@ -18,16 +19,16 @@
     <!-- =========================
          NAVBAR
     ========================== -->
-
     <nav class="navbar">
 
-        <div class="logo">
+        <a href="home.html" class="logo">
             <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
-        </div>
+        </a>
 
         <div class="nav-links">
-            <a href="index.html">Home</a>
+            <a href="home.html">Home</a>
             <a href="dashboard.html" class="active">Dashboard</a>
+            <a href="profile.html">Profile</a>
         </div>
 
         <div class="nav-buttons">
@@ -38,81 +39,80 @@
 
 
     <!-- =========================
-         DASHBOARD
+         DASHBOARD HERO SECTION
     ========================== -->
-
-    <main class="dashboard">
-
-        <div class="dashboard-heading">
-
+    <section class="dashboard-hero">
+        <div class="dashboard-hero-content">
             <p class="small-heading">DASHBOARD</p>
-
             <h1>Welcome back!</h1>
-
-            <p>Choose a tool to continue your career journey.</p>
-
+            <p class="dashboard-hero-sub">Choose a tool to continue your career journey.</p>
         </div>
+    </section>
 
+    <!-- =========================
+         DASHBOARD MAIN
+    ========================== -->
+    <main class="dashboard">
 
         <div class="dashboard-grid">
 
             <!-- =========================
                  CARD 1 - INTERVIEW
             ========================== -->
-
             <div class="dashboard-card">
 
-                <div class="card-top-row">
+                <div>
+                    <div class="card-top-row">
+                        <div class="card-title-row">
+                            <span class="card-number">1.</span>
+                            <h2>Start Interview</h2>
+                        </div>
 
-                    <div class="card-title-row">
-                        <span class="card-number">1.</span>
-
-                        <h2>Start Interview</h2>
+                        <img
+                            src="Micgif.gif"
+                            alt="Start Interview"
+                            class="dashboard-gif"
+                        >
                     </div>
 
-                    <img src="Micgif.gif"
-                         alt="Start Interview"
-                         class="dashboard-gif">
-
+                    <p>
+                        AI powered personal interview practice — your interactive voice guide to career success and placement readiness.
+                    </p>
                 </div>
 
-                <p>
-                    AI powered personal interview - Your guide to career success
-                </p>
-
                 <a href="interview.html">
-                    <button class="card-button">Start</button>
+                    <button class="card-button" type="button">Start Interview →</button>
                 </a>
 
             </div>
 
 
             <!-- =========================
-                 CARD 2 - RESUME
+                 CARD 2 - RESUME OPTIMIZER
             ========================== -->
+            <div class="dashboard-card card-optimizer">
 
-            <div class="dashboard-card">
+                <div>
+                    <div class="card-top-row">
+                        <div class="card-title-row">
+                            <span class="card-number">2.</span>
+                            <h2>Optimize Resume</h2>
+                        </div>
 
-                <div class="card-top-row">
-
-                    <div class="card-title-row">
-                        <span class="card-number">2.</span>
-
-                        <h2>Optimize Resume</h2>
+                        <img
+                            src="Optimizegif.gif"
+                            alt="Optimize Resume"
+                            class="dashboard-gif optimizer-gif"
+                        >
                     </div>
 
-                    <img src="Optimizegif.gif"
-                         alt="Optimize Resume"
-                         class="dashboard-gif">
-
+                    <p>
+                        Improve and polish your resume layout, font hierarchy, colors, and section styling for recruiter impact.
+                    </p>
                 </div>
 
-                <p>
-                    Improve your resume and make it stronger for job applications.
-                </p>
-
                 <a href="resume.html">
-                    <button class="card-button">Optimize</button>
+                    <button class="card-button" type="button">Optimize Resume →</button>
                 </a>
 
             </div>
@@ -121,106 +121,196 @@
             <!-- =========================
                  CARD 3 - JOB MATCHER
             ========================== -->
-
             <div class="dashboard-card">
 
-                <div class="card-top-row">
+                <div>
+                    <div class="card-top-row">
+                        <div class="card-title-row">
+                            <span class="card-number">3.</span>
+                            <h2>Job Matcher</h2>
+                        </div>
 
-                    <div class="card-title-row">
-                        <span class="card-number">3.</span>
-
-                        <h2>Job Matcher</h2>
+                        <img
+                            src="jobmatchergif.gif"
+                            alt="Job Matcher"
+                            class="dashboard-gif"
+                        >
                     </div>
 
-                    <img src="jobmatchergif.gif"
-                         alt="Job Matcher"
-                         class="dashboard-gif">
-
+                    <p>
+                        Find tailored placement and internship opportunities that align with your technical skills and aspirations.
+                    </p>
                 </div>
 
-                <p>
-                    Find job opportunities that match your skills and interests.
-                </p>
-
-                <a href="jobs.html">
-                    <button class="card-button">Jobs for you</button>
-                </a>
-
-            </div>
-
-
-            <!-- =========================
-                 CARD 4 - TRACKER
-            ========================== -->
-
-            <div class="dashboard-card">
-
-                <div class="card-top-row">
-
-                    <div class="card-title-row">
-                        <span class="card-number">4.</span>
-
-                        <h2>Application Tracker</h2>
-                    </div>
-
-                    <img src="trackergif.gif"
-                         alt="Application Tracker"
-                         class="dashboard-gif">
-
-                </div>
-
-                <!-- CareerAI Interactive Assistant -->
-
-
-
-                <p>
-                    Keep track of your applications and stay organized.
-                </p>
-
-                <a href="tracker.html">
-                    <button class="card-button">Track Status</button>
+                <a href="dashboard.html">
+                    <button class="card-button" type="button">Jobs for you →</button>
                 </a>
 
             </div>
 
         </div>
 
-    </main>
     
-    <!-- CareerAI Interactive Assistant -->
-    <div class="cursor-assistant">
-        <img src="cursor.png"
-            alt="CareerAI Assistant"
-            id="cursor-mascot">
-    </div>
+        <!-- =========================
+             RECENT ACTIVITY / QUICK STATS STRIP
+        ========================== -->
+        <section class="dashboard-stats-strip" aria-label="Recent Activity and Quick Stats">
+            <div class="stats-strip-header">
+                <div>
+                    <span class="stats-strip-badge">&#9889; YOUR MOMENTUM</span>
+                    <h3 class="stats-strip-title">Recent Activity &amp; Quick Stats</h3>
+                </div>
+                <p class="stats-strip-subtitle">Live progress tracked across your resumes made, resumes optimized, and unique job matches.</p>
+            </div>
+
+            <div class="dashboard-stats-grid">
+                <!-- Stat 1: Resumes Made -->
+                <div class="dash-stat-card" data-stat-key="resumesMade">
+                    <div class="dash-stat-top">
+                        <div class="dash-stat-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                        </div>
+                        <span class="dash-stat-unit-pill">Created</span>
+                    </div>
+                    <span class="dash-stat-number" data-target="5">0</span>
+                    <p class="dash-stat-label">Resumes Made</p>
+                </div>
+
+                <!-- Stat 2: Resumes Optimized -->
+                <div class="dash-stat-card" data-stat-key="resumesOptimized">
+                    <div class="dash-stat-top">
+                        <div class="dash-stat-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                        </div>
+                        <span class="dash-stat-unit-pill">Optimized</span>
+                    </div>
+                    <span class="dash-stat-number" data-target="4">0</span>
+                    <p class="dash-stat-label">Resumes Optimized</p>
+                </div>
+
+                <!-- Stat 3: Jobs Uniquely Matched & Saved -->
+                <div class="dash-stat-card" data-stat-key="jobs">
+                    <div class="dash-stat-top">
+                        <div class="dash-stat-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                        </div>
+                        <span class="dash-stat-unit-pill">Saved</span>
+                    </div>
+                    <span class="dash-stat-number" data-target="12">0</span>
+                    <p class="dash-stat-label">Jobs Saved &amp; Matched</p>
+                </div>
+
+                <!-- Stat 4: Average ATS Readiness Score -->
+                <div class="dash-stat-card" data-stat-key="atsScore">
+                    <div class="dash-stat-top">
+                        <div class="dash-stat-icon-wrapper">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                        </div>
+                        <span class="dash-stat-unit-pill">out of 100</span>
+                    </div>
+                    <span class="dash-stat-number" data-target="88">0</span>
+                    <p class="dash-stat-label">Avg Profile Readiness (out of 100)</p>
+                    <div class="dash-stat-progress-bar" style="margin-top: auto;">
+                        <div class="dash-stat-progress-fill" style="width: 88%;" data-fill-target="88%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
 
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
 
+        <div class="footer-top">
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+            <div class="footer-brand">
+                <a href="home.html">
+                    <img src="logoo.png" alt="CareerAI Logo" class="footer-logo-img">
+                </a>
+                <p>
+                    Your dedicated AI-powered career companion. Helping students, professionals build resumes, optimize them, make them ATS friendly, and finding the right opportunities for them.
+                </p>
+            </div>
 
-    <footer>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
 
-        <p>Take the next step in your career now!</p>
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="interview.html">AI Interview</a></li>
+                    <li><a href="resume.html">Resume Optimizer</a></li>
+                    <li><a href="ats.html">ATS Score Checker</a></li>
+                    <li><a href="dashboard.html">Job Matcher</a></li>
+                </ul>
+            </div>
 
-        <p>© 2026 CareerAI</p>
+            <div class="footer-col">
+                <h4>Contact & Help</h4>
+                <ul>
+                    <li><a href="mailto:support@careerai.com">support@careerai.com</a></li>
+                    <li><a href="profile.html#settings">Account Settings</a></li>
+                    <li><a href="profile.html#contact">Help Center</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 CareerAI.</p>
+            <p class="footer-tagline">Build your career with confidence.</p>
+            <p class="footer-subtext">Designed with precision for students and professionals.</p>
+        </div>
 
     </footer>
 
 
     <!-- =========================
          CAREERAI INTERACTIVE ASSISTANT
-         This image changes depending
-         on which dashboard card
-         is being hovered.
     ========================== -->
+    <div class="cursor-assistant">
+        <img
+            src="cursor.png"
+            alt="CareerAI Assistant"
+            id="cursor-mascot"
+        >
+    </div>
 
 
-    <!-- JavaScript -->
-
-    <script src="script.js"></script>
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        if (typeof gsap === 'undefined') {
+            document.write('<script src="node_modules/gsap/dist/gsap.min.js"><\/script>');
+        }
+    </script>
+    <script src="script.js?v=20261025_only_upload"></script>
 
 </body>
 

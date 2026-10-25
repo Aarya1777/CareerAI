@@ -1,18 +1,23 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CareerAI</title>
+    <title>CareerAI — Journey to Your Dream Career</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261025z1">
+    <link rel="icon" type="image/png" href="logoo.png">
+    <!-- Google Fonts for Elegant Cursive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Satisfy&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- HEADER -->
+    <!-- ================= NAVBAR ================= -->
     <header class="navbar">
 
         <a href="index.html" class="logo">
@@ -23,6 +28,10 @@
             >
         </a>
 
+        <div class="nav-links">
+            <a href="#stones-section">Features</a>
+        </div>
+
         <div class="nav-buttons">
             <a href="login.html" class="login-btn">Login</a>
             <a href="signup.html" class="signup-btn">Sign up</a>
@@ -31,7 +40,7 @@
     </header>
 
 
-    <!-- LANDING PAGE -->
+    <!-- ================= HERO WITH VIDEO SHOWCASE ================= -->
     <main class="hero">
 
         <!-- TEXT ABOVE VIDEO -->
@@ -39,73 +48,347 @@
             From where you are,
         </h1>
 
+        <!-- VIDEO SHOWCASE CARD -->
+        <div class="video-container-card" style="margin: 22px auto 26px;">
+            <div class="video-media-wrapper">
+                <video
+                    class="hero-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    aria-label="CareerAI Resume Selection and Parsing demo video"
+                >
+                    <source src="selection.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
-        <!-- VIDEO -->
-        <div class="video-card">
-
-            <video
-             class="hero-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            >
-            <source src="selection.mp4" type="video/mp4">
-            </video>
-
+            <div class="video-caption-bar">
+                <div class="video-caption-title">
+                    <span class="live-dot" aria-hidden="true"></span>
+                    <span>Interactive Platform Demo</span>
+                </div>
+                <p class="video-caption-desc">
+                    YOUR PERSONALISED RESUME BUILDER, OPTIMIZER, ATS SCORE CHECKER AND JOB MATCHER ALL IN ONE PLACE!!
+                </p>
+            </div>
         </div>
 
+
+        
 
         <!-- TEXT BELOW VIDEO -->
         <h1 class="hero-text bottom-text">
             to where you want to be.
         </h1>
 
+        <!-- ================= STATS SECTION ================= -->
+        <section class="stats-section" aria-label="Key Platform Metrics">
 
-        <!-- FEATURES -->
-        <section class="features-section">
+            <div class="stat">
+                <h2 data-target="10000">0+</h2>
+                <p>Resumes Created</p>
+            </div>
 
-            <div class="features-row">
+            <div class="stat">
+                <h2 data-target="5000">0+</h2>
+                <p>Job Applications</p>
+            </div>
 
-                <!-- 1 - UP -->
-                <div class="feature-box">
-                    AI Voice Assistant
+            <div class="stat">
+                <h2 data-target="8000">0+</h2>
+                <p>Students Benefited</p>
+            </div>
+
+            <div class="stat">
+                <h2 data-target="95">0%</h2>
+                <p>Positive Feedback</p>
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= STEPPING-STONE FEATURES ================= -->
+        <section class="stepping-stones-section" id="stones-section" style="padding-top: 45px; width: 100%;">
+
+                        <div class="section-heading centered">
+                <!-- Semicircle Curved Step-by-Step Progression -->
+                <div class="semicircle-progression-wrapper" role="heading" aria-level="3" aria-label="STEP-BY-STEP PROGRESSION">
+                    <svg class="semicircle-progression-svg" viewBox="0 0 600 85" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                            <path id="progression-semicircle-path" d="M 50,72 Q 300,10 550,72" fill="none" />
+                            <linearGradient id="progressionRedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#4A0808" />
+                                <stop offset="30%" stop-color="#8A1515" />
+                                <stop offset="70%" stop-color="#A51D1D" />
+                                <stop offset="100%" stop-color="#4A0808" />
+                            </linearGradient>
+                        </defs>
+                        <text class="semicircle-progression-text">
+                            <textPath href="#progression-semicircle-path" xlink:href="#progression-semicircle-path" startOffset="50%" text-anchor="middle">
+                                STEP-BY-STEP PROGRESSION
+                            </textPath>
+                        </text>
+                    </svg>
                 </div>
 
+                <!-- Straight Line Heading for Your Career Stepping Stones -->
+                <h2 class="straight-stones-heading">YOUR CAREER STEPPING STONES</h2>
 
-                <!-- 2 - DOWN -->
-                <div class="feature-box feature-down">
-                    Resume Builder
+                <p class="heading-sub">
+                    <strong>Move stage-by-stage from interview practice to personalized job matches.</strong>
+                </p>
+            </div>
+
+                        <div class="stones-path-container">
+                <!-- 1: AI Voice Assistant -->
+                <div class="stone-card" id="landing-stone-1" aria-label="Feature 01: AI Voice Assistant">
+                    <div class="stone-face stone-face-front">
+                        <span class="stone-number-badge">01</span>
+                        <h3 class="stone-title">AI Voice Assistant</h3>
+                        <p class="stone-desc">Practice realistic mock interviews with instant voice guidance.</p>
+                    </div>
+                    <div class="stone-face stone-face-back">
+                        <span class="stone-number-badge">01</span>
+                        <h4 class="stone-back-title">AI Voice Assistant</h4>
+                        <p class="stone-back-desc">Interactive voice simulations with real-time AI scoring &amp; guidance.</p>
+                        <span class="stone-lively-tag">&#10022; Live Feature</span>
+                    </div>
                 </div>
 
-
-                <!-- 3 - UP -->
-                <div class="feature-box">
-                    Resume Optimizer
+                <div class="stone-connector" aria-hidden="true">
+                    <span class="connector-dot"></span>
+                    <span class="connector-line"></span>
+                    <span class="connector-dot"></span>
                 </div>
 
-
-                <!-- 4 - DOWN -->
-                <div class="feature-box feature-down">
-                    ATS Score Checker
+                <!-- 2: Resume Builder -->
+                <div class="stone-card" id="landing-stone-2" aria-label="Feature 02: Resume Builder">
+                    <div class="stone-face stone-face-front">
+                        <span class="stone-number-badge">02</span>
+                        <h3 class="stone-title">Resume Builder</h3>
+                        <p class="stone-desc">Build ATS-friendly, structured professional resumes easily.</p>
+                    </div>
+                    <div class="stone-face stone-face-back">
+                        <span class="stone-number-badge">02</span>
+                        <h4 class="stone-back-title">Resume Builder</h4>
+                        <p class="stone-back-desc">Clean ATS-ready layouts designed to pass corporate recruiter filters.</p>
+                        <span class="stone-lively-tag">&#10022; Live Feature</span>
+                    </div>
                 </div>
 
-
-                <!-- 5 - UP -->
-                <div class="feature-box">
-                    Job Matcher
+                <div class="stone-connector" aria-hidden="true">
+                    <span class="connector-dot"></span>
+                    <span class="connector-line"></span>
+                    <span class="connector-dot"></span>
                 </div>
 
-
-                <!-- 6 - DOWN -->
-                <div class="feature-box feature-down">
-                    Application Tracker
+                <!-- 3: Resume Optimizer -->
+                <div class="stone-card" id="landing-stone-3" aria-label="Feature 03: Resume Optimizer">
+                    <div class="stone-face stone-face-front">
+                        <span class="stone-number-badge">03</span>
+                        <h3 class="stone-title">Resume Optimizer</h3>
+                        <p class="stone-desc">Custom palettes, typography, and theme styling adjustments.</p>
+                    </div>
+                    <div class="stone-face stone-face-back">
+                        <span class="stone-number-badge">03</span>
+                        <h4 class="stone-back-title">Resume Optimizer</h4>
+                        <p class="stone-back-desc">Dynamic font sizing, curated color palettes, and professional styling.</p>
+                        <span class="stone-lively-tag">&#10022; Live Feature</span>
+                    </div>
                 </div>
 
+                <div class="stone-connector" aria-hidden="true">
+                    <span class="connector-dot"></span>
+                    <span class="connector-line"></span>
+                    <span class="connector-dot"></span>
+                </div>
 
-                <!-- 7 - UP -->
-                <div class="feature-box">
-                    Trusted by 1000 people
+                <!-- 4: Resume Analyser -->
+                <div class="stone-card" id="landing-stone-4" aria-label="Feature 04: Resume Analyser">
+                    <div class="stone-face stone-face-front">
+                        <span class="stone-number-badge">04</span>
+                        <h3 class="stone-title">Resume Analyser</h3>
+                        <p class="stone-desc">Identify missing keywords and score your resume formatting.</p>
+                    </div>
+                    <div class="stone-face stone-face-back">
+                        <span class="stone-number-badge">04</span>
+                        <h4 class="stone-back-title">Resume Analyser</h4>
+                        <p class="stone-back-desc">Keyword gap audits, formatting checks, and targeted ATS recommendations.</p>
+                        <span class="stone-lively-tag">&#10022; Live Feature</span>
+                    </div>
+                </div>
+
+                <div class="stone-connector" aria-hidden="true">
+                    <span class="connector-dot"></span>
+                    <span class="connector-line"></span>
+                    <span class="connector-dot"></span>
+                </div>
+
+                <!-- 5: Job Matcher -->
+                <div class="stone-card" id="landing-stone-5" aria-label="Feature 05: Job Matcher">
+                    <div class="stone-face stone-face-front">
+                        <span class="stone-number-badge">05</span>
+                        <h3 class="stone-title">Job Matcher</h3>
+                        <p class="stone-desc">Tailored job openings matching your current skills profile.</p>
+                    </div>
+                    <div class="stone-face stone-face-back">
+                        <span class="stone-number-badge">05</span>
+                        <h4 class="stone-back-title">Job Matcher</h4>
+                        <p class="stone-back-desc">Curated tech roles and engineering matches based on your resume profile.</p>
+                        <span class="stone-lively-tag">&#10022; Live Feature</span>
+                    </div>
+                </div>
+
+                <div class="stone-connector" aria-hidden="true">
+                    <span class="connector-dot"></span>
+                    <span class="connector-line"></span>
+                    <span class="connector-dot"></span>
+                </div>
+
+                <!-- 6: Placements -->
+                <div class="stone-card" id="landing-stone-6" aria-label="Feature 06: Placements">
+                    <div class="stone-face stone-face-front">
+                        <span class="stone-number-badge">06</span>
+                        <h3 class="stone-title">Placements</h3>
+                        <p class="stone-desc">Trusted by thousands of engineering &amp; IT placement seekers.</p>
+                    </div>
+                    <div class="stone-face stone-face-back">
+                        <span class="stone-number-badge">06</span>
+                        <h4 class="stone-back-title">Placements</h4>
+                        <p class="stone-back-desc">Direct campus and professional career network for top engineering opportunities.</p>
+                        <span class="stone-lively-tag">&#10022; Live Feature</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CALLOUT TO SIGN UP / LOGIN -->
+            <div class="landing-cta-banner" style="margin-top: 55px; text-align: center; background: #FFF9EF; border: 1px solid rgba(104, 19, 19, 0.12); border-radius: 16px; padding: 36px 24px; box-shadow: 0 4px 15px rgba(70, 35, 25, 0.05); max-width: 720px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: #241a17; font-size: 24px; margin-bottom: 8px;">Ready to start your career journey?</h3>
+                <p style="color: #645b55; font-size: 15px; margin-bottom: 22px;">Create your account now to unlock AI powered interview, personalised resume builder, resume optimization, and curated job matches.</p>
+                <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+                    <a href="signup.html" class="hero-btn-primary" style="padding: 12px 28px;">
+                        <span>Get Started</span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+                    <a href="login.html" class="hero-btn-secondary" style="padding: 12px 24px;">
+                        Login to Existing Account
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= TESTIMONIALS HERO SECTION ================= -->
+        <section class="testimonials-hero" id="reviews">
+            <div class="testimonials-hero-content">
+                <p class="small-heading">TESTIMONIALS</p>
+                <h1>Student's Testimonies</h1>
+                <p class="testimonials-hero-sub">Hear directly from students and professionals that have used CareerAI.</p>
+            </div>
+        </section>
+
+
+        <!-- ================= REVIEWS SECTION (Curved Arrangement) ================= -->
+        <section class="reviews-section">
+
+            <!-- FIRST ROW: CURVED ARC (Down -> Up -> Down) -->
+            <div class="review-grid curved-grid curved-row-1">
+
+                <!-- 1. Left (Curved Down) -->
+                <div class="review-card curve-left">
+                    <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="quote">“</p>
+                    <p>
+                        CareerAI helped me create the perfect resume.
+                        Earlier I used to be so overwhelmed and confused with conflicting advice.
+                    </p>
+                    <div class="reviewer-meta">
+                        <h4>Riya Sharma</h4>
+                        <span>Computer Science Student</span>
+                    </div>
+                </div>
+
+                <!-- 2. Center (Curved Up) -->
+                <div class="review-card curve-center">
+                    <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="quote">“</p>
+                    <p>
+                        I could finally keep my resume and applications
+                        organized in one place. The mock voice interview was remarkably realistic!
+                    </p>
+                    <div class="reviewer-meta">
+                        <h4>Aarav Patel</h4>
+                        <span>Information Technology Student</span>
+                    </div>
+                </div>
+
+                <!-- 3. Right (Curved Down) -->
+                <div class="review-card curve-right">
+                    <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="quote">“</p>
+                    <p>
+                        The tools are simple, intuitive, and helped me feel confident and
+                        fully prepared for on-campus technical placements.
+                    </p>
+                    <div class="reviewer-meta">
+                        <h4>Meera Joshi</h4>
+                        <span>Software Engineering Aspirant</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- SECOND ROW: CURVED ARC (Right under first row) -->
+            <div class="review-grid curved-grid curved-row-2">
+
+                <!-- 4. Left (Curved Down) -->
+                <div class="review-card curve-left">
+                    <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="quote">“</p>
+                    <p>
+                        The AI mock voice assistant asked questions just like real tech interviewers.
+                        My speaking confidence boosted tenfold before campus recruitment!
+                    </p>
+                    <div class="reviewer-meta">
+                        <h4>Rohan Verma</h4>
+                        <span>Electronics & Telecomm Student</span>
+                    </div>
+                </div>
+
+                <!-- 5. Center (Curved Up) -->
+                <div class="review-card curve-center">
+                    <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="quote">“</p>
+                    <p>
+                        The ATS score checker pointed out the exact missing keywords from job descriptions.
+                        Got shortlisted by two tier-1 product companies!
+                    </p>
+                    <div class="reviewer-meta">
+                        <h4>Ananya Kulkarni</h4>
+                        <span>Data Science & AI Undergraduate</span>
+                    </div>
+                </div>
+
+                <!-- 6. Right (Curved Down) -->
+                <div class="review-card curve-right">
+                    <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                    <p class="quote">“</p>
+                    <p>
+                        Transitioning into software was tough until CareerAI optimized my technical project
+                        descriptions and provided instant feedback.
+                    </p>
+                    <div class="reviewer-meta">
+                        <h4>Kabir Malhotra</h4>
+                        <span>Mechanical to Software Transition</span>
+                    </div>
                 </div>
 
             </div>
@@ -113,6 +396,81 @@
         </section>
 
     </main>
+
+
+    
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="index.html">
+                    <img src="logoo.png" alt="CareerAI Logo" class="footer-logo-img">
+                </a>
+                <p>
+                    Your dedicated AI-powered career companion. Helping students, professionals build resumes, optimize them, make them ATS friendly, and finding the right opportunities for them.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#stones-section">Features</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Create Account</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="interview.html">AI Interview</a></li>
+                    <li><a href="resume.html">Resume Optimizer</a></li>
+                    <li><a href="ats.html">ATS Score Checker</a></li>
+                    <li><a href="dashboard.html">Job Matcher</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:support@careerai.com">support@careerai.com</a></li>
+                    <li><a href="profile.html#settings">Account Settings</a></li>
+                    <li><a href="profile.html#contact">Help Center</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 CareerAI.</p>
+            <p class="footer-tagline">Build your career with confidence.</p>
+            <p class="footer-subtext">Designed with precision for students and professionals.</p>
+        </div>
+
+    </footer>
+
+
+        <!-- ================= CAREERAI ASSISTANT ================= -->
+    <div class="cursor-assistant">
+        <img
+            src="cursor.png"
+            alt="CareerAI Assistant"
+            id="cursor-mascot"
+        >
+    </div>
+
+    <!-- ================= SCRIPTS ================= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        if (typeof gsap === 'undefined') {
+            document.write('<script src="node_modules/gsap/dist/gsap.min.js"><\/script>');
+            document.write('<script src="node_modules/gsap/dist/ScrollTrigger.min.js"><\/script>');
+        }
+    </script>
+    <script src="script.js?v=20261025w"></script>
 
 </body>
 

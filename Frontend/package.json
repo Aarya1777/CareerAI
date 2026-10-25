@@ -1,0 +1,24 @@
+{
+  "name": "careerai",
+  "version": "1.0.0",
+  "description": "Frontend ft CareerAI FEP",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ananya-vishal-walunjkar07/CareerAI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ananya-vishal-walunjkar07/CareerAI/issues"
+  },
+  "homepage": "https://github.com/ananya-vishal-walunjkar07/CareerAI#readme",
+  "dependencies": {
+    "gsap": "^3.15.0"
+  }
+}
