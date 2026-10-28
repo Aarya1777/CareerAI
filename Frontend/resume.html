@@ -1,373 +1,1428 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en">
 
+
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
     <title>Resume Optimizer | CareerAI</title>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" type="image/png" href="logoo.png">
+
+    <link rel="stylesheet" href="style.css?v=20261025_editable">
+
+
+
+    
+
+    <!-- PDF.js library for PDF parsing & text extraction -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <script>
+
+        if (window.pdfjsLib) {
+
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        }
+
+    </script>
+
+    <!-- Mammoth.js for Word .docx extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <!-- Tesseract.js for scanned document OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 
-<body>
-    <!-- NAVBAR -->
-<header class="interview-navbar">
-    <div class="interview-logo">
-        <a href="index.html">
-            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
-        </a>
-    </div>
 
-    <a href="dashboard.html" class="back-dashboard">
-        ← Go Back to Dashboard
-    </a>
-</header>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+
+
+        <a href="home.html" class="logo">
+
+            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
+
+        </a>
+
+
+
+        <div class="nav-links">
+
+            <a href="home.html">Home</a>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="resume.html" class="active">Resume Optimizer</a>
+
+            <a href="profile.html">Profile</a>
+
+        </div>
+
+
+
+        <div class="nav-buttons">
+
+            <a href="dashboard.html" class="back-btn" style="color: white; font-weight: 600; text-decoration: none; padding: 7px 16px; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; font-size: 14px;">← Back to Dashboard</a>
+
+        </div>
+
+
+
+    </nav>
+
+
 
     <main class="optimizer-page">
-        <h1 class="optimizer-title">RESUME OPTIMIZER</h1>
+
+
+
+        <!-- PAGE HEADING -->
+
+        <h1 class="optimizer-title">
+
+            RESUME OPTIMIZER
+
+        </h1>
+
+
+
+
+
+        <!-- MAIN CONTENT -->
 
         <div class="optimizer-layout">
 
-            <aside class="optimizer-sidebar">
-                <h2>What would you like to<br>edit today?</h2>
 
-                <section class="optimizer-setting">
-                    <h3>COLOR PALETTE</h3>
 
-                    <div class="setting-row">
-                        <label for="color-count">No. of colors</label>
-                        <select id="color-count">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+
+
+            <!-- =====================================
+
+                 LEFT SETTINGS PANEL
+
+            ====================================== -->
+
+
+
+            <aside class="optimizer-sidebar" id="optimizerSidebar">
+
+
+
+                <button type="button" class="mobile-settings-toggle" id="btnToggleSettings" aria-expanded="false">
+
+                    <span>🎨 Customize Style, Font &amp; Theme</span>
+
+                    <span class="toggle-icon">▼</span>
+
+                </button>
+
+
+
+                <div class="sidebar-collapsible-content" id="sidebarSettingsBody">
+
+
+
+                <!-- 1. INCLUDE PROFILE IMAGE IN RESUME -->
+
+                <section class="optimizer-setting photo-setting-box">
+
+                    <label for="includePhotoSelect" class="setting-main-label">Include Profile Image in Resume?</label>
+
+                    <select id="includePhotoSelect" class="ref-input optimizer-select">
+
+                        <option value="no">No</option>
+
+                        <option value="yes">Yes</option>
+
+                    </select>
+
+
+
+                    <!-- Photo Upload / Camera Actions (Shown when Yes) -->
+
+                    <div id="photoActionsGroup" class="photo-actions-group" style="display: none;">
+
+                        <div class="photo-buttons-grid">
+
+                            <button type="button" class="photo-opt-btn primary" id="btnUploadResumePhoto" title="Upload an image from your device">
+
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+
+                                </svg>
+
+                                <span>Upload Image File</span>
+
+                            </button>
+
+                            <button type="button" class="photo-opt-btn secondary" id="btnCaptureResumePhoto" title="Take photo right now using camera">
+
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+
+                                    <circle cx="12" cy="13" r="4"></circle>
+
+                                </svg>
+
+                                <span>Click Image</span>
+
+                            </button>
+
+                        </div>
+
+                        <p class="photo-perm-note">*Requires Camera Permission*</p>
+
+                        
+
+                        <!-- Active Photo Indicator Bar -->
+
+                        <div id="activePhotoBar" class="active-photo-bar" style="display: none;">
+
+                            <div class="active-photo-info">
+
+                                <img id="activePhotoThumb" src="" alt="Thumbnail" class="active-photo-thumb">
+
+                                <span>Photo active on resume</span>
+
+                            </div>
+
+                            <button type="button" id="btnRemovePhoto" class="btn-remove-photo">Remove</button>
+
+                        </div>
+
                     </div>
 
-                    <div class="setting-row">
-                        <label for="resume-color">Choose color</label>
-                        <input type="color" id="resume-color" value="#8b0000">
+                    <input type="file" id="resumePhotoFileInput" accept="image/png,image/jpeg,image/jpg,image/webp" hidden>
+
+                </section>
+
+
+
+
+
+                <!-- 2. RESUME TEMPLATES -->
+
+                <section class="optimizer-setting">
+
+                    <h3 class="setting-title">Resume Templates</h3>
+
+                    <div class="template-cards-grid no-photo" id="templateCardsGrid">
+
+                        <!-- Executive -->
+                        <div class="template-card" data-template="executive" title="Executive Template">
+                            <div class="template-card-preview">
+                                <svg class="mini-page-svg" viewBox="0 0 120 165" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="120" height="165" fill="#FFFFFF"/>
+                                    <!-- Header Band -->
+                                    <rect x="0" y="0" width="120" height="34" fill="#681313"/>
+                                    
+                                    <!-- PHOTO VARIANT -->
+                                    <g class="preview-photo-group">
+                                        <circle cx="16" cy="17" r="9" fill="#FFFFFF" fill-opacity="0.18" stroke="#FFFFFF" stroke-width="0.8"/>
+                                        <circle cx="16" cy="14" r="3.2" fill="#FFFFFF"/>
+                                        <path d="M10 23.5 C10 19.5, 22 19.5, 22 23.5 Z" fill="#FFFFFF"/>
+                                        <rect x="31" y="9" width="58" height="4.5" rx="1" fill="#FFFFFF"/>
+                                        <rect x="31" y="16.5" width="42" height="2.6" rx="0.6" fill="#F3D5D5"/>
+                                        <rect x="31" y="22.5" width="76" height="2" rx="0.5" fill="#DFC2C2"/>
+                                    </g>
+
+                                    <!-- NO-PHOTO VARIANT -->
+                                    <g class="preview-no-photo-group">
+                                        <rect x="12" y="8" width="76" height="5" rx="1" fill="#FFFFFF"/>
+                                        <rect x="12" y="15.5" width="52" height="2.8" rx="0.6" fill="#F3D5D5"/>
+                                        <rect x="12" y="22" width="96" height="2" rx="0.5" fill="#DFC2C2"/>
+                                    </g>
+                                    
+                                    <!-- Summary -->
+                                    <rect x="8" y="40" width="42" height="2.8" rx="0.5" fill="#681313"/>
+                                    <line x1="8" y1="44.5" x2="112" y2="44.5" stroke="#681313" stroke-width="0.8"/>
+                                    <rect x="8" y="47.5" width="104" height="2" rx="0.4" fill="#888888"/>
+                                    <rect x="8" y="51" width="98" height="2" rx="0.4" fill="#A0A0A0"/>
+                                    <rect x="8" y="54.5" width="76" height="2" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <!-- Experience -->
+                                    <rect x="8" y="62" width="46" height="2.8" rx="0.5" fill="#681313"/>
+                                    <line x1="8" y1="66.5" x2="112" y2="66.5" stroke="#681313" stroke-width="0.8"/>
+                                    <rect x="8" y="70" width="50" height="2.4" rx="0.5" fill="#241A17"/>
+                                    <rect x="86" y="70" width="26" height="2.2" rx="0.5" fill="#777777"/>
+                                    <circle cx="10" cy="76" r="1" fill="#681313"/>
+                                    <rect x="13" y="75" width="95" height="1.8" rx="0.4" fill="#888888"/>
+                                    <circle cx="10" cy="80" r="1" fill="#681313"/>
+                                    <rect x="13" y="79" width="90" height="1.8" rx="0.4" fill="#A0A0A0"/>
+                                    <circle cx="10" cy="84" r="1" fill="#681313"/>
+                                    <rect x="13" y="83" width="75" height="1.8" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <rect x="8" y="90" width="46" height="2.4" rx="0.5" fill="#241A17"/>
+                                    <rect x="88" y="90" width="24" height="2.2" rx="0.5" fill="#777777"/>
+                                    <circle cx="10" cy="96" r="1" fill="#681313"/>
+                                    <rect x="13" y="95" width="92" height="1.8" rx="0.4" fill="#888888"/>
+                                    <circle cx="10" cy="100" r="1" fill="#681313"/>
+                                    <rect x="13" y="99" width="80" height="1.8" rx="0.4" fill="#A0A0A0"/>
+                                    
+                                    <!-- Education & Skills -->
+                                    <rect x="8" y="108" width="30" height="2.6" rx="0.5" fill="#681313"/>
+                                    <line x1="8" y1="112" x2="56" y2="112" stroke="#681313" stroke-width="0.6"/>
+                                    <rect x="8" y="115" width="44" height="2" rx="0.4" fill="#241A17"/>
+                                    <rect x="8" y="118.5" width="36" height="1.6" rx="0.4" fill="#777777"/>
+                                    <rect x="8" y="123" width="40" height="2" rx="0.4" fill="#241A17"/>
+                                    <rect x="8" y="126.5" width="32" height="1.6" rx="0.4" fill="#777777"/>
+                                    
+                                    <rect x="64" y="108" width="36" height="2.6" rx="0.5" fill="#681313"/>
+                                    <line x1="64" y1="112" x2="112" y2="112" stroke="#681313" stroke-width="0.6"/>
+                                    <rect x="64" y="115" width="22" height="4.5" rx="2" fill="#FAF1ED" stroke="#681313" stroke-width="0.5"/>
+                                    <rect x="88" y="115" width="24" height="4.5" rx="2" fill="#FAF1ED" stroke="#681313" stroke-width="0.5"/>
+                                    <rect x="64" y="121.5" width="25" height="4.5" rx="2" fill="#FAF1ED" stroke="#681313" stroke-width="0.5"/>
+                                    <rect x="91" y="121.5" width="21" height="4.5" rx="2" fill="#FAF1ED" stroke="#681313" stroke-width="0.5"/>
+                                    <rect x="64" y="128" width="20" height="4.5" rx="2" fill="#FAF1ED" stroke="#681313" stroke-width="0.5"/>
+                                    <rect x="86" y="128" width="26" height="4.5" rx="2" fill="#FAF1ED" stroke="#681313" stroke-width="0.5"/>
+                                    <line x1="8" y1="145" x2="112" y2="145" stroke="#E2D9D5" stroke-width="0.6"/>
+                                </svg>
+                            </div>
+                            <span class="template-card-name">Executive</span>
+                        </div>
+
+                        <!-- Professional (Default Active) -->
+                        <div class="template-card active" data-template="professional" title="Professional Template">
+                            <div class="template-card-preview">
+                                <svg class="mini-page-svg" viewBox="0 0 120 165" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="120" height="165" fill="#FFFFFF"/>
+                                    <!-- Framed Header -->
+                                    <rect x="6" y="7" width="108" height="27" rx="3" fill="#FAF1ED" stroke="rgba(104, 19, 19, 0.2)" stroke-width="0.8"/>
+                                    
+                                    <!-- PHOTO VARIANT -->
+                                    <g class="preview-photo-group">
+                                        <rect x="12" y="12" width="62" height="4.5" rx="1" fill="#681313"/>
+                                        <rect x="12" y="18.5" width="44" height="2.5" rx="0.6" fill="#4A3E3D"/>
+                                        <rect x="12" y="24" width="78" height="2" rx="0.5" fill="#8C7D79"/>
+                                        <rect x="94" y="11" width="15" height="18" rx="2" fill="#E8D5CE" stroke="#681313" stroke-width="0.5"/>
+                                        <circle cx="101.5" cy="17" r="3" fill="#681313" fill-opacity="0.6"/>
+                                        <path d="M96 26 C96 22, 107 22, 107 26 Z" fill="#681313" fill-opacity="0.6"/>
+                                    </g>
+
+                                    <!-- NO-PHOTO VARIANT -->
+                                    <g class="preview-no-photo-group">
+                                        <rect x="12" y="11" width="82" height="4.8" rx="1" fill="#681313"/>
+                                        <rect x="12" y="17.5" width="58" height="2.6" rx="0.6" fill="#4A3E3D"/>
+                                        <rect x="12" y="23" width="96" height="2" rx="0.5" fill="#8C7D79"/>
+                                    </g>
+                                    
+                                    <!-- Summary -->
+                                    <rect x="8" y="39" width="34" height="2.6" rx="0.5" fill="#241A17"/>
+                                    <rect x="8" y="42.5" width="16" height="1" rx="0.5" fill="#681313"/>
+                                    <line x1="8" y1="44" x2="112" y2="44" stroke="#E2D9D5" stroke-width="0.6"/>
+                                    <rect x="8" y="47" width="104" height="2" rx="0.4" fill="#888888"/>
+                                    <rect x="8" y="50.5" width="98" height="2" rx="0.4" fill="#A0A0A0"/>
+                                    <rect x="8" y="54" width="70" height="2" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <!-- Experience -->
+                                    <rect x="8" y="61" width="46" height="2.6" rx="0.5" fill="#241A17"/>
+                                    <rect x="8" y="64.5" width="18" height="1" rx="0.5" fill="#681313"/>
+                                    <line x1="8" y1="66" x2="112" y2="66" stroke="#E2D9D5" stroke-width="0.6"/>
+                                    <rect x="8" y="69" width="48" height="2.4" rx="0.5" fill="#241A17"/>
+                                    <rect x="85" y="69" width="27" height="2.2" rx="0.5" fill="#777777"/>
+                                    <rect x="8" y="72.5" width="32" height="1.8" rx="0.4" fill="#681313"/>
+                                    <circle cx="10" cy="78" r="0.9" fill="#555555"/>
+                                    <rect x="13" y="77" width="96" height="1.8" rx="0.4" fill="#888888"/>
+                                    <circle cx="10" cy="82" r="0.9" fill="#555555"/>
+                                    <rect x="13" y="81" width="88" height="1.8" rx="0.4" fill="#A0A0A0"/>
+                                    <circle cx="10" cy="86" r="0.9" fill="#555555"/>
+                                    <rect x="13" y="85" width="76" height="1.8" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <rect x="8" y="91" width="44" height="2.4" rx="0.5" fill="#241A17"/>
+                                    <rect x="87" y="91" width="25" height="2.2" rx="0.5" fill="#777777"/>
+                                    <rect x="8" y="94.5" width="30" height="1.8" rx="0.4" fill="#681313"/>
+                                    <circle cx="10" cy="100" r="0.9" fill="#555555"/>
+                                    <rect x="13" y="99" width="94" height="1.8" rx="0.4" fill="#888888"/>
+                                    <circle cx="10" cy="104" r="0.9" fill="#555555"/>
+                                    <rect x="13" y="103" width="82" height="1.8" rx="0.4" fill="#A0A0A0"/>
+                                    
+                                    <!-- Education & Skills -->
+                                    <rect x="8" y="111" width="30" height="2.6" rx="0.5" fill="#241A17"/>
+                                    <rect x="8" y="114.5" width="14" height="1" rx="0.5" fill="#681313"/>
+                                    <line x1="8" y1="116" x2="56" y2="116" stroke="#E2D9D5" stroke-width="0.6"/>
+                                    <rect x="8" y="119" width="42" height="2" rx="0.4" fill="#241A17"/>
+                                    <rect x="8" y="122.5" width="34" height="1.6" rx="0.4" fill="#777777"/>
+                                    <rect x="8" y="127" width="44" height="2" rx="0.4" fill="#241A17"/>
+                                    <rect x="8" y="130.5" width="30" height="1.6" rx="0.4" fill="#777777"/>
+                                    
+                                    <rect x="64" y="111" width="24" height="2.6" rx="0.5" fill="#241A17"/>
+                                    <rect x="64" y="114.5" width="12" height="1" rx="0.5" fill="#681313"/>
+                                    <line x1="64" y1="116" x2="112" y2="116" stroke="#E2D9D5" stroke-width="0.6"/>
+                                    <rect x="64" y="119" width="22" height="4.5" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.2)" stroke-width="0.6"/>
+                                    <rect x="88" y="119" width="24" height="4.5" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.2)" stroke-width="0.6"/>
+                                    <rect x="64" y="125" width="25" height="4.5" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.2)" stroke-width="0.6"/>
+                                    <rect x="91" y="125" width="21" height="4.5" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.2)" stroke-width="0.6"/>
+                                    <rect x="64" y="131" width="20" height="4.5" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.2)" stroke-width="0.6"/>
+                                    <rect x="86" y="131" width="26" height="4.5" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.2)" stroke-width="0.6"/>
+                                </svg>
+                            </div>
+                            <span class="template-card-name">Professional</span>
+                        </div>
+
+                        <!-- Minimalistic -->
+                        <div class="template-card" data-template="minimalistic" title="Minimalistic Template">
+                            <div class="template-card-preview">
+                                <svg class="mini-page-svg" viewBox="0 0 120 165" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="120" height="165" fill="#FFFFFF"/>
+                                    
+                                    <!-- PHOTO VARIANT -->
+                                    <g class="preview-photo-group">
+                                        <circle cx="16" cy="16" r="6.5" fill="#EAEAEA" stroke="#555555" stroke-width="0.6"/>
+                                        <circle cx="16" cy="14" r="2.2" fill="#555555"/>
+                                        <path d="M12 21 C12 18, 20 18, 20 21 Z" fill="#555555"/>
+                                        <rect x="27" y="11" width="52" height="4" rx="0.6" fill="#1A1A1A"/>
+                                        <rect x="27" y="17" width="36" height="2" rx="0.4" fill="#777777"/>
+                                        <rect x="10" y="24" width="85" height="1.8" rx="0.4" fill="#999999"/>
+                                    </g>
+
+                                    <!-- NO-PHOTO VARIANT -->
+                                    <g class="preview-no-photo-group">
+                                        <rect x="10" y="10" width="62" height="4.2" rx="0.6" fill="#1A1A1A"/>
+                                        <rect x="10" y="16" width="42" height="2" rx="0.4" fill="#777777"/>
+                                        <rect x="10" y="21" width="85" height="1.8" rx="0.4" fill="#999999"/>
+                                    </g>
+                                    <line x1="10" y1="26" x2="110" y2="26" stroke="#E5E5E5" stroke-width="0.6"/>
+                                    
+                                    <!-- About -->
+                                    <rect x="10" y="32" width="26" height="2.2" rx="0.4" fill="#333333"/>
+                                    <line x1="10" y1="36" x2="110" y2="36" stroke="#EEEEEE" stroke-width="0.5"/>
+                                    <rect x="10" y="39" width="100" height="1.8" rx="0.4" fill="#888888"/>
+                                    <rect x="10" y="42.5" width="94" height="1.8" rx="0.4" fill="#A0A0A0"/>
+                                    <rect x="10" y="46" width="68" height="1.8" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <!-- Experience -->
+                                    <rect x="10" y="54" width="34" height="2.2" rx="0.4" fill="#333333"/>
+                                    <line x1="10" y1="58" x2="110" y2="58" stroke="#EEEEEE" stroke-width="0.5"/>
+                                    <rect x="10" y="62" width="46" height="2.2" rx="0.4" fill="#222222"/>
+                                    <rect x="85" y="62" width="25" height="1.8" rx="0.4" fill="#888888"/>
+                                    <rect x="10" y="65.5" width="30" height="1.6" rx="0.4" fill="#666666"/>
+                                    <rect x="14" y="69.5" width="94" height="1.6" rx="0.4" fill="#888888"/>
+                                    <rect x="14" y="73" width="88" height="1.6" rx="0.4" fill="#A0A0A0"/>
+                                    <rect x="14" y="76.5" width="70" height="1.6" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <rect x="10" y="83" width="42" height="2.2" rx="0.4" fill="#222222"/>
+                                    <rect x="87" y="83" width="23" height="1.8" rx="0.4" fill="#888888"/>
+                                    <rect x="10" y="86.5" width="28" height="1.6" rx="0.4" fill="#666666"/>
+                                    <rect x="14" y="90.5" width="90" height="1.6" rx="0.4" fill="#888888"/>
+                                    <rect x="14" y="94" width="80" height="1.6" rx="0.4" fill="#A0A0A0"/>
+                                    
+                                    <!-- Education -->
+                                    <rect x="10" y="102" width="30" height="2.2" rx="0.4" fill="#333333"/>
+                                    <line x1="10" y1="106" x2="110" y2="106" stroke="#EEEEEE" stroke-width="0.5"/>
+                                    <rect x="10" y="110" width="42" height="2" rx="0.4" fill="#222222"/>
+                                    <rect x="85" y="110" width="25" height="1.8" rx="0.4" fill="#888888"/>
+                                    <rect x="10" y="113.5" width="32" height="1.6" rx="0.4" fill="#666666"/>
+                                    
+                                    <!-- Skills -->
+                                    <rect x="10" y="122" width="22" height="2.2" rx="0.4" fill="#333333"/>
+                                    <line x1="10" y1="126" x2="110" y2="126" stroke="#EEEEEE" stroke-width="0.5"/>
+                                    <rect x="10" y="130" width="20" height="1.8" rx="0.4" fill="#555555"/>
+                                    <rect x="34" y="130" width="22" height="1.8" rx="0.4" fill="#555555"/>
+                                    <rect x="60" y="130" width="18" height="1.8" rx="0.4" fill="#555555"/>
+                                    <rect x="82" y="130" width="24" height="1.8" rx="0.4" fill="#555555"/>
+                                    <rect x="10" y="134" width="24" height="1.8" rx="0.4" fill="#555555"/>
+                                    <rect x="38" y="134" width="20" height="1.8" rx="0.4" fill="#555555"/>
+                                    <rect x="62" y="134" width="26" height="1.8" rx="0.4" fill="#555555"/>
+                                </svg>
+                            </div>
+                            <span class="template-card-name">Minimalistic</span>
+                        </div>
+
+                        <!-- Creative -->
+                        <div class="template-card" data-template="creative" title="Creative Template">
+                            <div class="template-card-preview">
+                                <svg class="mini-page-svg" viewBox="0 0 120 165" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="120" height="165" fill="#FFFFFF"/>
+                                    <!-- Left Sidebar -->
+                                    <rect x="0" y="0" width="38" height="165" fill="#681313"/>
+                                    
+                                    <!-- PHOTO VARIANT -->
+                                    <g class="preview-photo-group">
+                                        <circle cx="19" cy="18" r="9" fill="#FFFFFF" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="0.8"/>
+                                        <circle cx="19" cy="15" r="3.2" fill="#FFFFFF"/>
+                                        <path d="M13 24.5 C13 20.5, 25 20.5, 25 24.5 Z" fill="#FFFFFF"/>
+                                        <rect x="6" y="34" width="20" height="2" rx="0.4" fill="#FFFFFF" fill-opacity="0.9"/>
+                                        <circle cx="8" cy="40" r="1.2" fill="#FFFFFF" fill-opacity="0.7"/>
+                                        <rect x="12" y="39" width="21" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.8"/>
+                                        <circle cx="8" cy="45" r="1.2" fill="#FFFFFF" fill-opacity="0.7"/>
+                                        <rect x="12" y="44" width="19" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.8"/>
+                                        <circle cx="8" cy="50" r="1.2" fill="#FFFFFF" fill-opacity="0.7"/>
+                                        <rect x="12" y="49" width="22" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.8"/>
+                                    </g>
+
+                                    <!-- NO-PHOTO VARIANT -->
+                                    <g class="preview-no-photo-group">
+                                        <rect x="9" y="10" width="20" height="16" rx="3" fill="#FFFFFF" fill-opacity="0.15" stroke="#FFFFFF" stroke-width="0.8"/>
+                                        <text x="19" y="21.5" font-size="8" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">CV</text>
+                                        <rect x="6" y="32" width="20" height="2" rx="0.4" fill="#FFFFFF" fill-opacity="0.9"/>
+                                        <circle cx="8" cy="38" r="1.2" fill="#FFFFFF" fill-opacity="0.7"/>
+                                        <rect x="12" y="37" width="21" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.8"/>
+                                        <circle cx="8" cy="43" r="1.2" fill="#FFFFFF" fill-opacity="0.7"/>
+                                        <rect x="12" y="42" width="19" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.8"/>
+                                        <circle cx="8" cy="48" r="1.2" fill="#FFFFFF" fill-opacity="0.7"/>
+                                        <rect x="12" y="47" width="22" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.8"/>
+                                    </g>
+                                    
+                                    <rect x="6" y="60" width="18" height="2" rx="0.4" fill="#FFFFFF" fill-opacity="0.9"/>
+                                    <rect x="6" y="65" width="22" height="1.4" rx="0.3" fill="#FFFFFF" fill-opacity="0.8"/>
+                                    <rect x="6" y="67.5" width="26" height="2.2" rx="1.1" fill="#FFFFFF" fill-opacity="0.25"/>
+                                    <rect x="6" y="67.5" width="22" height="2.2" rx="1.1" fill="#FFFFFF"/>
+                                    
+                                    <rect x="6" y="72" width="18" height="1.4" rx="0.3" fill="#FFFFFF" fill-opacity="0.8"/>
+                                    <rect x="6" y="74.5" width="26" height="2.2" rx="1.1" fill="#FFFFFF" fill-opacity="0.25"/>
+                                    <rect x="6" y="74.5" width="18" height="2.2" rx="1.1" fill="#FFFFFF"/>
+                                    
+                                    <rect x="6" y="79" width="24" height="1.4" rx="0.3" fill="#FFFFFF" fill-opacity="0.8"/>
+                                    <rect x="6" y="81.5" width="26" height="2.2" rx="1.1" fill="#FFFFFF" fill-opacity="0.25"/>
+                                    <rect x="6" y="81.5" width="24" height="2.2" rx="1.1" fill="#FFFFFF"/>
+                                    
+                                    <rect x="6" y="93" width="22" height="2" rx="0.4" fill="#FFFFFF" fill-opacity="0.9"/>
+                                    <rect x="6" y="98" width="26" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.9"/>
+                                    <rect x="6" y="101" width="22" height="1.4" rx="0.3" fill="#FFFFFF" fill-opacity="0.6"/>
+                                    <rect x="6" y="105" width="24" height="1.6" rx="0.4" fill="#FFFFFF" fill-opacity="0.9"/>
+                                    <rect x="6" y="108" width="20" height="1.4" rx="0.3" fill="#FFFFFF" fill-opacity="0.6"/>
+                                    
+                                    <!-- Right Main Body -->
+                                    <rect x="44" y="11" width="54" height="4.5" rx="1" fill="#241A17"/>
+                                    <rect x="44" y="17.5" width="38" height="2.5" rx="0.6" fill="#681313"/>
+                                    <line x1="44" y1="23" x2="114" y2="23" stroke="#E5D8D4" stroke-width="0.6"/>
+                                    
+                                    <rect x="44" y="27" width="28" height="2.6" rx="0.5" fill="#681313"/>
+                                    <rect x="44" y="32" width="70" height="1.8" rx="0.4" fill="#888888"/>
+                                    <rect x="44" y="35.5" width="65" height="1.8" rx="0.4" fill="#A0A0A0"/>
+                                    <rect x="44" y="39" width="48" height="1.8" rx="0.4" fill="#B8B8B8"/>
+                                    
+                                    <rect x="44" y="47" width="38" height="2.6" rx="0.5" fill="#681313"/>
+                                    <line x1="47" y1="54" x2="47" y2="92" stroke="#E5D8D4" stroke-width="0.8"/>
+                                    
+                                    <circle cx="47" cy="56" r="1.6" fill="#681313"/>
+                                    <rect x="52" y="54" width="38" height="2.2" rx="0.4" fill="#241A17"/>
+                                    <rect x="96" y="54" width="18" height="2" rx="0.4" fill="#888888"/>
+                                    <rect x="52" y="58" width="60" height="1.5" rx="0.3" fill="#888888"/>
+                                    <rect x="52" y="61" width="54" height="1.5" rx="0.3" fill="#A0A0A0"/>
+                                    
+                                    <circle cx="47" cy="70" r="1.6" fill="#681313"/>
+                                    <rect x="52" y="68" width="34" height="2.2" rx="0.4" fill="#241A17"/>
+                                    <rect x="98" y="68" width="16" height="2" rx="0.4" fill="#888888"/>
+                                    <rect x="52" y="72" width="58" height="1.5" rx="0.3" fill="#888888"/>
+                                    <rect x="52" y="75" width="50" height="1.5" rx="0.3" fill="#A0A0A0"/>
+                                    
+                                    <rect x="44" y="86" width="30" height="2.6" rx="0.5" fill="#681313"/>
+                                    <rect x="44" y="91" width="70" height="17" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.18)" stroke-width="0.6"/>
+                                    <rect x="48" y="94" width="32" height="2" rx="0.4" fill="#681313"/>
+                                    <rect x="48" y="98" width="62" height="1.4" rx="0.3" fill="#777777"/>
+                                    <rect x="48" y="101" width="52" height="1.4" rx="0.3" fill="#999999"/>
+                                    
+                                    <rect x="44" y="111" width="70" height="17" rx="2" fill="#FAF1ED" stroke="rgba(104,19,19,0.18)" stroke-width="0.6"/>
+                                    <rect x="48" y="114" width="34" height="2" rx="0.4" fill="#681313"/>
+                                    <rect x="48" y="118" width="60" height="1.4" rx="0.3" fill="#777777"/>
+                                    <rect x="48" y="121" width="48" height="1.4" rx="0.3" fill="#999999"/>
+                                </svg>
+                            </div>
+                            <span class="template-card-name">Creative</span>
+                        </div>
+
                     </div>
                 </section>
 
-                <section class="optimizer-setting">
-                    <h3>Font</h3>
+
+
+
+
+                <!-- 3. COLOR PALETTE (LIVE THEME) -->
+                <section class="optimizer-setting color-palette-section">
+                    <h3 class="setting-title">Color Palette</h3>
+
+                    <div class="color-palette-widget">
+                        <!-- Dropdown: Number of colors -->
+                        <div class="setting-row color-count-row">
+                            <label for="colorCountSelect" class="setting-sublabel">Number of colors</label>
+                            <select id="colorCountSelect" class="ref-input optimizer-select">
+                                <option value="1">1 Color (Primary Accent)</option>
+                                <option value="2">2 Colors (Primary & Secondary)</option>
+                                <option value="3">3 Colors (Primary, Secondary, Highlight)</option>
+                            </select>
+                        </div>
+
+                        <!-- Picking guide indicator -->
+                        <div class="color-picking-target" id="colorPickingTarget">
+                            <span class="picking-badge" id="pickingBadge">Step 1</span>
+                            <span class="picking-text" id="pickingTargetText">Select <strong>Color 1 (Primary Accent)</strong></span>
+                        </div>
+
+                        <!-- Color Wheel + Confirm Row -->
+                        <div class="color-wheel-row">
+                            <label class="color-wheel-btn" for="resume-color" title="Click to choose custom color from color wheel">
+                                <input type="color" id="resume-color" value="#681313" class="native-color-input">
+                                <div class="color-wheel-circle"></div>
+                            </label>
+
+                            <div class="active-color-tag">
+                                <span class="active-color-swatch" id="activeColorSwatch" style="background-color: #681313;"></span>
+                                <span class="active-color-hex" id="activeColorHex">#681313</span>
+                            </div>
+
+                            <!-- Confirm Button -->
+                            <button type="button" class="btn-confirm-color" id="btnConfirmColor" title="Confirm this color and add it to your palette">
+                                ✓ Confirm Color
+                            </button>
+                        </div>
+
+                        <!-- Quick presets -->
+                        <div class="color-swatches-grid" id="colorPresetSwatches">
+                            <button type="button" class="swatch-btn active" data-color="#681313" style="background:#681313;" title="CareerAI Maroon"></button>
+                            <button type="button" class="swatch-btn" data-color="#1D3557" style="background:#1D3557;" title="Navy Blue"></button>
+                            <button type="button" class="swatch-btn" data-color="#2A6F4E" style="background:#2A6F4E;" title="Forest Green"></button>
+                            <button type="button" class="swatch-btn" data-color="#2B2D42" style="background:#2B2D42;" title="Charcoal"></button>
+                            <button type="button" class="swatch-btn" data-color="#5E2750" style="background:#5E2750;" title="Royal Plum"></button>
+                            <button type="button" class="swatch-btn" data-color="#B85D19" style="background:#B85D19;" title="Warm Amber"></button>
+                            <button type="button" class="swatch-btn" data-color="#0F4C5C" style="background:#0F4C5C;" title="Deep Teal"></button>
+                        </div>
+
+                        <!-- Confirmed Colors Section (Appears Below) -->
+                        <div class="confirmed-palette-container" id="confirmedPaletteContainer">
+                            <div class="palette-header-row">
+                                <span class="palette-subheading">Selected Palette</span>
+                                <span class="palette-counter" id="paletteCounter">1 / 1 ready ✓</span>
+                            </div>
+                            <div class="confirmed-swatches-list" id="confirmedSwatchesList">
+                                <!-- Slots dynamically populated by script.js -->
+                            </div>
+                        </div>
+
+                        <!-- Apply Selected Colors Option -->
+                        <div class="apply-colors-wrapper">
+                            <button type="button" class="btn-apply-colors" id="btnApplyColors">
+                                🎨 Apply Selected Colors
+                            </button>
+                            <div class="apply-status-text" id="applyStatusText" style="display: none;"></div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+                <!-- 4. FONT SETTINGS -->
+
+                <section class="optimizer-setting font-setting-section">
+
+                    <h3 class="setting-title">Font Settings</h3>
+
+
 
                     <div class="setting-row">
+
                         <label for="current-font">Current font</label>
-                        <div id="current-font" class="current-font-demo">CareerAI</div>
+
+                        <div id="current-font" class="current-font-demo">Arial</div>
+
                     </div>
 
+
+
                     <div class="setting-row">
+
                         <label for="font-choice">Choose font</label>
-                        <select id="font-choice">
-                            <option>Arial</option>
-                            <option>Georgia</option>
-                            <option>Times New Roman</option>
-                            <option>Verdana</option>
-                            <option>Trebuchet MS</option>
-                            <option>Courier New</option>
-                            <option>Garamond</option>
-                            <option>Tahoma</option>
-                            <option>Calibri</option>
-                            <option>Helvetica</option>
-                        </select>
-                    </div>
-                </section>
 
-                <section class="optimizer-setting">
-                    <h3>Size of font</h3>
+                        <select id="font-choice" class="ref-input optimizer-select">
+
+                            <option value="Arial" selected>Arial</option>
+
+                            <option value="Georgia">Georgia</option>
+
+                            <option value="Times New Roman">Times New Roman</option>
+
+                            <option value="Verdana">Verdana</option>
+
+                            <option value="Trebuchet MS">Trebuchet MS</option>
+
+                            <option value="Courier New">Courier New</option>
+
+                            <option value="Garamond">Garamond</option>
+
+                            <option value="Tahoma">Tahoma</option>
+
+                            <option value="Calibri">Calibri</option>
+
+                            <option value="Helvetica">Helvetica</option>
+
+                        </select>
+
+                    </div>
+
+
 
                     <div class="setting-row">
+
                         <label for="font-section">Choose a section</label>
-                        <select id="font-section">
+
+                        <select id="font-section" class="ref-input optimizer-select">
+
                             <option>Heading</option>
+
                             <option>Subheading</option>
+
                             <option>Body</option>
+
                             <option>Skills</option>
+
                             <option>Experience</option>
+
                             <option>Education</option>
+
                             <option>Contact</option>
+
                         </select>
+
                     </div>
 
+
+
                     <div class="setting-row">
+
                         <label for="font-size">Font size</label>
-                        <select id="font-size">
+
+                        <select id="font-size" class="ref-input optimizer-select">
+
                             <option>12px</option>
+
                             <option>14px</option>
+
                             <option>16px</option>
+
                             <option>18px</option>
+
                             <option>20px</option>
+
                             <option>22px</option>
+
                             <option>24px</option>
+
                             <option>28px</option>
+
                             <option>32px</option>
+
                             <option>36px</option>
-                        </select>
-                    </div>
-                </section>
 
-                <section class="optimizer-setting">
-                    <div class="setting-row">
-                        <label for="current-theme">Current theme</label>
-                        <select id="current-theme">
-                            <option>Classic</option>
-                            <option>Modern</option>
-                            <option>Minimal</option>
                         </select>
+
                     </div>
 
-                    <div class="setting-row">
-                        <label for="edit-theme">Edit theme</label>
-                        <select id="edit-theme">
-                            <option>Casual</option>
-                            <option>Professional</option>
-                            <option>Creative</option>
-                            <option>Minimal</option>
-                            <option>Modern</option>
-                            <option>Elegant</option>
-                        </select>
-                    </div>
                 </section>
+
+
+
+
+
+                <!-- 5. ATS SCORE RECTANGLE (Loads dynamically upon resume upload) -->
+
+                <div class="sidebar-ats-box" id="sidebarAtsBox" style="display: none;">
+
+                    <span class="sidebar-ats-label">ATS Score:</span>
+
+                    <strong class="sidebar-ats-value" id="sidebarAtsScoreVal">--/100</strong>
+
+                </div>
+
+
+
+                </div>
+
+
+
             </aside>
 
-            <section class="optimizer-content">
-                <label for="resume-file" class="upload-resume">
-                    <span id="uploadText">Upload files</span>
-                    <small>PDF or Word doc</small>
-                </label>
 
-                <input type="file" id="resume-file" accept=".pdf" hidden>
 
-                <button class="download-resume" type="button">Download</button>
+
+
+
+
+            <!-- =====================================
+
+                 RIGHT CONTENT
+
+            ====================================== -->
+
+
+
+            <!-- =====================================
+
+                 RIGHT CONTENT: BIG EDITABLE RESUME WORKSPACE
+
+            ====================================== -->
+
+            <section class="optimizer-content" id="optimizerWorkspace">
+
+
+
+                <!-- UPLOAD FILE DROPZONE -->
+
+                <div class="upload-dropzone-wrapper" id="dropzoneWrapper">
+
+
+
+                    <label for="resume-file" class="upload-resume" id="uploadResumeLabel">
+
+                        <div class="upload-icon-circle">
+
+                            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+
+                                <polyline points="17 8 12 3 7 8"></polyline>
+
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+
+                            </svg>
+
+                        </div>
+
+
+
+                        <span>Upload your Resume</span>
+
+
+
+                        <small>Drop your PDF, Word doc (.docx), or text file here, or click to browse</small>
+
+                    </label>
+
+
+
+                    <input type="file" id="resume-file" accept=".pdf,.doc,.docx,.txt" hidden>
+
+
+
+                    <div class="sample-resume-prompt">
+
+                        <span>Want to test or edit right away?</span>
+
+                        <button type="button" class="btn-sample-resume" id="btnLoadSample">
+
+                            📄 Load Sample Resume to Edit
+
+                        </button>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+                <!-- BIG RESUME WORKSPACE (Revealed upon upload or sample load) -->
+
+                <div class="resume-editor-container" id="resumeEditorContainer" style="display: none;">
+
+
+
+                    <!-- WORKSPACE TOOLBAR -->
+
+                    <div class="resume-toolbar">
+
+
+
+                        <div class="toolbar-file-meta">
+
+                            <span class="file-icon">📄</span>
+
+                            <div class="file-info-text">
+
+                                <strong id="activeFileName">resume.pdf</strong>
+
+                                <span id="activeFileSize">145 KB</span>
+
+                            </div>
+
+                            <span class="badge-live-edit">✏️ Click any text to edit directly</span>
+
+                        </div>
+
+
+
+                        <div class="toolbar-actions">
+
+
+
+                            <!-- Toggle View (if PDF uploaded) -->
+
+                            <div class="view-toggle-group" id="viewToggleGroup" style="display: none;">
+
+                                <button type="button" class="btn-toggle active" id="btnViewEditable" title="View & edit document text">
+
+                                    ✏️ Edit Canvas
+
+                                </button>
+
+                                <button type="button" class="btn-toggle" id="btnViewOriginal" title="View original uploaded PDF">
+
+                                    📑 Original PDF
+
+                                </button>
+
+                            </div>
+
+
+
+                            <!-- Zoom controls -->
+
+                            <div class="zoom-controls">
+
+                                <button type="button" class="btn-zoom" id="btnZoomOut" title="Zoom Out">−</button>
+
+                                <span id="zoomLevelText">100%</span>
+
+                                <button type="button" class="btn-zoom" id="btnZoomIn" title="Zoom In">+</button>
+
+                            </div>
+
+
+
+                            <!-- Change file button -->
+
+                            <button type="button" class="btn-secondary-action" id="btnChangeFile">
+
+                                🔄 Replace File
+
+                            </button>
+
+
+
+                            <!-- Download Button -->
+
+                            <button type="button" class="download-resume" id="btnDownloadResume" style="position: static; margin: 0;">
+
+                                📥 Print / Save PDF
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <!-- ORIGINAL PDF VIEWER (Tab 2) -->
+
+                    <div class="original-pdf-viewer" id="originalPdfViewer" style="display: none;">
+
+                        <iframe id="pdfIframe" src="" title="Uploaded PDF Preview"></iframe>
+
+                    </div>
+
+
+
+
+
+                    <!-- BIG EDITABLE RESUME SHEET (Tab 1) -->
+
+                    <div class="resume-canvas-scroller" id="resumeCanvasScroller">
+
+
+
+                        <div class="resume-sheet theme-modern" id="resumeSheet" style="--resume-accent: #8b0000; --resume-font: 'Arial', sans-serif;">
+
+
+
+                            <!-- RESUME HEADER -->
+
+                            <header class="sheet-header">
+
+                                <div class="header-name-row">
+
+                                    <!-- Optional Profile Photo (Toggled by Include Profile Image) -->
+
+                                    <div class="resume-avatar-container" id="resumeAvatarContainer" style="display: none;">
+
+                                        <img src="2.jpeg" alt="Profile" id="resumeSheetAvatar" class="resume-sheet-avatar">
+
+                                    </div>
+
+                                    <div class="header-text-col">
+
+                                        <h1 class="resume-name" contenteditable="true" spellcheck="false" data-section="Heading" title="Click to edit name">
+
+                                            ALEXANDER WILLIAM SMITH
+
+                                        </h1>
+
+                                        <div class="resume-tagline" contenteditable="true" spellcheck="false" data-section="Subheading" title="Click to edit title">
+
+                                            Senior Software Engineer &amp; Full-Stack Architect
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="resume-contact-bar" data-section="Contact" title="Click to edit contact details">
+                                    <span class="contact-item" contenteditable="true" spellcheck="false" title="Click to edit email">📧 alex.smith@email.com</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item" contenteditable="true" spellcheck="false" title="Click to edit phone">📱 +1 (555) 456-7890</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item" contenteditable="true" spellcheck="false" title="Click to edit location">📍 San Francisco, CA</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item" contenteditable="true" spellcheck="false" title="Click to edit LinkedIn">🔗 linkedin.com/in/alexsmith</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item" contenteditable="true" spellcheck="false" title="Click to edit GitHub">💻 github.com/alexsmith</span>
+                                </div>
+                            </header>
+
+
+
+
+
+                            <!-- SECTION: PROFESSIONAL SUMMARY -->
+
+                            <section class="sheet-section section-summary">
+
+                                <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+
+                                    PROFESSIONAL SUMMARY
+
+                                </h2>
+
+                                <div class="sheet-section-body" contenteditable="true" spellcheck="false" data-section="Body">
+
+                                    Results-driven and innovative Software Engineer with 4+ years of comprehensive experience architecting high-scalability web applications and microservices. Proven expertise in modern JavaScript frameworks, cloud infrastructure, and database optimization. Dedicated to writing clean, maintainable code and mentoring junior developers to achieve engineering excellence.
+
+                                </div>
+
+                            </section>
+
+
+
+
+
+                            <!-- SECTION: WORK EXPERIENCE -->
+
+                            <section class="sheet-section section-experience">
+
+                                <div class="section-title-row">
+
+                                    <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+
+                                        WORK EXPERIENCE
+
+                                    </h2>
+
+                                    <button type="button" class="btn-add-entry" id="btnAddExperience" title="Add another job entry">+ Add Role</button>
+
+                                </div>
+
+
+
+                                <div class="experience-list" id="experienceList">
+
+
+
+                                    <div class="experience-item">
+
+                                        <div class="exp-header-row">
+
+                                            <strong class="exp-role" contenteditable="true" spellcheck="false" data-section="Experience">Lead Software Engineer</strong>
+
+                                            <span class="exp-dates" contenteditable="true" spellcheck="false" data-section="Experience">2022 — Present</span>
+
+                                        </div>
+
+                                        <div class="exp-company-row">
+
+                                            <span class="exp-company" contenteditable="true" spellcheck="false" data-section="Experience">TechVentures Global Inc.</span>
+
+                                            <span class="exp-location" contenteditable="true" spellcheck="false" data-section="Experience">San Francisco, CA</span>
+
+                                        </div>
+
+                                        <ul class="exp-bullets" data-section="Body">
+
+                                            <li contenteditable="true" spellcheck="false" title="Click to edit bullet point">Spearheaded transition from monolith to event-driven microservices architecture, boosting transaction throughput by 42%.</li>
+
+                                            <li contenteditable="true" spellcheck="false" title="Click to edit bullet point">Engineered real-time analytics pipeline using Node.js, WebSockets, and Redis, serving over 1.2M daily active users.</li>
+
+                                            <li contenteditable="true" spellcheck="false" title="Click to edit bullet point">Mentored 8 associate software engineers and introduced automated CI/CD testing suites reducing production rollback incidents by 65%.</li>
+
+                                        </ul>
+
+                                    </div>
+
+
+
+                                    <div class="experience-item">
+
+                                        <div class="exp-header-row">
+
+                                            <strong class="exp-role" contenteditable="true" spellcheck="false" data-section="Experience">Full-Stack Software Engineer</strong>
+
+                                            <span class="exp-dates" contenteditable="true" spellcheck="false" data-section="Experience">2020 — 2022</span>
+
+                                        </div>
+
+                                        <div class="exp-company-row">
+
+                                            <span class="exp-company" contenteditable="true" spellcheck="false" data-section="Experience">InnovateX Labs</span>
+
+                                            <span class="exp-location" contenteditable="true" spellcheck="false" data-section="Experience">Austin, TX</span>
+
+                                        </div>
+
+                                        <ul class="exp-bullets" data-section="Body">
+
+                                            <li contenteditable="true" spellcheck="false" title="Click to edit bullet point">Developed responsive front-end customer portals with React, TypeScript, and Tailwind CSS, increasing user onboarding conversion by 28%.</li>
+
+                                            <li contenteditable="true" spellcheck="false" title="Click to edit bullet point">Built RESTful APIs and PostgreSQL schema optimizations that trimmed average endpoint response latencies from 320ms to 75ms.</li>
+
+                                        </ul>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </section>
+
+
+
+
+
+                            <!-- SECTION: TECHNICAL SKILLS -->
+
+                            <section class="sheet-section section-skills">
+
+                                <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+
+                                    TECHNICAL SKILLS
+
+                                </h2>
+
+                                <div class="skills-grid" data-section="Skills">
+
+                                    <p contenteditable="true" spellcheck="false" title="Click to edit skill group"><strong>Languages:</strong> JavaScript (ES6+), TypeScript, Python, Java, SQL, HTML5, CSS3/Sass</p>
+
+                                    <p contenteditable="true" spellcheck="false" title="Click to edit skill group"><strong>Frameworks &amp; Libraries:</strong> React, Next.js, Node.js, Express, Vue.js, Redux, Tailwind CSS</p>
+
+                                    <p contenteditable="true" spellcheck="false" title="Click to edit skill group"><strong>Databases &amp; Cloud:</strong> PostgreSQL, MongoDB, Redis, AWS (S3, EC2, Lambda), Docker, Kubernetes, CI/CD</p>
+
+                                    <p contenteditable="true" spellcheck="false" title="Click to edit skill group"><strong>Developer Tools:</strong> Git, GitHub Actions, Jest, Postman, Webpack, Vite, Figma</p>
+
+                                </div>
+
+                            </section>
+
+
+
+
+
+                            <!-- SECTION: EDUCATION -->
+
+                            <section class="sheet-section section-education">
+
+                                <div class="section-title-row">
+
+                                    <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+
+                                        EDUCATION
+
+                                    </h2>
+
+                                    <button type="button" class="btn-add-entry" id="btnAddEducation" title="Add another education entry">+ Add Degree</button>
+
+                                </div>
+
+
+
+                                <div class="education-list" id="educationList">
+
+                                    <div class="education-item">
+
+                                        <div class="exp-header-row">
+
+                                            <strong class="edu-degree" contenteditable="true" spellcheck="false" data-section="Education">Bachelor of Science in Computer Science</strong>
+
+                                            <span class="edu-dates" contenteditable="true" spellcheck="false" data-section="Education">2016 — 2020</span>
+
+                                        </div>
+
+                                        <div class="exp-company-row">
+
+                                            <span class="edu-school" contenteditable="true" spellcheck="false" data-section="Education">Stanford University</span>
+
+                                            <span class="edu-gpa" contenteditable="true" spellcheck="false" data-section="Education">GPA: 3.88 / 4.0 • Magna Cum Laude</span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+
+
+
+
+                            <!-- SECTION: KEY PROJECTS -->
+
+                            <section class="sheet-section section-projects">
+
+                                <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+
+                                    KEY PROJECTS &amp; ACHIEVEMENTS
+
+                                </h2>
+
+                                <div class="projects-list" data-section="Body">
+
+                                    <p contenteditable="true" spellcheck="false" title="Click to edit project details"><strong>AI Career Platform &amp; Voice Guide:</strong> Architected responsive career platform featuring voice mock interviews, dynamic resume optimization, and ATS parsing algorithms with 95%+ precision.</p>
+
+                                    <p contenteditable="true" spellcheck="false" title="Click to edit project details"><strong>Distributed Task Queue Engine:</strong> Engineered a lightweight pub/sub distributed task scheduling engine handling 10,000+ jobs/sec with automatic dead-letter queue retries.</p>
+
+                                </div>
+
+                            </section>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                <!-- BOTTOM RIGHT: VIEW DETAILED ATS REPORT BUTTON & SEMICIRCLE SCORE BOX -->
+                <div class="optimizer-bottom-actions" id="optimizerBottomActions" style="display: none;">
+                    <a href="ats.html" class="view-ats-reports-btn" id="btnViewAtsReports">
+                        View Detailed ATS Report &rarr;
+                    </a>
+
+                    <div class="ats-semicircle-box" id="bottomAtsSemicircleBox">
+                        <span class="ats-semicircle-title">ATS Compatibility Score</span>
+
+                        <div class="semicircle-gauge-container">
+                            <svg class="semicircle-gauge-svg" viewBox="0 0 240 135" aria-hidden="true">
+                                <!-- Background Track -->
+                                <path class="semicircle-gauge-track" d="M 30,120 A 90,90 0 0,1 210,120"></path>
+                                <!-- Animated Progress Arc -->
+                                <path class="semicircle-gauge-fill" id="atsSemicircleProgress" d="M 30,120 A 90,90 0 0,1 210,120"></path>
+                            </svg>
+
+                            <div class="semicircle-gauge-center">
+                                <div class="semicircle-score-row">
+                                    <span class="semicircle-score-val" id="atsSemicircleVal">0</span>
+                                    <span class="semicircle-score-total">/100</span>
+                                </div>
+                                <span class="semicircle-score-badge" id="atsSemicircleBadge">Analyzing...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
+
+
         </div>
+
+
+
     </main>
 
-    <div id="resumeMessage" style="margin-top:15px;"></div>
 
-    <div id="resumeResult" style="display:none; margin-top:20px;">
-        <h2>Resume Analysis</h2>
-        <p id="resumeScore"></p>
-        <div id="atsReport"></div>
-        <div id="resumeSummary"></div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+
+
+        <div class="footer-top">
+
+
+
+            <div class="footer-brand">
+
+                <a href="home.html">
+
+                    <img src="logoo.png" alt="CareerAI Logo" class="footer-logo-img">
+
+                </a>
+
+                <p>
+
+                    Your dedicated AI-powered career companion. Helping students, professionals build resumes, optimize them, make them ATS friendly, and finding the right opportunities for them.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="footer-col">
+
+                <h4>Navigation</h4>
+
+                <ul>
+
+                    <li><a href="home.html">Home</a></li>
+
+                    <li><a href="dashboard.html">Dashboard</a></li>
+
+                    <li><a href="profile.html">My Profile</a></li>
+
+                    <li><a href="login.html">Logout</a></li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="footer-col">
+
+                <h4>Tools</h4>
+
+                <ul>
+
+                    <li><a href="interview.html">AI Interview</a></li>
+
+                    <li><a href="resume.html">Resume Optimizer</a></li>
+
+                    <li><a href="ats.html">ATS Score Checker</a></li>
+
+                    <li><a href="dashboard.html">Job Matcher</a></li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="footer-col">
+
+                <h4>Contact & Help</h4>
+
+                <ul>
+
+                    <li><a href="mailto:support@careerai.com">support@careerai.com</a></li>
+
+                    <li><a href="profile.html#settings">Account Settings</a></li>
+
+                    <li><a href="profile.html#contact">Help Center</a></li>
+
+                </ul>
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p class="footer-copy">&copy; 2026 CareerAI.</p>
+
+            <p class="footer-tagline">Build your career with confidence.</p>
+
+            <p class="footer-subtext">Designed with precision for students and professionals.</p>
+
+        </div>
+
+
+
+    </footer>
+
+
+
+    <script src="script.js?v=20261025_editable"></script>
+
+
+
+    <!-- ================= CAMERA CAPTURE MODAL ================= -->
+
+    <div id="cameraCaptureModal" class="ref-modal-overlay" style="display: none; z-index: 9999;">
+
+        <div class="ref-modal" style="max-width: 440px; text-align: center;">
+
+            <button type="button" class="ref-modal-close" id="btnCloseCameraModal" aria-label="Close modal">&times;</button>
+
+            <h3 style="font-family: 'Playfair Display', Georgia, serif; color: #681313; font-size: 22px; margin-top: 0; margin-bottom: 8px;">Take Profile Photo</h3>
+
+            <p style="font-size: 13px; color: #665; margin-bottom: 16px;">Position your face in the camera view and click Snap Photo.</p>
+
+            
+
+            <div style="position: relative; width: 100%; height: 260px; background: #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 16px; display: flex; align-items: center; justify-content: center;">
+
+                <video id="cameraVideo" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover;"></video>
+
+                <div id="cameraLoadingHint" style="position: absolute; color: #fff; font-size: 13px; font-weight: 600;">Requesting camera access...</div>
+
+            </div>
+
+
+
+            <div style="display: flex; justify-content: center; gap: 12px;">
+
+                <button type="button" class="photo-opt-btn primary" id="btnSnapPhoto">📸 Snap Photo</button>
+
+                <button type="button" class="photo-opt-btn secondary" id="btnCancelCamera">Cancel</button>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <script>
-        "use strict";
 
-        function escapeHtml(value) {
-            return String(value == null ? "" : value).replace(/[&<>"']/g, function (char) {
-                return {
-                    "&": "&amp;",
-                    "<": "&lt;",
-                    ">": "&gt;",
-                    '"': "&quot;",
-                    "'": "&#39;"
-                }[char];
-            });
-        }
-
-        const API_BASE = "http://127.0.0.1:8000";
-
-        const fileInput = document.getElementById("resume-file");
-        const uploadText = document.getElementById("uploadText");
-        const message = document.getElementById("resumeMessage");
-        const resultBox = document.getElementById("resumeResult");
-        const scoreText = document.getElementById("resumeScore");
-        const summaryText = document.getElementById("resumeSummary");
-        const atsReportBox = document.getElementById("atsReport");
-
-        const token = localStorage.getItem("careerai_token");
-
-        if (!token) {
-            window.location.href = "login.html";
-        }
-
-        function renderList(value) {
-            if (!Array.isArray(value) || value.length === 0) {
-                return "<p>None reported.</p>";
-            }
-
-            return "<ul>" + value.map(function (item) {
-                if (item && typeof item === "object") {
-                    return "<li>" + Object.entries(item).map(function ([key, val]) {
-                        const displayValue = Array.isArray(val)
-                            ? val.join(", ")
-                            : String(val == null ? "" : val);
-
-                        return "<strong>" +
-                            escapeHtml(key.replace(/_/g, " ")) +
-                            ":</strong> " +
-                            escapeHtml(displayValue);
-                    }).join("<br>") + "</li>";
-                }
-
-                return "<li>" + escapeHtml(item) + "</li>";
-            }).join("") + "</ul>";
-        }
-
-        function renderReport(report) {
-            atsReportBox.innerHTML = `
-                <section class="resume-result-section">
-                    <h3>ATS Analysis</h3>
-
-                    <p><strong>Overall Score:</strong>
-                        ${escapeHtml(report.overall_score ?? "Not available")} / 100
-                    </p>
-
-                    <p><strong>Keyword Match:</strong>
-                        ${report.keyword_match_score == null
-                            ? "Not available"
-                            : escapeHtml(report.keyword_match_score) + " / 100"}
-                    </p>
-
-                    <p><strong>Formatting Score:</strong>
-                        ${report.formatting_score == null
-                            ? "Not available"
-                            : escapeHtml(report.formatting_score) + " / 100"}
-                    </p>
-
-                    <h4>Summary</h4>
-                    <p>${escapeHtml(report.summary_text || "No summary provided.")}</p>
-
-                    <h4>Missing Keywords</h4>
-                    ${renderList(report.missing_keywords)}
-
-                    <h4>Strengths</h4>
-                    ${renderList(report.strengths)}
-
-                    <h4>Suggested Corrections</h4>
-                    ${renderList(report.corrections)}
-                </section>
-            `;
-        }
-
-        fileInput.addEventListener("change", async function () {
-            const file = fileInput.files[0];
-
-            if (!file) return;
-
-            if (file.type !== "application/pdf" &&
-                !file.name.toLowerCase().endsWith(".pdf")) {
-                message.textContent = "Please upload a PDF file.";
-                fileInput.value = "";
-                return;
-            }
-
-            if (!token) return;
-
-            uploadText.textContent = file.name;
-            message.textContent = "Uploading and analyzing your resume...";
-            resultBox.style.display = "none";
-            atsReportBox.innerHTML = "";
-            summaryText.innerHTML = "";
-            scoreText.textContent = "";
-
-            const formData = new FormData();
-            formData.append("file", file);
-
-            try {
-                const response = await fetch(API_BASE + "/resumes/upload", {
-                    method: "POST",
-                    headers: {
-                        "Authorization": "Bearer " + token
-                    },
-                    body: formData
-                });
-
-                let data;
-
-                try {
-                    data = await response.json();
-                } catch {
-                    data = null;
-                }
-
-                console.log("Resume API response:", data);
-
-                if (!response.ok) {
-                    throw new Error(
-                        data && data.detail
-                            ? data.detail
-                            : "Resume upload failed (" + response.status + ")."
-                    );
-                }
-
-                if (!data || data.id == null) {
-                    throw new Error("Upload succeeded, but the server did not return a resume ID.");
-                }
-
-                const resumeId = String(data.id);
-
-                localStorage.setItem("careerai_resume_id", resumeId);
-                localStorage.setItem("careerai_last_resume_id", resumeId);
-
-                message.textContent = "Resume uploaded. Retrieving your ATS report...";
-
-                const reportResponse = await fetch(
-                    API_BASE + "/reports/resume/" + encodeURIComponent(resumeId),
-                    {
-                        method: "GET",
-                        headers: {
-                            "Authorization": "Bearer " + token
-                        }
-                    }
-                );
-
-                if (!reportResponse.ok) {
-                    let detail = "";
-
-                    try {
-                        const errorData = await reportResponse.json();
-                        detail = errorData.detail || "";
-                    } catch {
-                        // The response may not contain JSON.
-                    }
-
-                    throw new Error(
-                        detail ||
-                        "The resume uploaded, but its ATS report is not available yet (HTTP " +
-                        reportResponse.status + ")."
-                    );
-                }
-
-                const payload = await reportResponse.json();
-                const report = Array.isArray(payload) ? payload[0] : payload;
-
-                if (!report || typeof report !== "object") {
-                    throw new Error("The server did not return an ATS report for this resume.");
-                }
-
-                console.log("ATS report response:", report);
-
-                renderReport(report);
-
-                resultBox.style.display = "block";
-                scoreText.textContent = "ATS analysis completed successfully.";
-
-                message.textContent = "Analysis complete! Opening your ATS dashboard...";
-
-                // Keep the saved resume ID so ats.html can load the same report.
-                localStorage.setItem("careerai_resume_id", resumeId);
-                localStorage.setItem("careerai_last_resume_id", resumeId);
-
-                // Redirect only after the report has been retrieved successfully.
-                window.location.href = "ats.html";
-
-            } catch (error) {
-                console.error("Resume upload/report error:", error);
-
-                message.textContent = "❌ " + (
-                    error.message || "Unable to complete resume analysis."
-                );
-
-                resultBox.style.display = "block";
-            }
-        });
-    </script>
 
 </body>
+
+
+
 </html>

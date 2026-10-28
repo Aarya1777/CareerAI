@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Optimizer | CareerAI</title>
+    <link rel="icon" type="image/png" href="logoo.png">
+    <link rel="stylesheet" href="style.css?v=20261025v">
+
+    
+    <!-- PDF.js library for PDF parsing & text extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        if (window.pdfjsLib) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        }
+    </script>
+</head>
+
+<body>
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+
+        <a href="home.html" class="logo">
+            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
+        </a>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="resume.html" class="active">Resume Optimizer</a>
+            <a href="profile.html">Profile</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="dashboard.html" class="back-btn" style="color: white; font-weight: 600; text-decoration: none; padding: 7px 16px; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; font-size: 14px;">← Back to Dashboard</a>
+        </div>
+
+    </nav>
+
+    <main class="optimizer-page">
+
+        <!-- PAGE HEADING -->
+        <h1 class="optimizer-title">
+            RESUME OPTIMIZER
+        </h1>
+
+
+        <!-- MAIN CONTENT -->
+        <div class="optimizer-layout">
+
+
+            <!-- =====================================
+                 LEFT SETTINGS PANEL
+            ====================================== -->
+
+            <aside class="optimizer-sidebar" id="optimizerSidebar">
+
+                <button type="button" class="mobile-settings-toggle" id="btnToggleSettings" aria-expanded="false">
+                    <span>🎨 Customize Style, Font &amp; Theme</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+
+                <div class="sidebar-collapsible-content" id="sidebarSettingsBody">
+
+                <h2>
+                    What would you like to<br>
+                    edit today?
+                </h2>
+
+
+                <!-- COLOR PALETTE -->
+
+                <section class="optimizer-setting">
+
+                    <h3>COLOR PALETTE</h3>
+
+
+                    <div class="setting-row">
+
+                        <label for="color-count">
+                            No. of colors
+                        </label>
+
+                        <select id="color-count">
+
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="resume-color">
+                            Choose color
+                        </label>
+
+                        <input
+                            type="color"
+                            id="resume-color"
+                            value="#8b0000"
+                        >
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- FONT -->
+
+                <section class="optimizer-setting">
+
+                    <h3>Font</h3>
+
+
+                    <div class="setting-row">
+
+                        <label for="current-font">
+                            Current font
+                        </label>
+
+                        <div
+                            id="current-font"
+                            class="current-font-demo"
+                        >
+                            Arial
+                        </div>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="font-choice">
+                            Choose font
+                        </label>
+
+                        <select id="font-choice">
+
+                            <option>Arial</option>
+                            <option>Georgia</option>
+                            <option>Times New Roman</option>
+                            <option>Verdana</option>
+                            <option>Trebuchet MS</option>
+                            <option>Courier New</option>
+                            <option>Garamond</option>
+                            <option>Tahoma</option>
+                            <option>Calibri</option>
+                            <option>Helvetica</option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- FONT SIZE -->
+
+                <section class="optimizer-setting">
+
+                    <h3>Size of font</h3>
+
+
+                    <div class="setting-row">
+
+                        <label for="font-section">
+                            Choose a section
+                        </label>
+
+                        <select id="font-section">
+
+                            <option>Heading</option>
+                            <option>Subheading</option>
+                            <option>Body</option>
+                            <option>Skills</option>
+                            <option>Experience</option>
+                            <option>Education</option>
+                            <option>Contact</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="setting-row">
+
+                        <label for="font-size">
+                            Font size
+                        </label>
+
+                        <select id="font-size">
+
+                            <option>12px</option>
+                            <option>14px</option>
+                            <option>16px</option>
+                            <option>18px</option>
+                            <option>20px</option>
+                            <option>22px</option>
+                            <option>24px</option>
+                            <option>28px</option>
+                            <option>32px</option>
+                            <option>36px</option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- THEME -->
+
+                <section class="optimizer-setting">
+
+                    <div class="setting-row">
+
+                        <label for="current-theme">
+                            Current theme
+                        </label>
+
+                        <select id="current-theme">
+
+                            <option>Classic</option>
+                            <option>Modern</option>
+                            <option>Minimal</option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- =====================================
+                 RIGHT CONTENT
+            ====================================== -->
+
+            <!-- =====================================
+                 RIGHT CONTENT: BIG EDITABLE RESUME WORKSPACE
+            ====================================== -->
+            <section class="optimizer-content" id="optimizerWorkspace">
+
+                <!-- UPLOAD FILE DROPZONE -->
+                <div class="upload-dropzone-wrapper" id="dropzoneWrapper">
+
+                    <label for="resume-file" class="upload-resume" id="uploadResumeLabel">
+                        <div class="upload-icon-circle">
+                            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                        </div>
+
+                        <span>Upload your Resume</span>
+
+                        <small>Drop your PDF, Word doc (.docx), or text file here, or click to browse</small>
+                    </label>
+
+                    <input type="file" id="resume-file" accept=".pdf,.doc,.docx,.txt" hidden>
+
+                    <div class="sample-resume-prompt">
+                        <span>Want to test or edit right away?</span>
+                        <button type="button" class="btn-sample-resume" id="btnLoadSample">
+                            📄 Load Sample Resume to Edit
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <!-- BIG RESUME WORKSPACE (Revealed upon upload or sample load) -->
+                <div class="resume-editor-container" id="resumeEditorContainer" style="display: none;">
+
+                    <!-- WORKSPACE TOOLBAR -->
+                    <div class="resume-toolbar">
+
+                        <div class="toolbar-file-meta">
+                            <span class="file-icon">📄</span>
+                            <div class="file-info-text">
+                                <strong id="activeFileName">resume.pdf</strong>
+                                <span id="activeFileSize">145 KB</span>
+                            </div>
+                            <span class="badge-live-edit">✏️ Click any text to edit directly</span>
+                        </div>
+
+                        <div class="toolbar-actions">
+
+                            <!-- Toggle View (if PDF uploaded) -->
+                            <div class="view-toggle-group" id="viewToggleGroup" style="display: none;">
+                                <button type="button" class="btn-toggle active" id="btnViewEditable" title="View & edit document text">
+                                    ✏️ Edit Canvas
+                                </button>
+                                <button type="button" class="btn-toggle" id="btnViewOriginal" title="View original uploaded PDF">
+                                    📑 Original PDF
+                                </button>
+                            </div>
+
+                            <!-- Zoom controls -->
+                            <div class="zoom-controls">
+                                <button type="button" class="btn-zoom" id="btnZoomOut" title="Zoom Out">−</button>
+                                <span id="zoomLevelText">100%</span>
+                                <button type="button" class="btn-zoom" id="btnZoomIn" title="Zoom In">+</button>
+                            </div>
+
+                            <!-- Change file button -->
+                            <button type="button" class="btn-secondary-action" id="btnChangeFile">
+                                🔄 Replace File
+                            </button>
+
+                            <!-- Download Button -->
+                            <button type="button" class="download-resume" id="btnDownloadResume" style="position: static; margin: 0;">
+                                📥 Print / Save PDF
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ORIGINAL PDF VIEWER (Tab 2) -->
+                    <div class="original-pdf-viewer" id="originalPdfViewer" style="display: none;">
+                        <iframe id="pdfIframe" src="" title="Uploaded PDF Preview"></iframe>
+                    </div>
+
+
+                    <!-- BIG EDITABLE RESUME SHEET (Tab 1) -->
+                    <div class="resume-canvas-scroller" id="resumeCanvasScroller">
+
+                        <div class="resume-sheet theme-modern" id="resumeSheet" style="--resume-accent: #8b0000; --resume-font: 'Arial', sans-serif;">
+
+                            <!-- RESUME HEADER -->
+                            <header class="sheet-header">
+                                <div class="header-name-row">
+                                    <h1 class="resume-name" contenteditable="true" spellcheck="false" data-section="Heading" title="Click to edit name">
+                                        ALEXANDER WILLIAM SMITH
+                                    </h1>
+                                    <div class="resume-tagline" contenteditable="true" spellcheck="false" data-section="Subheading" title="Click to edit title">
+                                        Senior Software Engineer &amp; Full-Stack Architect
+                                    </div>
+                                </div>
+
+                                <div class="resume-contact-bar" contenteditable="true" spellcheck="false" data-section="Contact" title="Click to edit contact details">
+                                    <span class="contact-item">📧 alex.smith@email.com</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item">📱 +1 (555) 456-7890</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item">📍 San Francisco, CA</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item">🔗 linkedin.com/in/alexsmith</span>
+                                    <span class="contact-sep">•</span>
+                                    <span class="contact-item">💻 github.com/alexsmith</span>
+                                </div>
+                            </header>
+
+
+                            <!-- SECTION: PROFESSIONAL SUMMARY -->
+                            <section class="sheet-section section-summary">
+                                <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+                                    PROFESSIONAL SUMMARY
+                                </h2>
+                                <div class="sheet-section-body" contenteditable="true" spellcheck="false" data-section="Body">
+                                    Results-driven and innovative Software Engineer with 4+ years of comprehensive experience architecting high-scalability web applications and microservices. Proven expertise in modern JavaScript frameworks, cloud infrastructure, and database optimization. Dedicated to writing clean, maintainable code and mentoring junior developers to achieve engineering excellence.
+                                </div>
+                            </section>
+
+
+                            <!-- SECTION: WORK EXPERIENCE -->
+                            <section class="sheet-section section-experience">
+                                <div class="section-title-row">
+                                    <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+                                        WORK EXPERIENCE
+                                    </h2>
+                                    <button type="button" class="btn-add-entry" id="btnAddExperience" title="Add another job entry">+ Add Role</button>
+                                </div>
+
+                                <div class="experience-list" id="experienceList">
+
+                                    <div class="experience-item">
+                                        <div class="exp-header-row">
+                                            <strong class="exp-role" contenteditable="true" spellcheck="false" data-section="Experience">Lead Software Engineer</strong>
+                                            <span class="exp-dates" contenteditable="true" spellcheck="false" data-section="Experience">2022 — Present</span>
+                                        </div>
+                                        <div class="exp-company-row">
+                                            <span class="exp-company" contenteditable="true" spellcheck="false" data-section="Experience">TechVentures Global Inc.</span>
+                                            <span class="exp-location" contenteditable="true" spellcheck="false" data-section="Experience">San Francisco, CA</span>
+                                        </div>
+                                        <ul class="exp-bullets" contenteditable="true" spellcheck="false" data-section="Body">
+                                            <li>Spearheaded transition from monolith to event-driven microservices architecture, boosting transaction throughput by 42%.</li>
+                                            <li>Engineered real-time analytics pipeline using Node.js, WebSockets, and Redis, serving over 1.2M daily active users.</li>
+                                            <li>Mentored 8 associate software engineers and introduced automated CI/CD testing suites reducing production rollback incidents by 65%.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="experience-item">
+                                        <div class="exp-header-row">
+                                            <strong class="exp-role" contenteditable="true" spellcheck="false" data-section="Experience">Full-Stack Software Engineer</strong>
+                                            <span class="exp-dates" contenteditable="true" spellcheck="false" data-section="Experience">2020 — 2022</span>
+                                        </div>
+                                        <div class="exp-company-row">
+                                            <span class="exp-company" contenteditable="true" spellcheck="false" data-section="Experience">InnovateX Labs</span>
+                                            <span class="exp-location" contenteditable="true" spellcheck="false" data-section="Experience">Austin, TX</span>
+                                        </div>
+                                        <ul class="exp-bullets" contenteditable="true" spellcheck="false" data-section="Body">
+                                            <li>Developed responsive front-end customer portals with React, TypeScript, and Tailwind CSS, increasing user onboarding conversion by 28%.</li>
+                                            <li>Built RESTful APIs and PostgreSQL schema optimizations that trimmed average endpoint response latencies from 320ms to 75ms.</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </section>
+
+
+                            <!-- SECTION: TECHNICAL SKILLS -->
+                            <section class="sheet-section section-skills">
+                                <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+                                    TECHNICAL SKILLS
+                                </h2>
+                                <div class="skills-grid" contenteditable="true" spellcheck="false" data-section="Skills">
+                                    <p><strong>Languages:</strong> JavaScript (ES6+), TypeScript, Python, Java, SQL, HTML5, CSS3/Sass</p>
+                                    <p><strong>Frameworks &amp; Libraries:</strong> React, Next.js, Node.js, Express, Vue.js, Redux, Tailwind CSS</p>
+                                    <p><strong>Databases &amp; Cloud:</strong> PostgreSQL, MongoDB, Redis, AWS (S3, EC2, Lambda), Docker, Kubernetes, CI/CD</p>
+                                    <p><strong>Developer Tools:</strong> Git, GitHub Actions, Jest, Postman, Webpack, Vite, Figma</p>
+                                </div>
+                            </section>
+
+
+                            <!-- SECTION: EDUCATION -->
+                            <section class="sheet-section section-education">
+                                <div class="section-title-row">
+                                    <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+                                        EDUCATION
+                                    </h2>
+                                    <button type="button" class="btn-add-entry" id="btnAddEducation" title="Add another education entry">+ Add Degree</button>
+                                </div>
+
+                                <div class="education-list" id="educationList">
+                                    <div class="education-item">
+                                        <div class="exp-header-row">
+                                            <strong class="edu-degree" contenteditable="true" spellcheck="false" data-section="Education">Bachelor of Science in Computer Science</strong>
+                                            <span class="edu-dates" contenteditable="true" spellcheck="false" data-section="Education">2016 — 2020</span>
+                                        </div>
+                                        <div class="exp-company-row">
+                                            <span class="edu-school" contenteditable="true" spellcheck="false" data-section="Education">Stanford University</span>
+                                            <span class="edu-gpa" contenteditable="true" spellcheck="false" data-section="Education">GPA: 3.88 / 4.0 • Magna Cum Laude</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                            <!-- SECTION: KEY PROJECTS -->
+                            <section class="sheet-section section-projects">
+                                <h2 class="sheet-section-title" contenteditable="true" spellcheck="false" data-section="Subheading">
+                                    KEY PROJECTS &amp; ACHIEVEMENTS
+                                </h2>
+                                <div class="projects-list" contenteditable="true" spellcheck="false" data-section="Body">
+                                    <p><strong>AI Career Platform &amp; Voice Guide:</strong> Architected responsive career platform featuring voice mock interviews, dynamic resume optimization, and ATS parsing algorithms with 95%+ precision.</p>
+                                    <p><strong>Distributed Task Queue Engine:</strong> Engineered a lightweight pub/sub distributed task scheduling engine handling 10,000+ jobs/sec with automatic dead-letter queue retries.</p>
+                                </div>
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+
+        <div class="footer-top">
+
+            <div class="footer-brand">
+                <a href="home.html">
+                    <img src="logoo.png" alt="CareerAI Logo" class="footer-logo-img">
+                </a>
+                <p>
+                    Your dedicated AI-powered career companion. Helping students, professionals build resumes, optimize them, make them ATS friendly, and finding the right opportunities for them.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="interview.html">AI Interview</a></li>
+                    <li><a href="resume.html">Resume Optimizer</a></li>
+                    <li><a href="ats.html">ATS Score Checker</a></li>
+                    <li><a href="dashboard.html">Job Matcher</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact & Help</h4>
+                <ul>
+                    <li><a href="mailto:support@careerai.com">support@careerai.com</a></li>
+                    <li><a href="profile.html#settings">Account Settings</a></li>
+                    <li><a href="profile.html#contact">Help Center</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 CareerAI.</p>
+            <p class="footer-tagline">Build your career with confidence.</p>
+            <p class="footer-subtext">Designed with precision for students and professionals.</p>
+        </div>
+
+    </footer>
+
+    <script src="script.js?v=20261025v"></script>
+</body>
+
+</html>

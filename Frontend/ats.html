@@ -7,28 +7,31 @@
 
     <title>CareerAI - ATS Score</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20261025w">
+    <link rel="icon" type="image/png" href="logoo.png">
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
 
-    <header class="ats-navbar">
-
-        <div class="logo">
-            <a href="index.html">
-                <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
-            </a>
-        </div>
-
-        <a href="dashboard.html" class="back-btn">
-            ← Back to Dashboard
+        <a href="home.html" class="logo">
+            <img src="logoo.png" alt="CareerAI Logo" class="logo-image">
         </a>
 
-    </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="ats.html" class="active">ATS Score</a>
+            <a href="profile.html">Profile</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="dashboard.html" class="back-btn" style="color: white; font-weight: 600; text-decoration: none; padding: 7px 16px; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; font-size: 14px;">← Back to Dashboard</a>
+        </div>
+
+    </nav>
 
 
     <!-- =========================
@@ -91,6 +94,7 @@
 
         <path
             class="gauge-progress"
+            id="gaugeProgress"
             d="M 25 145 A 125 125 0 0 1 275 145"
         ></path>
 
@@ -100,22 +104,26 @@
     <div class="score-content">
 
         <div>
-            <span class="score-number" id="overallScore">--</span>
+            <span class="score-number" id="atsScoreValue" data-target="88">
+                0
+            </span>
 
             <span class="score-total">
                 /100
             </span>
         </div>
 
-        <p id="scoreLabel">Loading report…</p>
+        <p id="atsScoreLabel">Excellent</p>
 
     </div>
 
 </div>
 
+            </div> <!-- END SCORE-LEFT -->
+
 
             <!-- =========================
-                 SCORE BREAKDOWN
+                 RIGHT SIDE: SCORE BREAKDOWN
             ========================== -->
 
             <div class="breakdown">
@@ -135,7 +143,9 @@
                             Keywords
                         </span>
 
-                        <strong><span id="keywordScore">--</span></strong>
+                        <strong>
+                            94%
+                        </strong>
 
                     </div>
 
@@ -143,8 +153,7 @@
 
                         <div
                             class="progress-bar"
-                            id="keywordBar"
-                            style="width: 0%"
+                            style="width: 94%"
                         ></div>
 
                     </div>
@@ -162,7 +171,9 @@
                             Formatting
                         </span>
 
-                        <strong><span id="formatScore">--</span></strong>
+                        <strong>
+                            90%
+                        </strong>
 
                     </div>
 
@@ -170,9 +181,7 @@
 
                         <div
                             class="progress-bar"
-                             id="formatBar"
-                            style="width: 0%"
-    
+                            style="width: 90%"
                         ></div>
 
                     </div>
@@ -180,32 +189,94 @@
                 </div>
 
 
+                <!-- CONTENT -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Content
+                        </span>
+
+                        <strong>
+                            81%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 81%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SKILLS -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Skills
+                        </span>
+
+                        <strong>
+                            87%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 87%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ORGANIZATION -->
+
+                <div class="metric">
+
+                    <div class="metric-info">
+
+                        <span>
+                            Organization
+                        </span>
+
+                        <strong>
+                            88%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width: 88%"
+                        ></div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </section>
 
 
-
-        <section class="section-card" id="reportDetails">
-            <div class="section-title">
-                <div>
-                    <p class="small-heading">YOUR REPORT</p>
-                    <h2>Resume insights</h2>
-                </div>
-            </div>
-            <p id="reportSummary">Loading your saved ATS report…</p>
-            <div class="reason-grid">
-                <div class="reason">
-                    <div class="reason-icon good">✓</div>
-                    <div><h3>Strengths</h3><div id="strengthsList">Loading…</div></div>
-                </div>
-                <div class="reason">
-                    <div class="reason-icon warning">!</div>
-                    <div><h3>Missing keywords / elements</h3><div id="missingList">Loading…</div></div>
-                </div>
-            </div>
-        </section>
 
         <!-- =========================
              WHY THIS SCORE
@@ -227,14 +298,104 @@
 
                 </div>
 
-                <span class="issue-count" id="issueCount">Loading…</span>
+                <span class="issue-count">
+                    4 areas
+                </span>
 
             </div>
 
 
-            <div class="reason-grid" id="analysisReasons">
-                <p>Loading your latest ATS analysis…</p>
-            </div>>
+            <div class="reason-grid">
+
+
+                <div class="reason">
+
+                    <div class="reason-icon warning">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Some keywords are missing
+                        </h3>
+
+                        <p>
+                            Your resume does not contain some important keywords
+                            commonly found in the target job description.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reason">
+
+                    <div class="reason-icon good">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Good resume structure
+                        </h3>
+
+                        <p>
+                            Your resume follows a clear structure with recognizable
+                            sections such as education, skills and experience.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reason">
+
+                    <div class="reason-icon warning">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Experience descriptions could be stronger
+                        </h3>
+
+                        <p>
+                            Some bullet points describe responsibilities instead
+                            of showing measurable results or impact.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="reason">
+
+                    <div class="reason-icon warning">
+                        !
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Skills section needs more detail
+                        </h3>
+
+                        <p>
+                            Adding relevant technical skills from the job description
+                            could improve your keyword matching score.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -263,9 +424,113 @@
             </div>
 
 
-            <div class="improvement-list" id="improvementList">
-                <p>Loading personalized recommendations…</p>
-            </div>>
+            <div class="improvement-list">
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Add relevant job keywords
+                        </h3>
+
+                        <p>
+                            Compare your resume with the target job description
+                            and naturally include relevant skills and technologies.
+                        </p>
+
+                    </div>
+
+                    <span class="impact">
+                        High Impact
+                    </span>
+
+                </div>
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Make your bullet points stronger
+                        </h3>
+
+                        <p>
+                            Use action verbs and measurable results instead of
+                            simply listing your responsibilities.
+                        </p>
+
+                    </div>
+
+                    <span class="impact">
+                        High Impact
+                    </span>
+
+                </div>
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Improve your skills section
+                        </h3>
+
+                        <p>
+                            Add relevant technical skills that match the position
+                            you are applying for.
+                        </p>
+
+                    </div>
+
+                    <span class="impact medium">
+                        Medium
+                    </span>
+
+                </div>
+
+
+                <div class="improvement">
+
+                    <span class="number">
+                        04
+                    </span>
+
+                    <div>
+
+                        <h3>
+                            Keep formatting ATS-friendly
+                        </h3>
+
+                        <p>
+                            Avoid excessive graphics, tables and complicated layouts
+                            that may be difficult for ATS software to read.
+                        </p>
+
+                    </div>
+
+                    <span class="impact medium">
+                        Medium
+                    </span>
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -301,139 +566,67 @@
 
     </main>
 
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
 
-<script>
-(() => {
-    const API_BASE = "http://127.0.0.1:8000";
-    const token = localStorage.getItem("careerai_token");
-    const $ = id => document.getElementById(id);
+        <div class="footer-top">
 
-    function safe(value) {
-        return String(value ?? "").replace(/[&<>"']/g, ch => ({
-            "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-        }[ch]));
-    }
-    function toList(value) {
-        if (!Array.isArray(value) || value.length === 0) return "<p>None reported.</p>";
-        return "<ul>" + value.map(item => {
-            if (item && typeof item === "object") {
-                return "<li>" + Object.entries(item).map(([k, v]) =>
-                    "<strong>" + safe(k.replace(/_/g, " ")) + ":</strong> " +
-                    safe(Array.isArray(v) ? v.join(", ") : v)
-                ).join("<br>") + "</li>";
-            }
-            return "<li>" + safe(item) + "</li>";
-        }).join("") + "</ul>";
-    }
-    function score(value) {
-        const n = Number(value);
-        return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : null;
-    }
-    function setMetric(value, textId, barId) {
-        const n = score(value);
-        $(textId).textContent = n === null ? "N/A" : n + "%";
-        if (barId) $(barId).style.width = (n === null ? 0 : n) + "%";
-    }
-    function reason(title, description, good = false) {
-        return `<div class="reason">
-            <div class="reason-icon ${good ? "good" : "warning"}">${good ? "✓" : "!"}</div>
-            <div><h3>${safe(title)}</h3><p>${safe(description)}</p></div>
-        </div>`;
-    }
-    function improvement(index, title, description) {
-        return `<div class="improvement">
-            <span class="number">${String(index).padStart(2, "0")}</span>
-            <div><h3>${safe(title)}</h3><p>${safe(description)}</p></div>
-            <span class="impact ${index > 2 ? "medium" : ""}">${index > 2 ? "Recommended" : "Priority"}</span>
-        </div>`;
-    }
+            <div class="footer-brand">
+                <a href="home.html">
+                    <img src="logoo.png" alt="CareerAI Logo" class="footer-logo-img">
+                </a>
+                <p>
+                    Your dedicated AI-powered career companion. Helping students, professionals build resumes, optimize them, make them ATS friendly, and finding the right opportunities for them.
+                </p>
+            </div>
 
-    async function loadReport() {
-        if (!token) {
-            $("reportSummary").textContent = "Please log in, then upload your resume in Resume Optimizer to generate an ATS report.";
-            $("scoreLabel").textContent = "Login required";
-            $("analysisReasons").innerHTML = reason("No active session", "Sign in and analyze a resume to see your report.");
-            $("improvementList").innerHTML = improvement(1, "Analyze your resume", "Open Resume Optimizer and upload your resume.");
-            return;
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="profile.html">My Profile</a></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="interview.html">AI Interview</a></li>
+                    <li><a href="resume.html">Resume Optimizer</a></li>
+                    <li><a href="ats.html">ATS Score Checker</a></li>
+                    <li><a href="dashboard.html">Job Matcher</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact & Help</h4>
+                <ul>
+                    <li><a href="mailto:support@careerai.com">support@careerai.com</a></li>
+                    <li><a href="profile.html#settings">Account Settings</a></li>
+                    <li><a href="profile.html#contact">Help Center</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p class="footer-copy">&copy; 2026 CareerAI.</p>
+            <p class="footer-tagline">Build your career with confidence.</p>
+            <p class="footer-subtext">Designed with precision for students and professionals.</p>
+        </div>
+
+    </footer>
+
+    <!-- GSAP for Smooth Controlled Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        if (typeof gsap === 'undefined') {
+            document.write('<script src="node_modules/gsap/dist/gsap.min.js"><\/script>');
         }
-
-        // Resume Optimizer stores this ID after a successful upload. Fallbacks support older test keys.
-        const resumeId = localStorage.getItem("careerai_resume_id")
-            || localStorage.getItem("careerai_last_resume_id")
-            || localStorage.getItem("resume_id");
-        if (!resumeId) {
-            $("reportSummary").textContent = "No resume ID is saved yet. Open Resume Optimizer, upload your resume, then return here.";
-            $("scoreLabel").textContent = "No report yet";
-            $("analysisReasons").innerHTML = reason("Report not found", "Upload a resume first so CareerAI can generate your personalized ATS report.");
-            $("improvementList").innerHTML = improvement(1, "Upload your resume", "Go to Resume Optimizer and upload your resume to populate this dashboard.");
-            return;
-        }
-
-        try {
-            const response = await fetch(`${API_BASE}/reports/resume/${encodeURIComponent(resumeId)}`, {
-                headers: { "Authorization": "Bearer " + token }
-            });
-            if (!response.ok) throw new Error("Report request failed (" + response.status + ")");
-            const reports = await response.json();
-            const report = Array.isArray(reports) ? reports[0] : reports;
-            if (!report) throw new Error("No ATS report exists for this resume yet.");
-
-            const overall = score(report.overall_score);
-            $("overallScore").textContent = overall === null ? "--" : overall;
-            $("scoreLabel").textContent = overall === null ? "Score unavailable"
-                : overall >= 80 ? "Strong" : overall >= 60 ? "Good foundation" : "Needs improvement";
-
-            // Update the existing semicircle gauge using its SVG path length.
-            const gauge = document.querySelector(".gauge-progress");
-            if (gauge && overall !== null) {
-                const length = gauge.getTotalLength();
-                gauge.style.strokeDasharray = length;
-                gauge.style.strokeDashoffset = length * (1 - overall / 100);
-            }
-
-            setMetric(report.keyword_match_score, "keywordScore", "keywordBar");
-            setMetric(report.formatting_score, "formatScore", "formatBar");
-            $("reportSummary").textContent = report.summary_text || "No summary was provided in this report.";
-            $("strengthsList").innerHTML = toList(report.strengths);
-            $("missingList").innerHTML = toList(report.missing_keywords);
-
-            const corrections = Array.isArray(report.corrections) ? report.corrections : [];
-            const missing = Array.isArray(report.missing_keywords) ? report.missing_keywords : [];
-            const strengths = Array.isArray(report.strengths) ? report.strengths : [];
-            const reasons = [];
-            if (missing.length) reasons.push(reason("Missing keywords or resume elements", missing.map(x => typeof x === "object" ? Object.values(x).join(": ") : x).join(", ")));
-            else reasons.push(reason("No missing keywords were reported", "The report did not identify specific missing keywords.", true));
-            if (corrections.length) reasons.push(...corrections.slice(0, 3).map(c => reason(c.section || "Suggested correction", [c.issue, c.suggestion].filter(Boolean).join(" — "))));
-            if (strengths.length) reasons.push(reason("Strengths identified", strengths.map(x => typeof x === "object" ? Object.values(x).join(": ") : x).join(", "), true));
-            if (!reasons.length) reasons.push(reason("Analysis available", report.summary_text || "See the scores and report summary above.", true));
-            $("analysisReasons").innerHTML = reasons.join("");
-            $("issueCount").textContent = corrections.length + " corrections";
-
-            const tips = [];
-            corrections.forEach(c => tips.push({
-                title: c.section || c.issue || "Improve your resume",
-                description: [c.issue, c.suggestion].filter(Boolean).join(" — ")
-            }));
-            missing.forEach(item => tips.push({
-                title: "Address missing keyword / element",
-                description: typeof item === "object" ? Object.values(item).join(" — ") : String(item)
-            }));
-            if (!tips.length) tips.push({
-                title: "Review your ATS analysis",
-                description: report.summary_text || "Use the score breakdown and strengths above to guide your next revision."
-            });
-            $("improvementList").innerHTML = tips.slice(0, 6).map((t, i) => improvement(i + 1, t.title, t.description)).join("");
-        } catch (err) {
-            $("reportSummary").textContent = "Could not load the ATS report: " + err.message + ". Upload a resume again if needed.";
-            $("scoreLabel").textContent = "Report unavailable";
-            $("analysisReasons").innerHTML = reason("Unable to load report", err.message);
-            $("improvementList").innerHTML = improvement(1, "Return to Resume Optimizer", "Upload your resume to generate or refresh the ATS report.");
-        }
-    }
-    document.addEventListener("DOMContentLoaded", loadReport);
-})();
-</script>
-
+    </script>
+    <script src="script.js?v=20261025w"></script>
 </body>
 
 </html>
